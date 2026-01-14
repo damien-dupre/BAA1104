@@ -1,0 +1,995 @@
+---
+title: "Lecture 1: Introduction to ePortfolios"
+subtitle: BAA1104 - E-Portfolio and Business Analytics Challenges
+author: Damien Dupré
+format:
+  revealjs:
+    theme: [theme/metropolis.scss]
+    toc-depth: 1
+    chalkboard: false
+    menu: true
+    slide-number: true
+title-slide-attributes:
+    data-background-iframe: logo-fall/index.html
+preload-iframes: true
+---
+
+```{r setup, include = FALSE}
+# libraries --------------------------------------------------------------------
+library(anicon)
+library(countdown)
+library(fontawesome)
+library(knitr)
+```
+
+## Module Contact Details
+
+::: columns
+::: {.column width="50%"}
+### Damien Dupré, PhD
+
+- email: damien.dupre@dcu.ie
+- phone: 00353 (0)1 700 6360
+- office: Q233 DCU Business School
+:::
+
+::: {.column width="40%"}
+```{r}
+include_graphics("https://pbs.twimg.com/profile_images/1221820283159490565/96a3XnSg_400x400.jpg")
+```
+:::
+:::
+
+## Module Content
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+### Knowledge
+
+- ePortfolio
+- Project Organisation
+
+### Skills
+
+- bash/zsh
+- Git & GitHub
+- Quarto
+- Markdown & HTML/CSS
+:::
+
+::: {#second-column}
+### Slides
+
+Available on the module's loop page and, more importantly, online at:
+
+[https://damien-dupre.github.io -> courses -> BAA1104](https://damien-dupre.github.io/courses/details/BAA1104)
+:::
+::::
+
+## What About You?
+
+::: incremental
+- Who uses Microsoft Windows, macOS, or Linux?
+- Who already has an account on GitHub, GitLab, or an equivalent platform?
+- Who has a personal website built with WordPress, Google Sites, or a similar service?
+- Who knows how to read and write HTML files?
+- Which coding environment do you currently use: Spyder, JupyterLab, Jupyter Notebook (collab or local), PyCharm, VS Code, Neovim, RStudio, Atom, Positron, or something else?
+- Who knows what Quarto is? what bash or zsh is?
+- Do you know where to find Notepad on Windows or TextEdit on macOS?
+:::
+
+## Module Assessment
+
+### 90% ePortfolio
+
+Website that showcases your coding skills, achievements, experiences, and personal reflections. It should include various media types—documents, images, videos, audio clips, presentations, and web links—that can be tailored for different audiences. **Deadline: April 20, 2026**
+
+### 10% Kubicle Courses
+
+  - [Data Presentation Skills: Communicating Data Effectively](https://app.kubicle.com/learn/data-presentation-skills/overview-of-data-communication)<br>
+  - [Data Presentation Skills: Telling Stories with Data](https://app.kubicle.com/learn/data-presentation-skills/a-storytelling-structure)<br>
+  - [Data Presentation Skills: Presenting Your Data](https://app.kubicle.com/learn/data-presentation-skills/overview-of-data-presentation)<br>
+  - [Data Security: Keeping Your Information Safe](https://app.kubicle.com/learn/data-security/introduction-to-information-security)<br>
+  - [Data Security: Handling Data Securely and Responsibly](https://app.kubicle.com/learn/data-security/introduction-to-security-protocols)
+  
+## Creating an ePortfolio
+
+```{r}
+include_img("workflow.png")
+```
+
+# 2023-2024 BAA1104 ePortfolios
+
+## ePortfolio Example 1
+
+```{=html}
+<iframe width="1000" height="500" src="https://alanlynch94.github.io/My-Website/"></iframe>
+```
+
+- `r fa(name = "globe")` <https://alanlynch94.github.io/My-Website>
+- `r fa(name = "github")` <https://github.com/AlanLynch94/My-Website>
+
+## ePortfolio Example 2
+
+```{=html}
+<iframe width="1000" height="500" src="https://jeff-bow.github.io/"></iframe>
+```
+
+- `r fa(name = "globe")` <https://jeff-bow.github.io>
+- `r fa(name = "github")` <https://github.com/jeff-bow/jeff-bow.github.io>
+
+## ePortfolio Example 3
+
+```{=html}
+<iframe width="1000" height="500" src="https://liam-mcgovern23.github.io/Portfolio3.0/"></iframe>
+```
+
+- `r fa(name = "globe")` <https://liam-mcgovern23.github.io/Portfolio3.0>
+- `r fa(name = "github")` <https://github.com/liam-mcgovern23/Portfolio3.0>
+
+## ePortfolio Example 4
+
+```{=html}
+<iframe width="1000" height="500" src="https://beris00.github.io/"></iframe>
+```
+
+- `r fa(name = "globe")` <https://beris00.github.io/>
+- `r fa(name = "github")` <https://github.com/beris00/beris00.github.io>
+
+## ePortfolio Example 5
+
+```{=html}
+<iframe width="1000" height="500" src="https://laurenmcconnel.github.io/Business_Analytics_Portfolio/"></iframe>
+```
+
+- `r fa(name = "globe")` <https://laurenmcconnel.github.io/Business_Analytics_Portfolio>
+- `r fa(name = "github")` <https://github.com/laurenmcconnel/Business_Analytics_Portfolio>
+
+## ePortfolio Example 6
+
+```{=html}
+<iframe width="1000" height="500" src="https://kellie-staunton.github.io/E-Portfolio/"></iframe>
+```
+
+- `r fa(name = "globe")` <https://kellie-staunton.github.io/E-Portfolio>
+- `r fa(name = "github")` <https://github.com/kellie-staunton/E-Portfolio>
+
+## ePortfolio Example 7
+
+```{=html}
+<iframe width="1000" height="500" src="https://jhowardinho45.github.io/jameshoward.github.io/"></iframe>
+```
+
+- `r fa(name = "globe")` <https://jhowardinho45.github.io/jameshoward.github.io>
+- `r fa(name = "github")` <https://github.com/jhowardinho45/jameshoward.github.io>
+
+## ePortfolio Example 8
+
+```{=html}
+<iframe width="1000" height="500" src="https://chloed77.github.io/MT412---E-Portfolio---Chloe-Downes/"></iframe>
+```
+
+- `r fa(name = "globe")` <https://chloed77.github.io/MT412---E-Portfolio---Chloe-Downes>
+- `r fa(name = "github")` <https://github.com/chloed77/MT412---E-Portfolio---Chloe-Downes>
+
+## ePortfolio Example 9
+
+```{=html}
+<iframe width="1000" height="500" src="https://catalinbondari.github.io/eportfolio-website/"></iframe>
+```
+
+- `r fa(name = "globe")` <https://catalinbondari.github.io/eportfolio-website>
+- `r fa(name = "github")` <https://github.com/catalinbondari/eportfolio-website>
+
+## ePortfolio Example 10
+
+```{=html}
+<iframe width="1000" height="500" src="https://cianshannon.github.io/cian-shannon/"></iframe>
+```
+
+- `r fa(name = "globe")` <https://cianshannon.github.io/cian-shannon>
+- `r fa(name = "github")` <https://github.com/cianshannon/cian-shannon>
+
+# 2024-2025 BAA1104 ePortfolios
+
+## ePortfolio Example 11
+
+```{=html}
+<iframe width="1000" height="500" src="https://boonchinlook.github.io"></iframe>
+```
+
+- `r fa(name = "globe")` <https://boonchinlook.github.io>
+- `r fa(name = "github")` <https://github.com/BoonChinLook/BoonChinLook.github.io>
+
+## ePortfolio Example 11
+
+```{=html}
+<iframe width="1000" height="500" src="https://danny-odunsi.github.io/3rd-repo"></iframe>
+```
+
+- `r fa(name = "globe")` <https://danny-odunsi.github.io/3rd-repo>
+- `r fa(name = "github")` <https://github.com/Danny-Odunsi/3rd-repo>
+
+## ePortfolio Example 12
+
+```{=html}
+<iframe width="1000" height="500" src="https://davidcbyrne.github.io"></iframe>
+```
+
+- `r fa(name = "globe")` <https://davidcbyrne.github.io>
+- `r fa(name = "github")` <https://github.com/DavidCByrne/davidcbyrne.github.io>
+
+## ePortfolio Example 13
+
+```{=html}
+<iframe width="1000" height="500" src="https://rorymul.github.io/mysite"></iframe>
+```
+
+- `r fa(name = "globe")` <https://rorymul.github.io/mysite>
+- `r fa(name = "github")` <https://github.com/rorymul/mysite>
+
+## ePortfolio Example 14
+
+```{=html}
+<iframe width="1000" height="500" src="https://curtis-shane.github.io"></iframe>
+```
+
+- `r fa(name = "globe")` <https://curtis-shane.github.io>
+- `r fa(name = "github")` <https://github.com/curtis-shane/curtis-shane.github.io>
+
+## ePortfolio Example 15
+
+```{=html}
+<iframe width="1000" height="500" src="https://robert-gulmann.github.io/Robert-Gulmann"></iframe>
+```
+
+- `r fa(name = "globe")` <https://robert-gulmann.github.io/Robert-Gulmann>
+- `r fa(name = "github")` <https://github.com/Robert-Gulmann/Robert-Gulmann>
+
+## ePortfolio Example 16
+
+```{=html}
+<iframe width="1000" height="500" src="https://lisalucks.github.io"></iframe>
+```
+
+- `r fa(name = "globe")` <https://lisalucks.github.io>
+- `r fa(name = "github")` <https://github.com/lisalucks/lisalucks.github.io>
+
+## ePortfolio Example 17
+
+```{=html}
+<iframe width="1000" height="500" src="https://sadhanar7.github.io/portfolio"></iframe>
+```
+
+- `r fa(name = "globe")` <https://sadhanar7.github.io/portfolio>
+- `r fa(name = "github")` <https://github.com/SadhanaR7/portfolio>
+
+# What is an ePortfolio?
+
+## Definition
+
+- An ePortfolio is a digital collection of materials that showcases an individual’s achievements, skills, experiences, and learning.
+- It serves as both a personal and professional development tool.
+-	Combines multimedia elements (text, images, videos, etc.) to enhance presentation.
+
+### ePortfolio are also about what you don't include
+
+- Quality over quantity! Don't throw in every student project
+- Avoid sharing irrelevant information like data cleaning (just link to the file with the code) or personal information like phone number
+- Check for grammar errors/clarity
+
+## ePortfolio Platforms
+
+- [Google Sites](https://sites.google.com): Free and user-friendly while having limited design options.
+- [Canva](https://www.canva.com/en_gb/): Visually appealing templates.
+- [WordPress](https://wordpress.com/): Customisable and scalable website for diverse purpose.
+- [Loop Reflect/Mahara](https://www.dcu.ie/teu/learning-eportfolios): Designed for education and collaboration.
+- [LinkedIn](https://www.linkedin.com/pulse/linkedin-portfolio-step-by-step-guide-showcase-your-work): Professional networking with portfolio integration.
+
+...Just to name a few.
+
+These services offer a **platform to design an eportfolio/website** and to **host the eportfolio/website on their own servers**.
+
+Instead, we are going to **manually create** our eportfolio/website and to **host it on a specific server**.
+
+## ePortfolio Requirements {.smaller}
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+### Technical Features
+
+- Published with **GitHub Pages**
+- Use of **Git** to upload files rather manual upload
+- Use of **Quarto** rather than manual html pages
+- **Active code** rather than inactive code (e.g., screenshots)
+- **Tidy project** folder organisation
+- **Careful use of data**, both databases and personal data
+:::
+
+::: {#second-column}
+### Components
+
+- **Introduction:** About me/profile section.
+- **Evidence of Work**: Projects, assignments, and achievements.
+- **Reflection**: Insights on learning experiences.
+- **References/Contact**: Networks and accessibility details.
+- **CV**: Link to pdf accessible document.
+:::
+::::
+
+### Additional Criteria
+**Overall design**, **attention to details**, and **innovation**.
+
+## Do and do not guidelines {background="#43464B"}
+
+<br>
+
+### Do take inspiration from other students work
+
+<br>
+
+### Do adapt code you find online, for example on GitHub
+
+<br>
+
+### Do not use complete HTML or CSS templates
+
+# Talk to your Computer
+
+## What is a command-line interface (CLI)? 
+
+> A command-line interface (CLI) **processes commands** to a computer program in the form of **lines of text**. The program which handles the interface is called a command-line interpreter or command-line processor. 
+
+> Operating systems implement a command-line interface in a shell for interactive access to operating system functions or services. Such access was primarily provided to users by computer terminals starting in the mid-1960s, and continued to be used throughout the 1970s and 1980s on VAX/VMS, Unix systems and personal computer systems including DOS, CP/M and Apple DOS.
+
+See [https://en.wikipedia.org/wiki/Command-line_interface](https://en.wikipedia.org/wiki/Command-line_interface)
+
+## What is a command-line interface (CLI)? 
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+### Command-Line Interface
+- Text-based commands.
+- Efficient for automation.
+- Preferred by tech experts.
+:::
+
+::: {#second-column}
+### Graphical User Interface
+- Visual elements (icons, windows).
+- User-friendly.
+- Immediate visual feedback.
+- Common for everyday tasks.
+:::
+::::
+
+## Evolution of Computer Interfaces
+
+- **1969**: UNIX introduces Command Line Interface (CLI)
+- **1980**: MS-DOS popularizes Command Line Interface (CLI)
+- **1984**: Apple Macintosh brings GUI to mainstream
+- **1985**: Microsoft introduces Windows 1.0, a graphical user interface (GUI).
+- **1991**: Linux introduces CLI to open source
+- **1995**: Windows 95 merges GUI and CLI
+- **2001**: Mac OS X merges Unix and GUI
+- **2004**: Ubuntu simplifies Linux CLI 
+- **2020s**: CLI continues its indispensable role, supporting automation, scripting, and advanced tasks. 
+
+## And what is a shell?
+
+> In computing, a shell is a computer program which exposes an operating system's services to a human user or other program. In general, operating system shells use either a command-line interface (CLI) or graphical user interface (GUI), depending on a computer's role and particular operation. It is named a shell because it is the outermost layer around the operating system.
+
+See [https://en.wikipedia.org/wiki/Shell_(computing)](https://en.wikipedia.org/wiki/Shell_(computing))
+
+## Terminal vs Shell
+
+Vocabulary:
+
+- **Terminal**: A program that runs a shell
+- **Shell**: A program that interprets commands
+- **Bash**: The most common shell on Linux
+- **zsh**: The most common shell on MacOS
+- **PowerShell**: The most common shell on Windows
+- **Cmd**: The legacy shell on Windows
+
+## Windows Terminal
+
+A new CMD or PowerShell terminal application for Windows OS
+
+![](https://devblogs.microsoft.com/commandline/wp-content/uploads/sites/33/2021/10/profile-matching-2.gif)
+
+## MacOS Terminal
+
+A new zsh terminal on MacOS
+
+![](https://www.moncefbelyamani.com/images/spotlight-terminal.gif)
+
+## Okay, but why?!
+
+- Fast and efficient way to interact with your computer
+
+- Important part of your automation toolbox to create a reproducible data analysis pipeline
+
+- Accessing a remote server almost always requires some sort of command line skills
+
+[I also recommend "Top ten reasons to learn to use the command line: Expanding your reproducibility tools"](https://riffomonas.org/code_club/2020-08-17-command-line-life)
+
+## Important Commands
+
+| Description           | Win         | Linux, MacOS |
+| :---                  | :---        | :---         |    
+| Copy files, folders   | `copy`      | `cp`         |
+| Move files, folders   | `move`      | `mv`         |
+| List folder content   | `dir`       | `ls`         |
+| Create new folder     | `mkdir`     | `mkdir`      |
+| Change current folder | `cd`        | `cd`         |
+| Show current path.    | `cd`        | `pwd`        |
+| Locate a software     | `where`     | `which`      |
+| **Danger zone** No undo!|
+| Delete file(s)         | `del`      | `rm`         |
+| Delete folder(s)       | `rmdir`.   | `rm`         |
+
+## Your Turn: Access your Terminal {background="#43464B"}
+
+1. Open a Terminal window
+2. Show current path using 
+
+- `cd` with cmd
+- `pwd` with zsh or PowerShell
+
+Note, Terminals always start from your home. You, it should print something like:
+
+- `C:\Users\YourUserName`
+- `/Users/YourUserName`
+
+3. Print the path of your python installation using 
+
+- `where python` with cmd
+- `where.exe python` with PowerShell
+- `which python` with zsh
+
+Note, if python is not installed, noting will be printed
+
+```{r}
+countdown(minutes = 3, warn_when = 60)
+```
+
+# Paths, folders, and files
+
+## What is a path?
+
+> A path is a string of characters used to uniquely identify a location in a
+directory structure. It is composed by following the directory tree hierarchy in which components, separated by a delimiting character, represent each directory.
+
+> Resources can be represented by either **absolute or relative paths**
+
+See [https://en.wikipedia.org/wiki/Path_(computing)](https://en.wikipedia.org/wiki/Path_(computing))
+
+## Delimiting characters
+
+Delimiting characters `/` or `\` vary by operating system
+
+- MS Windows: 
+  - Use a colon `:` to specify the drive name (e.g., `C:`, `D:`, `E:`)
+  - Folders and files are separated by a backslash character (`\`)
+  - Example: `C:\Damien\Documents\projects\damien-dupre.github.io\index.qmd`
+
+- Linux/macOS:
+  - No colon (`:`)
+  - Use only the slash (`/`) character
+  - Example: `/Users/Damien/Drive/projects/damien-dupre.github.io/index.qmd`
+  
+## Delimiting characters
+
+- Software, such as R, $\LaTeX$, and Python, with a Linux/UNIX background behaves differently under MS Windows when it comes to specifying file/folder paths
+
+- That is, when specifying a path (e.g., in Python) in MS Windows, these programs do not like the backslash character (`\`) (the backslash is used for "escaping" other characters)
+
+## Delimiting characters
+
+In MS Windows, the following will not work!
+
+```python
+import pandas
+csv_file = pandas.read_csv('C:\Damien\myfolder\mysubfolder\mydata.csv')
+```
+
+Two solutions:
+
+1. Use the slash character `/` instead of `\`, e.g.:   
+
+```python
+import pandas
+csv_file = pandas.read_csv('C:/Damien/myfolder/mysubfolder/mydata.csv')
+```
+
+2. Escape the backslash character via `\\`, e.g.:
+
+```python
+import pandas
+csv_file = pandas.read_csv('C:\\Damien\\myfolder\\mysubfolder\\mydata.csv')
+```
+
+## Delimiting characters
+
+Note: Many programming languages/statistical packages (R, Python, ...) can
+dynamically create a full path that follows the rules of the respective
+operating system
+
+```python
+import os
+os.path.join("E:", "folder1", "folder2", "file")
+```
+returns: `E:folder1\\folder2\\file` (in Windows)
+
+A handy tool when working on both operating system: [Path
+Copy Copy -- Copy file paths from Windows explorer's contextual
+menu](https://pathcopycopy.github.io/)
+
+Mac users can left-click and press <kbd>option</kbd> to "copy as a Pathname"
+
+## Relative vs. Absolute Paths
+
+An absolute path specifies a file or directory location from the root directory.
+
+Examples:
+
+- **Mac/Linux:**
+```bash
+/Users/Username/Documents/file.txt
+```
+- **Windows:**
+```bash
+C:\Users\Username\Documents\file.txt
+```
+
+When accessing folders and files that you have created, the root directory is  followed by your home folder
+
+## Relative vs. Absolute Paths
+
+So, let's assume the project "damien-dupre.github.io", the full absolute path is:
+
+- `C:\Users\Damien\Projects\damien-dupre.github.io`
+- `Users/Damien/Projects/damien-dupre.github.io`
+
+## Relative vs. Absolute Paths
+
+A relative path specifies a location relative to the current directory which is a "fixed location" on your computer
+
+Often, this "fixed location" is the so-called "working directory" 
+
+- The dot `.` denotes the current working directory
+- The dot dot `..` denotes the parent directory, i.e., it points upwards in the folder hierarchy
+- Finally, the tilde symbol `~` will bring you back to your home directory, e.g. `cd ~`
+
+Examples:
+```bash
+subfolder/file.txt  # Inside a subfolder
+./file.txt       # Current directory
+../file.txt      # Parent directory
+```
+
+Works differently based on where the command is run.
+
+## Relative vs. Absolute Paths
+
+All other file- or folder-related operations are defined relative to this working directory
+
+**The huge benefit: when you share your project with a colleague or move it to
+a new computer, you only have to define the working directory once, everything
+else should work flawelessly**
+
+## Navigating with Paths
+
+Using `cd` in the Terminal, it is possible to move between directories with either:
+
+- Absolute Paths
+
+```bash
+  cd C:\Users\Username\Documents
+```
+
+```bash
+  cd /Users/Username/Documents
+```
+
+- Relative Paths
+
+```bash
+  cd Users
+  cd Username
+  cd Documents
+```
+
+See here for [more examples](https://earthdatascience.org/courses/intro-to-earth-data-science/python-code-fundamentals/work-with-files-directories-paths-in-python/)
+
+## Self-Contained Projects
+
+Contains all necessary files for your project, eportfolio or any repository in general:
+
+- data
+- results
+- documentation
+- scripts
+- images
+- designs (css/sass)
+- tabs/topics
+
+## Folder/File structure
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+
+### `data`
+
+- all raw data files, organised in meaningful ways
+- never, ever write back to this folder, read only
+- if using git, never commit to history, place in .gitignore
+
+### `results`
+
+- write all analysis etc. results to treat as disposable, can be overwritten
+- may also include figures etc if wanted
+
+### `docs`
+- documentation
+- Quarto files
+
+:::
+
+::: {#second-column}
+
+### `src` or `py`
+- if you write functions that are used in several places
+- this is the standard python folder for keeping these files that might be called in python scripts
+
+### `scripts/analysis`
+- files with full analysis pipelines
+- might have source calls to files in python
+
+:::
+::::
+
+## Folder/File structure
+
+### `README.md`
+- markdown file describing the project content and intent
+- maybe also explains which files to look in for what
+- ideal to have if saving the folder to github
+
+### `LICENCE`
+- dictates how code can be reused
+- not covering that in this series, ask me at need
+
+## File Naming
+
+An important part of project management, code automation, and data analytics in general is to have your files read by a piece of code or software.
+
+Machines are clever, but extremely pedantic.
+
+Be consistent, be meticulous.
+
+Some machines are more clever than others, so name files in a way that the "dumbest" of them can deal with.
+
+## File Naming
+
+- Don't use white space
+  - decide on a separator and use consistently
+  - recommend the dash -
+- Use small case letters
+  - certain machines care about capitalization
+- Use numbers smartly
+  - numbers are awesome to use and can help organise files meaningfully
+  - but needs some thinking about before implementing
+  
+## File Naming
+
+Variables and filenames should have meaningful names in `kebab-case` or `snake_case` format, preferring all lower case.
+
+```{r}
+knitr::include_graphics("https://raw.githubusercontent.com/Public-Health-Scotland/python-training/1b2302fdf8c6a57e2782e9ed96d613afd40e047c/images/r_coding_cases.png")
+```
+
+## File Naming
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+
+Machines will first list files starting with numbers (ascdendingly) then in alphabetic order.
+
+```markdown
+1_file.txt
+2_file.txt
+file_one.txt
+file_three.txt
+file_two.txt
+```
+
+But they wont understand the difference between 1 and 10
+
+```markdown
+10_file.txt
+1_file.txt
+2_file.txt
+file_1.txt
+file_10.txt
+file_2.txt
+```
+
+:::
+
+::: {#second-column .fragment}
+
+'zero-padding' is a way of preserving file order
+
+```markdown
+01_file.txt
+02_file.txt
+10_file.txt
+file_01.txt
+file_02.txt
+file_10.txt
+```
+
+:::
+::::
+
+## File Naming
+
+Using dates in file names may also ensure decent organisation but be consistent. Recommend using YYYY-MM-DD formatting
+
+```markdown
+13-11-21_initial-submission-results.txt
+22-01-03_revised-results.txt
+2022-02-28_results.txt
+```
+
+vs
+
+```markdown
+2021-11-13_initial-submission-results.txt
+2022-02-28_results.txt
+2022-03-01_revised-results.txt
+```
+
+## File Naming
+
+Consider using different space separators for different parts of the file name
+
+This way you can use the file name it self, programatically, if needed
+
+```markdown
+2021-11-13_initial_submission_results.txt
+2022-02-28_results.txt
+2022-03-01_revised_results.txt
+```
+
+## File Naming
+
+Optimising file names for computers is great, but ultimately its us humans that need to choose files to work with. Naming files in a way that makes the file content obvious (or at least give an idea of content) by the file name is good for such interactions. 
+
+```markdown
+2021-11-13_final-results.txt
+2022-02-28_finalfinal-results.txt
+2022-03-01_finished-results.txt
+```
+
+vs.
+
+```markdown
+2021-11-13_first-submission-results.txt
+2022-02-28_revision-round1-results.txt
+2022-03-01_revision-round2-results.txt
+2022-03-01_revision-round2-no-sex-results.txt
+```
+
+## Image Types
+
+Images from plots should use png or svg
+
+- .png supports transparency and has no quality loss upon re-saving
+
+- .svg can rescale to infinity without getting grainy
+
+- .jpg best for photos, quality loss on rescale, blurry edges and poor text rendering
+
+Images can also some times be saved in pdf, but pdf while a vector format, cannot support transparency.
+
+Tiff has fallen out of favour due to high file sizes, but are preferable to jpeg for photos.
+
+# Keep your Projects Tidy
+
+## Project Organisation
+
+Keep your projects tidy
+
+> 1 folder per project and all the project folders in 1 "Projects" folder.
+
+```
+.
+|-- Projects
+  |-- my-project-a
+  |-- my-project-b
+  |-- damien-dupre.github.io
+
+```
+
+## Your Turn: Create your "Projects" folder  {background="#43464B" .smaller}
+
+1. Open your Terminal again and run `cd ~` to go back to your home directory
+
+2. Create a "Projects" folder using `mkdir Projects` (cmd, powershell, zsh, bash)
+
+3. Move to this new folder directory using `cd Projects`
+
+Note, the message `no such file or directory` will be printed if it hasn't worked
+
+4. In this "Projects" folder, create a subfolder called "my_first_project" using `mkdir my_first_project` (cmd, powershell, zsh, bash)
+
+5. Move to this folder using absolute path:
+
+- `cd C:\Users\YourUsername\Projects\my_first_project` (Windows)
+
+- `cd Users/YourUsername/Projects/my_first_project` (MacOS/Linux)
+
+```{r}
+countdown(minutes = 5, warn_when = 60)
+```
+
+## Project Management
+
+Why do we care about project management?
+
+<br>
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+### Portability
+The ability to move the project without breaking code or needing adapting
+
+- you will change computers
+- you will reorganise your file structure
+- you will share your code with others
+:::
+
+::: {#second-column}
+### Reproducibility
+The ability to rerun the entire process from scratch
+
+- not just for reviews
+- not just for best-practice analytics
+- also for future (or even present) you
+- and for your collaborators/helpers
+:::
+::::
+
+## Project Workflows
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+### Portability
+- All necessary files should be contained in the project and referenced relatively
+- All necessary outputs are created by code in the project and stored in the project
+:::
+
+::: {#second-column}
+### Reproducibility
+- All code can be run in fresh sessions and produce the same output
+- Does not force other users to alter their own work setup
+:::
+::::
+
+## Your Turn: Type of Files in an ePortfolio {background="#43464B"}
+
+1. Go to the GitHub Repository of my own website <https://github.com/damien-dupre/damien-dupre.github.io>
+2. Download and unZip this repository on your own Computer in the Projects folder,
+3. List all the file extensions of documents included in this folder and subfolders.
+
+```{r}
+countdown(minutes = 5, warn_when = 60)
+```
+
+## Your Turn: Type of Files in an ePortfolio {.smaller}
+
+Which file `extensions` have you found?
+
+::: {.fragment .fade-up}
+::: columns
+::: {.column width="30%"}
+Web and Interactive Content
+
+	•	.html / .htm: HyperText Markup Language files for web content.
+	•	.css: Cascading Style Sheets for web design.
+	•	.js: JavaScript files for interactive elements.
+
+Text and Document Formats
+
+	•	.doc / .docx: Microsoft Word documents.
+	•	.pdf: Portable Document Format, widely used for static, professional documents.
+	•	.txt: Plain text files.
+	•	.rtf: Rich Text Format, compatible with various word processors.
+	•	.odt: OpenDocument Text, used by open-source tools like LibreOffice.
+
+Presentation Formats
+
+	•	.ppt / .pptx: Microsoft PowerPoint presentations.
+	•	.odp: OpenDocument Presentation format.
+	•	.key: Apple Keynote presentations.
+:::
+::: {.column width="30%"}
+Spreadsheet Formats
+
+	•	.xls / .xlsx: Microsoft Excel spreadsheets.
+	•	.csv: Comma-separated values, often used for data sharing.
+	•	.ods: OpenDocument Spreadsheet format.
+
+Image Formats
+
+	•	.jpg / .jpeg: Compressed image files.
+	•	.png: High-quality image files supporting transparency.
+	•	.gif: Animated or static image files.
+	•	.bmp: Bitmap image files.
+	•	.tiff / .tif: High-resolution image files.
+	•	.webp: Compressed image format for the web.
+	•	.ico: Icon image files, often used for branding or UI mockups.
+	•	.heic: High Efficiency Image Format, used in modern Apple devices.
+	•	.svgz: Compressed Scalable Vector Graphics.
+	•	.raw: Camera raw image files from DSLRs.
+:::
+::: {.column width="30%"}
+Audio Formats
+
+	•	.mp3: Compressed audio files.
+	•	.wav: High-quality audio files.
+	•	.ogg: Open-source audio file format.
+
+Video Formats
+
+	•	.mp4: A widely-used video format compatible with most devices.
+	•	.avi: Video format with higher quality, but larger file size.
+	•	.mov: Apple QuickTime video format.
+	•	.wmv: Windows Media Video format.
+
+Other Formats
+
+	•	.svg: Scalable Vector Graphics, ideal for logos and illustrations.
+	•	.md: Markdown files, often used in coding or minimalist documentation.
+	•	.log: Log files for tracking progress or issues.
+	•	.yml / .yaml: Data serialisation formats, often for configuration files.
+	•	.zip / .tar.gz / .7z: Compressed archive formats for distributing multiple files.
+	•	.dat: Generic data files.
+:::
+:::
+:::
+
+## References
+
+Huge thanks the following people who have generated and shared most of the content of this lecture:
+
+- Athanasia Monika Mowinckel: [Mind your data - Creating Organised Research Projects](https://drmowinckels.io/talks_repo/slides/2023.03.28-promenta-fileorg/)
+
+- Bernd Weiß: [Tools and Workflows for Reproducible Research in the Quantitative Social Sciences - Computer Literacy](https://jobreu.github.io/reproducible-research-gesis-2022/slides/comp-literacy.html#1)
+
+<br>
+
+```{r}
+#| fig-align: "center"
+knitr::include_graphics("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGdyMnhseGczY3NheHU1cHhtdGRzdWRxaXJ1Z3BsdWF6MWdwZm84ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7JG6cq7EWesFcQ/giphy.gif")
+```
+
+## {background="#43464B"}
+
+```{css, echo = FALSE}
+img.circle {border-radius:50%;}
+```
+
+::: {layout-ncol="2"}
+<img class="circle" src="https://github.com/damien-dupre.png" />
+
+**Thanks for your attention and don't hesitate to ask if you have any questions!**  
+[`r fa(name = "mastodon")` @damien_dupre](https://datasci.social/@damien_dupre)  
+[`r fa(name = "github")` @damien-dupre](https://github.com/damien-dupre)  
+[`r fa(name = "link")` https://damien-dupre.github.io](https://damien-dupre.github.io)  
+[`r fa(name = "paper-plane")` damien.dupre@dcu.ie](mailto:damien.dupre@dcu.ie)
+:::
+
