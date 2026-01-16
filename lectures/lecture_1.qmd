@@ -86,17 +86,55 @@ Website that showcases your coding skills, achievements, experiences, and person
 
 ### 10% Kubicle Courses
 
-  - [Data Presentation Skills: Communicating Data Effectively](https://app.kubicle.com/learn/data-presentation-skills/overview-of-data-communication)<br>
-  - [Data Presentation Skills: Telling Stories with Data](https://app.kubicle.com/learn/data-presentation-skills/a-storytelling-structure)<br>
-  - [Data Presentation Skills: Presenting Your Data](https://app.kubicle.com/learn/data-presentation-skills/overview-of-data-presentation)<br>
-  - [Data Security: Keeping Your Information Safe](https://app.kubicle.com/learn/data-security/introduction-to-information-security)<br>
-  - [Data Security: Handling Data Securely and Responsibly](https://app.kubicle.com/learn/data-security/introduction-to-security-protocols)
+ - [General Data Protection Regulation](https://app.kubicle.com/learn/gdpr/introduction-to-gdpr)
+ - [Data Security: Keeping Your Information Safe](https://app.kubicle.com/learn/data-security/introduction-to-information-security)
+ - [Data Security: Handling Data Securely and Responsibly](https://app.kubicle.com/learn/data-security/introduction-to-security-protocols)
+ - [Data Ethics & Risk: Introduction to Data Ethics](https://app.kubicle.com/learn/data-ethics-risk/introduction-to-ethical-issues)
+ - [Data Ethics & Risk: Applying Ethical Thinking](https://app.kubicle.com/learn/data-ethics-risk/how-to-use-data-responsibly)
   
 ## Creating an ePortfolio
 
 ```{r}
 include_img("workflow.png")
 ```
+
+# Example of ePortfolios
+
+## Mine!
+
+```{=html}
+<iframe width="1000" height="500" src="https://damien-dupre.github.io"></iframe>
+```
+
+- `r fa(name = "globe")` <https://damien-dupre.github.io>
+- `r fa(name = "github")` <https://github.com/damien-dupre/damien-dupre.github.io>
+
+## Mickaël CANOUIL
+
+```{=html}
+<iframe width="1000" height="500" src="https://mickael.canouil.fr"></iframe>
+```
+
+- `r fa(name = "globe")` <https://mickael.canouil.fr>
+- `r fa(name = "github")` <https://github.com/mcanouil/mickael.canouil.fr>
+
+## Athanasia Mo Mowinckel
+
+```{=html}
+<iframe width="1000" height="500" src="https://drmowinckels.io"></iframe>
+```
+
+- `r fa(name = "globe")` <https://drmowinckels.io>
+- `r fa(name = "github")` <https://github.com/drmowinckels/drmowinckels.github.io>
+
+## Sam Shanny-Csik
+
+```{=html}
+<iframe width="1000" height="500" src="https://samanthacsik.github.io"></iframe>
+```
+
+- `r fa(name = "globe")` <https://samanthacsik.github.io>
+- `r fa(name = "github")` <https://github.com/samanthacsik/samanthacsik.github.io>
 
 # 2023-2024 BAA1104 ePortfolios
 
@@ -429,20 +467,21 @@ A new zsh terminal on MacOS
 | Delete file(s)         | `del`      | `rm`         |
 | Delete folder(s)       | `rmdir`.   | `rm`         |
 
-## Your Turn: Access your Terminal {background="#43464B"}
+## Your Turn: Access your Terminal {background="#43464B" .smaller}
 
-1. Open a Terminal window
-2. Show current path using 
+#### 1. Open a Terminal window
 
-- `cd` with cmd
-- `pwd` with zsh or PowerShell
+#### 2. Show current path using 
+
+ - `cd` with cmd
+ - `pwd` with zsh or PowerShell
 
 Note, Terminals always start from your home. You, it should print something like:
 
 - `C:\Users\YourUserName`
 - `/Users/YourUserName`
 
-3. Print the path of your python installation using 
+#### 3. Print the path of your python installation using 
 
 - `where python` with cmd
 - `where.exe python` with PowerShell
@@ -831,6 +870,8 @@ Note, the message `no such file or directory` will be printed if it hasn't worke
 - `cd C:\Users\YourUsername\Projects\my_first_project` (Windows)
 
 - `cd Users/YourUsername/Projects/my_first_project` (MacOS/Linux)
+
+Note, in case of error, check for typos!
 
 ```{r}
 countdown(minutes = 5, warn_when = 60)
