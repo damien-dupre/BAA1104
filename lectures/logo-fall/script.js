@@ -38,9 +38,9 @@
             height: 188
           },
           {
-            src: "jupyter.png",
-            width: 180,
-            height: 208
+            src: "vscode.png",
+            width: 300,
+            height: 300
           },
           {
             src: "markdown.png",

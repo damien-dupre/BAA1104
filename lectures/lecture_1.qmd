@@ -109,7 +109,7 @@ include_img("workflow.png")
 - `r fa(name = "globe")` <https://damien-dupre.github.io>
 - `r fa(name = "github")` <https://github.com/damien-dupre/damien-dupre.github.io>
 
-## Mickaël CANOUIL
+## Mickaël Canouil
 
 ```{=html}
 <iframe width="1000" height="500" src="https://mickael.canouil.fr"></iframe>
@@ -922,9 +922,15 @@ The ability to rerun the entire process from scratch
 
 ## Your Turn: Type of Files in an ePortfolio {background="#43464B"}
 
-1. Go to the GitHub Repository of my own website <https://github.com/damien-dupre/damien-dupre.github.io>
-2. Download and unZip this repository on your own Computer in the Projects folder,
+1. Go to the GitHub Repository of my own website <https://github.com/damien-dupre/damien-dupre.github.io>.
+2. Download and unZip this repository on your own Computer in the Projects folder.
 3. List all the file extensions of documents included in this folder and subfolders.
+
+::: {.callout-important}
+## Note
+
+- With the Windows OS, after downloading the repository, Click "Extract all" to unzip it.
+:::
 
 ```{r}
 countdown(minutes = 5, warn_when = 60)
