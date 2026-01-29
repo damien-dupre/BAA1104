@@ -1,0 +1,346 @@
+---
+title: "Lecture 3: Publishing with GitHub Pages"
+subtitle: BAA1104 - Workflow & Data Management 
+author: Damien Dupré
+format:
+  revealjs:
+    output-dir: lectures/
+    theme: [theme/metropolis.scss]
+    toc-depth: 1
+    chalkboard: false
+    menu: true
+    slide-number: true
+title-slide-attributes:
+    data-background-iframe: logo-fall/index.html
+preload-iframes: true
+knitr:
+  opts_chunk:
+    fig.align: center
+---
+
+```{r setup, include = FALSE}
+# libraries --------------------------------------------------------------------
+library(anicon)
+library(countdown)
+library(fontawesome)
+library(knitr)
+
+# functions --------------------------------------------------------------------
+include_img <- function(img_name) {
+  paste0("https://raw.githubusercontent.com/damien-dupre/img/main/", img_name) |> 
+  knitr::include_graphics()
+}
+
+#https://floswald.github.io/ScPoProgramming/
+# https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Environment_setup/Command_line
+# https://www.paulogcd.com/portfolio_tutorial/1_git_and_github.html
+
+# https://drmowinckels.io/talks_repo/slides/2022.04.28-git-github/#/git---why
+# https://r4ds.had.co.nz/workflow-projects.html#rstudio-projects
+
+# - [Structure Your Data Science
+# Projects](https://towardsdatascience.com/structure-your-data-science-projects-6c6c8653c16a)
+# 
+# - [Managing a statistical analysis project – guidelines and best
+# practices](https://www.r-statistics.com/2010/09/managing-a-statistical-analysis-project-guidelines-and-best-practices/)
+# 
+# - [Creating a research compendium w/
+# rrtools](https://annakrystalli.me/rrresearch/10_compendium.html)
+# 
+# - [Management of R
+# project](https://r-cubed.rostools.org/r-project-management.html)
+# 
+# - [The Basic Reproducible Workflow
+# Template](http://www.practicereproducibleresearch.org/core-chapters/3-basic.html)
+
+# https://jobreu.github.io/reproducible-research-gesis-2022/slides/comp-literacy.html#1
+# https://jobreu.github.io/reproducible-research-gesis-2022/
+
+# https://github.com/NGSchoolEU/ngs19_python_intro/blob/6a70c84188b74a02cdd52b13ff5f5c2955af86f5/1_Introduction_to_Python.ipynb#L109
+
+# https://github.com/Public-Health-Scotland/python-training/blob/1b2302fdf8c6a57e2782e9ed96d613afd40e047c/intro.Rmd#L223
+```
+
+## For Today
+
+### Requirements
+
+#### 1. Find these slides at:
+
+[https://damien-dupre.github.io/BAA1028/lecture_3](https://damien-dupre.github.io/BAA1028/lecture_3)
+
+#### 2. Homework Exercise done
+
+<br>
+
+### Objectives
+
+#### 1. Host your ePortfolio on GitHub
+
+#### 2. Publish your ePortfolio with GitHub pages
+
+<br>
+
+### Any questions?
+
+## Then, it's time to enter ...
+
+```{r out.width='40%'}
+include_img("the_matrix.gif")
+```
+
+# Host your Website on GitHub
+
+## GitHub
+
+#### GitHub has a lot of different functions. For now, we will only see how to use it to **published the html document output from our notebook file**.
+
+```{r}
+include_graphics("http://www.quickmeme.com/img/75/7509f68823389e4af3777ca6d3744c632cc32ab3547bc56e319126aa29ab149a.jpg")
+```
+
+## What is GitHub
+
+### Primary used to collaborate on code development, it became multi-purpose:
+
+- Version Control
+- File and Code Storage
+- Collaboration Projects
+- Social Media for Developers
+- Online Publication & Website Host
+- Automatic Actions
+
+### And even more that I am not aware of!
+
+## What is GitHub
+
+### Primary used to collaborate on code development, it became multi-purpose:
+
+- Version Control
+- **File and Code Storage**
+- Collaboration
+- Developers Social Media
+- **Online Publication & Website Host**
+- Automatic Actions
+
+### And even more that I am not aware of!
+
+## Your Turn: Sign In or Sign Up {background="#43464B"}
+
+1. Go to [https://github.com](https://github.com),
+2. Click <kbd>Sign In</kbd> or <kbd>Sign Up</kbd> (if you have already done it),
+3. If you are creating an account, fill all requested information.
+
+::: {.callout-important}
+## Important
+
+Your user name will become extremely important in your future (i.e., working with data teams, visibility of employers), `firstname-name` is usually good.
+:::
+
+```{r}
+countdown(minutes = 2, warn_when = 60)
+```
+
+## Welcome to GitHub
+
+```{r}
+include_graphics("https://miro.medium.com/v2/resize:fit:1400/1*cgJlPulU9t3djbf9TQ5sGA.gif")
+```
+
+## How does GitHub Work?
+
+#### The core principle of GitHub is a remote desktop (or profile) with a folder called **Repository** for each project you are working on or you worked on (also called "Repo" if you want to use the slang).
+
+```{r}
+include_img("github_dd_profile.png")
+```
+
+# Your First Repository
+
+## Your First Repository {background="#43464B"}
+
+Follow the steps here after [to create a Repository](https://docs.github.com/en/get-started/quickstart/create-a-repo):
+
+1. In the upper-right corner of any page, use the `+` drop-down menu, and select <kbd>New repository</kbd>.
+
+```{r}
+include_graphics("https://docs.github.com/assets/cb-11427/mw-1000/images/help/repository/repo-create.webp")
+```
+
+## Your First Repository {background="#43464B"}
+
+```{r}
+include_graphics("https://proclusacademy.com/images/32-github-new-repo-1.webp")
+```
+
+## Your First Repository {background="#43464B"}
+
+2. Type a short, memorable name for your repository, like `hello-world`.
+
+```{r}
+include_graphics("https://docs.github.com/assets/cb-61138/mw-1440/images/help/repository/create-repository-name.webp")
+```
+
+::: {.callout-important}
+## Important
+
+In the future, these test repositories should be removed to have a clean account.
+:::
+
+3. Optionally, add a description of your repository. For example, `My first repository on GitHub`. 
+
+## Your First Repository {background="#43464B"}
+
+4. Choose a **PUBLIC** repository visibility. For more information, see [about repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories),
+
+5. Tick ✅ **Add a README file**,
+
+6. Click <kbd>Create repository</kbd>.
+
+### Congratulations! You've successfully created your first repository, and initialized it with a README file.
+
+```{r out.width='50%'}
+include_graphics("https://external-preview.redd.it/H3X9ghkU1diDoEaB2j6OLakfRVvtelkI-VVCAMvpHFw.jpg?auto=webp&s=812777b2de31ed351475ecfb9cfe91a74931201b")
+```
+
+## Always Commit Changes
+
+In GitHub, a commit is a saved change to a project's source code or other files. When you make changes to a file in a GitHub repository, you create a new version of that file. 
+
+**A commit contains a snapshot of the changes** you've made to one or more files, along with a message that describes the changes. This **message should be descriptive and clear**, so that other developers can understand what changes you've made and why.
+
+::: {.callout-important}
+## Important
+
+Everytime you want to make a change in your repository, you need to commit these changes.
+:::
+
+# Your First Commit
+
+## Your First Commit {background="#43464B"}
+
+When you created your new repository, you initialized it with a README file. README files are a great place to describe your project in more detail, or add some documentation such as how to install or use your project. The contents of your README file are automatically shown on the front page of your repository.
+
+**Follow the steps here after to commit a change to the README file.**
+
+1. In your repository's list of files, click <kbd>README.md</kbd>. 
+
+```{r}
+include_graphics("https://docs.github.com/assets/cb-21025/mw-1440/images/help/repository/create-commit-open-readme.webp")
+```
+
+## Your First Commit {background="#43464B"}
+
+2. In the upper right corner of the file view, click on the pen icon to open the file editor ✏️,
+
+```{r}
+include_graphics("https://docs.github.com/assets/cb-47677/mw-1440/images/help/repository/edit-file-edit-button.webp")
+```
+
+3. In the text box, **type some information about the project**.
+
+## Your First Commit {background="#43464B"}
+
+4. Above the new content, click <kbd>Preview</kbd> to review the changes you made to the file.
+
+```{r}
+include_graphics("https://docs.github.com/assets/cb-35443/mw-1440/images/help/repository/edit-readme-preview-changes.webp")
+```
+
+6. Click <kbd>Commit changes...</kbd>.
+
+## Your First Commit {background="#43464B"}
+
+:::: {layout="[0.7,0.3]"}
+::: {#first-column}
+7. In the "Commit message" field, type a short, meaningful **commit message** that describes the change you made to the file.
+:::
+
+::: {#second-column}
+```{r}
+include_img("github_commit.png")
+```
+:::
+::::
+
+8. Below the commit message fields, decide whether to add your commit to the current branch or to a new branch. Select **commit directly to the `main` branch** for now. 
+
+9. Click <kbd>Commit changes</kbd>.
+
+::: {.callout-important}
+## Important
+
+For collaborative projects never commit to the main branch
+:::
+
+## GitHub Pages
+
+GitHub Pages is a **web hosting service** offered by GitHub that allows you to host static websites directly from a GitHub repository. This means you can use GitHub to store and version control your website's code, and then host it for free using GitHub Pages.
+
+Your website will then be published at a URL based on your GitHub username and repository name (e.g., **username.github.io/repository**).
+
+```{r out.width='50%'}
+include_graphics("https://miro.medium.com/v2/resize:fit:1400/format:webp/1*uHia-SKJPkWqbxbGJPfCCA.jpeg")
+```
+
+## Your Turn: Turn on GitHub Page {background="#43464B"}
+
+Turn on GitHub Pages for your project repository:
+
+1. Go to **Settings** and find **Pages** on the left pane,
+
+2. In **Branch**, instead of None select **Main** and click <kbd>Save</kbd>,
+
+3. Click on <kbd>Actions</kbd> and wait that "pages build and deployment" finishes,
+
+4. When it's done, go to <https://username.github.io/repositoryname>.
+
+```{r}
+countdown(minutes = 3, warn_when = 60)
+```
+
+## Your Turn: Add New Files to your Repository {background="#43464B"}
+
+::: {.callout-important}
+## Important
+
+For this exercise, you need the `index.html` file from the website template that you have downloaded and modified last time.
+:::
+
+1. In your Repository Page in GitHub, Click <kbd>Add files</kbd> then on <kbd>Upload files</kbd>,
+
+2. **Drop** or **choose** all the file `index.html`
+
+3. In the main box and **commit your changes** and observe the changes on your website.
+
+```{r}
+countdown(minutes = 2, warn_when = 60)
+```
+
+## Your Turn: Add New Files to your Repository {background="#43464B"}
+
+1. In your Repository Page in GitHub, Click <kbd>Add files</kbd> then on <kbd>Upload files</kbd>,
+
+2. **Drop** or **choose** all the subfolder and files contained in the local website folder beside `index.html`,
+
+3. In the main box and **commit your changes** and observe the changes on your website.
+
+```{r}
+countdown(minutes = 2, warn_when = 60)
+```
+
+## {background="#43464B"}
+
+```{css, echo = FALSE}
+img.circle {border-radius:50%;}
+```
+
+::: {layout-ncol="2"}
+<img class="circle" src="https://github.com/damien-dupre.png" />
+
+**Thanks for your attention and don't hesitate to ask if you have any questions!**  
+[`r fa(name = "mastodon")` @damien_dupre](https://datasci.social/@damien_dupre)  
+[`r fa(name = "github")` @damien-dupre](https://github.com/damien-dupre)  
+[`r fa(name = "link")` https://damien-dupre.github.io](https://damien-dupre.github.io)  
+[`r fa(name = "paper-plane")` damien.dupre@dcu.ie](mailto:damien.dupre@dcu.ie)
+:::

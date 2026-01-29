@@ -1,0 +1,598 @@
+---
+title: "Lecture 4: Git, GitHub, and Version Control"
+subtitle: BAA1104 - Workflow & Data Management 
+author: Damien Dupré
+format:
+  revealjs:
+    theme: [theme/metropolis.scss]
+    toc-depth: 1
+    chalkboard: false
+    menu: true
+    slide-number: true
+title-slide-attributes:
+    data-background-iframe: logo-fall/index.html
+preload-iframes: true
+knitr: 
+  opts_chunk:
+    fig.align: center
+---
+
+```{r setup, include = FALSE}
+# libraries --------------------------------------------------------------------
+library(anicon)
+library(countdown)
+library(fontawesome)
+library(knitr)
+
+# functions --------------------------------------------------------------------
+include_img <- function(img_name) {
+  paste0("https://raw.githubusercontent.com/damien-dupre/img/main/", img_name) |> 
+  knitr::include_graphics()
+}
+
+# https://anandology.github.io/isi-fcp/ 
+# https://hamishgibbs.github.io/soda_python_foundations/slides/slides_vscode_python#/title-slide
+# https://raw.githack.com/danilofreire/qtm350/main/lectures/lecture-03/03-command-line.html
+# https://raw.githack.com/danilofreire/qtm350/main/lectures/lecture-04/04-more-command-line.html
+
+# https://raw.githack.com/danilofreire/qtm350/main/lectures/lecture-06/06-more-git-github.html
+
+# https://github.com/DHI/datatalks
+```
+
+## Automated Version Control (AVC)
+::: {#sec-avc}
+![](https://mxochicale.github.io/intro-to-git-and-github/figures/version-control-what-is-it.png)
+:::
+
+## Automated Version Control (AVC)
+
+- A system that automatically manages changes to files, typically in the context of software development.
+- Keeps track of every modification to the code in a special kind of database.
+- If a mistake is made, developers can turn back the clock and compare earlier versions of the code to help fix the mistake while minimising disruption to all team members.
+
+## Automated Version Control (AVC)
+
+::: {#sec-avc-care}
+![](https://mxochicale.github.io/intro-to-git-and-github/figures/version-control-what-should-i-care-A.png)
+:::
+
+## Automated Version Control (AVC)
+
+![](https://mxochicale.github.io/intro-to-git-and-github/figures/version-control-what-should-i-care-B.png)
+
+## Automated Version Control (AVC)
+
+  - **Backup and restore**: Changes are stored securely and can be restored at any point.
+  - **Collaboration**: Multiple people can work on the same project at the same time.
+  - **Track changes**: You can see who last modified something that might be causing a problem, who introduced an issue, when it was introduced, and more.
+  - **Explore alternatives**: Safely experiment with new ideas in a branch, without affecting the main project.
+
+## Introduction to Git and GitHub
+
+- **Git**: A version control system that lets you manage and keep track of your source code history.
+- **GitHub**: A cloud-based hosting service that lets you manage Git repositories.
+- **Benefits**:
+  - Track changes in your code across versions.
+  - Collaborate with others on projects.
+  - Backup your work on the cloud.
+
+
+## What is Git ?
+
+> It's a **version control system**, which works like a time machine. In this time machine, it has check points which is known as **Commits** and it's unique for every check point. 
+
+> It has a super cool feature like multiverse aka **Branching**, that lets us create an alternate version of our code. A branch is a copy of project and it's super useful when working in groups, allowing us the capability of working on with or without changing the original code. We can also synchronize the changes that happened across different branches and that's called **Merging**.
+
+## GitHub is nothing without Git 
+
+```{r out.width='60%'}
+include_graphics("https://pbs.twimg.com/media/Fgg4vIWWIAAUJiq.jpg")
+```
+
+## What is a Git repository?
+
+ - A place where you can store your code, your files, and each file's revision history.
+ - Contains a `.git` folder at the root which does all the git magic behind the scenes.
+
+## Check if Git is Already Installed
+
+To check if Git is already installed, run the following in the Terminal:
+
+:::: {layout="[1,1,1]"}
+::: {#first-column}
+
+```{.bash filename="zsh (Linux/MacOS)"}
+which git
+```
+
+If asked to install the Xcode command line tools, say yes!
+:::
+
+::: {#second-column}
+```{.bash filename="cmd (windows)"}
+where git
+```
+:::
+
+::: {#third-column}
+```{.bash filename="PowerShell (windows)"}
+where.exe git
+```
+:::
+::::
+
+Check the version of your Git if you have one
+
+```bash
+git --version
+```
+
+## Downloading and Installing Git
+
+If Git is not installed: 
+
+- Download the installer from [https://git-scm.com/downloads](https://git-scm.com/downloads) 
+- Run keeping all the default settings. 
+
+Use `git --version` again to check that Git is installed.
+
+:::{.callout-note collapse=false appearance='default' icon=true}
+## If the Windows installer hangs with the progress bar at 100%:
+
+ - Close the installer with Task Manager
+ - Press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Delete</kbd>;  
+ - Select Task Manager;  
+ - Find Git for Windows installer and close.
+:::
+
+## Git Bash for Windows
+
+Git, the version control manager software, comes with `Git Bash` on Windows.
+
+`Git Bash` is the same Bash as the one used in Linux and MacOS.
+
+**However, all Command-Lines to use Git can be run not only in `Git Bash`, but also with `cmd` and `PowerShell`.**
+
+## Setting up Git
+
+The first step is to set up some configuration variables which helps git to keep track of contributor and contributors contribution.
+
+To set up the basic changes we will run `git config` command.
+
+```bash
+# git config command
+git config --global user.name "Your Name"
+git config --global user.email "Your Email"
+```
+
+## Your Turn: Setting up Git {background="#43464B"}
+
+In your terminal, type your GitHub Name and Email:
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "Your Email"
+```
+
+Example:
+
+```bash
+git config --global user.name "damien-dupre"
+git config --global user.email "damien.dupre@dcu.ie"
+```
+::: {.callout-important}
+## Important
+
+If done correctly there is no output to these commands but you can check them using:
+
+```bash
+git config --list
+```
+:::
+
+```{r}
+countdown(minutes = 5, warn_when = 60)
+```
+
+## Setting up Git
+
+The global option makes sure that every project in that local machine will use that name and email address.
+
+To see all the global configuration we can run the below command:
+
+```bash
+# displaying git global configuration command
+git config --list
+```
+
+To see where the settings file are defined, we can run bellow command:
+
+```bash
+# displaying setting files location command
+git config --list --show-origin
+```
+## Setting up Git
+
+Once we set up the global variables, we will initialize the project. To do so, we have to go to that directory from the command line.
+
+```bash
+# changing directory command
+cd folder/location
+```
+
+Once we are in the desired directory, we will initialize our project using `git init` or `git clone`
+
+```bash
+# Initialise a New Repo
+git init
+```
+
+```bash
+# Cloning an Existing Repo
+git clone https://github.com/username/repository.git
+```
+
+## Setting up Git
+
+It will create a `.git` file in the same directory and by default it's hidden. To see that, we need to type `ls -la` command on terminal.
+
+`git init` or `git clone` commands initialize the project for us and make files that are necessary for keeping track of our changes. We can change the directory to see what files have been created by the `git init` or `git clone` commands.
+
+```bash
+cd .git
+ls -la
+```
+
+It will display that git has created a several files to keep the tracks of our changes.
+
+## Your Turn: Clone Repository {background="#43464B"}
+
+1. Clone this repository from your terminal
+
+```bash
+cd ~ # brings you back to the root/home of your computer
+cd projects # moves the terminal to the "projects" folder
+git clone https://github.com/damien-dupre/my_simple_website.git
+```
+
+```{r}
+countdown(minutes = 5, warn_when = 60)
+```
+
+## Git Add
+
+After initializing the git, we need to add the files in the staging environment with `git add` command. Staging is a temporary area that we can store files that we want to commit later.
+
+```bash
+# Basic command for adding Files
+git add filename.extension # it adds single file at a time and it's a good
+practices
+# Alternative Options
+git add --all # it adds all the file in the directory to the staging environment
+git add -A # does the same thing as --all but it's a shortcut
+git add . # same as --all and -A
+```
+
+## Git Commit
+
+- You can think of a commit as a snapshot of your work at a particular time
+- You can navigate between commits easily with git
+- This allows you to switch easily between different versions of your work
+- When you commit, rather than saving all the files in a project every time, git is efficient
+and only stores the files which have been changed between the previous commit and your current one
+- The commit also stores a reference to its parent commit
+
+## Git Commit
+
+This means that Git has four main states that your files can be in:
+
+- **Untracked**: You've created a new file and not told git to keep track of it.
+- **Modified**: You've changed a file that git already has a record of, but have not told
+git to include these changes in your next commit.
+We say these files are in the working tree.
+- **Staged**: You've told git to include the file next time you do a commit.
+We say these files are in the staging area.
+- **Committed**: The file is saved in it's present state in the most recent commit.
+
+## Git Commit
+
+![](https://miro.medium.com/v2/1*diRLm1S5hkVoh5qeArND0Q.png)
+
+## Git Commit
+
+Last step is to commit the changes using the `git commit` command. 
+
+```bash
+# basic commit command with commit Message
+git commit -m "Commit Message"
+# commit command with description along with commit Message
+git commit -m "Commit Message" -m "Commit Description"
+```
+
+git commit message should be short and precise. What are the changes being made, why are the changes and the functionalities it will add.
+
+**git commit message should be like email subject. **
+
+## Your Turn: First Command Line Commit {background="#43464B"}
+
+1. Open the `my-first-web-page.html` file
+2. Modify 1 word in the text displayed in the website (title or content)
+3. Perform your first commit with the following code:
+
+```bash
+git add .
+git commit -m "My first command line commit"
+```
+
+```{r}
+countdown(minutes = 5, warn_when = 60)
+```
+
+## Working with remote repositories  
+
+* `git clone`: creates a copy of the codebase on your local machine.
+* `git push`: pushes changes back to the remote repository.
+* `git pull`: pulls changes from the remote repository.
+
+## Working with remote repositories  
+
+![](https://blog.isquaredsoftware.com/images/2021-01-career-advice-git-usage/git-staging-workflow.png)
+
+## GitHub 
+
+* Git repository hosting service
+* Collaborate with others on codebase
+* **Pull requests** for code review and merging changes
+* **Issue tracking** and project management tools
+* **GitHub Pages** for hosting websites
+
+## Git and GitHub
+
+Once your changes have been commited, it is time to send them to GitHub:
+
+```bash
+git push origin main
+```
+
+Be sure that your git project folder is connected to GitHub repository:  
+
+```bash
+git remote add origin https://github.com/YOURUSERNAME/my_simple_website.git
+```
+
+## Your Turn: First Push to GitHub{background="#43464B"}
+
+Just type: 
+
+```bash
+git push
+```
+And observe the results on your GitHub repository
+
+```{r}
+countdown(minutes = 5, warn_when = 60)
+```
+
+## Git and GitHub
+
+If you want to update your project with the version hosted on github:
+
+```bash
+git pull origin master
+```
+
+This command pulls changes from the remote repository and merges them into your local branch.
+
+This is useful when you are collaborating on a repository and working on different branches.
+
+
+## Git Information
+
+To verify git is keeping the track of our work we can use `git log` command.
+
+```bash
+# verifying command to check if git is keeping track 
+git log
+```
+
+It will show the entries that has been made in the `.git` folder. It shows the commit hash, author name, date with timestamp, and commit message.
+
+## Git Information
+
+`git log` command shows us some information about the commits that has been made. I will use the output of our first commit.
+
+```
+git log
+# Below is the output
+commit 1b12ec3c6bc7dfc48fa33c3ae655564a02700162 (HEAD -> main) # commit hash, which is unique for every commit
+Author: Shuvo Barman <user@users.noreply.github.com> # Name of the author and email
+Date:   Sun Dec 17 16:32:29 2023 -0330 # detailed time of the commit
+
+    Initial commit # commit message
+```
+
+the HEAD always point to the current branch in this case it's `main`
+
+## Git Environments
+
+We can see this with `git status` viewing command.
+
+```bash
+# Viewing status command
+git status
+```
+
+If a file goes into Modified Stage, we have two option for that file. One is adding that file using `git add` command
+or we can restore it using `git restore` command.
+
+```bash
+# restoring file command
+git restore FILENAME
+# Alternative options
+git restore . # restore all the files into it's previous state
+git checkout . # older version of restore command
+```
+
+## Ignoring Files
+
+Even if git is used to keep track of files but sometimes we don't want to keep track of all the files.
+
+There could be several reasons behind it. Such as:
+
+- Sensitive information(i.e. Password, Authentication tokens, API keys etc.)
+- Personal notes(i.e. To-Do list for project)
+- System files
+- Large files
+
+we can achieve this by creating a new file called `.gitignore`. Inside this file we can add any types of pattern, file name, folder name etc.
+which will git ignore. Git doesn't track empty folders.
+
+## Ignoring Files
+
+we can also use global ignore file to ignoring files or pattern that we don't want git to upload.
+
+```bash
+# global git ignore command
+git config --global core.excludesfile [file]
+```
+
+Clearing the cahce using below command.
+
+```bash
+# cache clearing command
+git rm -r --cached .
+```
+
+## Deleting 
+
+It can be done in two ways, from command line and another is doing manually from the IDE interface. we use `git rm` command to delete file.
+
+```bash
+# delete file command
+git rm FILENAME
+# force fully delete file 
+git rm -f FILENAME
+```
+
+If we delete the file using `git rm` command, it deletes the file and moved that deletion automatically into staging. But if we do it manually from IDE interface we have do move that file from staging. 
+
+## Deleting
+
+After deleting a certain file using `git rm` command, if we want to restore the file we need to execute below command
+
+```bash
+# restoring deleted file command
+git restore --staged FILENAME
+# git restore -S FILENAME
+```
+
+after executing the above command we have to execute below command as well.
+
+```bash
+git restore FILENAME
+```
+
+## Renaming
+
+This is a tricky part if we do it from the IDE interface manually. It will track two action: first deletion of certain file and second creating a new file. if we want to restore the manually renamed file using `git restore` command, git will keep both the 
+files.
+
+To do it from the command line we have to use `git mv` command
+
+```bash
+# file renaming command
+git mv OLD_FILE_NAME NEW_FILE_NAME
+```
+
+To restore the renamed file to it's previous name, we can use the same command `git mv` with just changing the order of file names.
+
+## Branches
+
+to see the brances we can use `git branch` command. It will show all the available branc in our project.
+
+```bash
+# checking git branch command
+git branch
+```
+
+To create a new branch we will have to take a copy of a snapshot from another branch and start working from there. To do so, 
+
+```bash
+# copying a branch command
+git switch -c NAME
+# Alternative Option
+git checkout -b NAME # older version of git switch
+```
+
+## Branches
+
+`git merge` command will merge the changes from one branch into the current branch.
+
+```bash
+# merge command syntax
+git merge <branch>
+```
+
+When we merge a feature into main branch, it's a good idea to delete that branch. To do that, we use below command
+
+```bash
+# git branch delete command syntax
+git branch --delete NAME
+# Alternative Option
+git branch -d NAME # we can use this as long as branches have no conflicts
+git branch -D NAME # ignore any conflicts, forcefully delete the branch
+```
+
+These sequence of doing things is also called git flow.
+
+## Best practices
+
+When working alone:
+
+* Commit often
+* Use descriptive commit messages
+* Review code regularly
+* Use .gitignore to exclude files
+* Don't commit data (only very small test data)
+* Don't commit passwords
+
+When working with a team: 
+
+* Keep pull requests small and focused
+* Use "issues" to track work
+
+## References
+
+Huge thanks the following people who have generated and shared most of the content of this lecture:
+
+- Zoë Turner: [Introduction to Git and GitHub Session - Prework for a computer](https://intro-git-github.nhsrcommunity.com/session-prework.html)
+
+- Miguel Xochicale: [Introduction to git and GitHub](https://mxochicale.github.io/intro-to-git-and-github/)
+
+- James Emberton, Amy Pike and Marion Weinzierl: [Git for beginners](https://github.com/Cambridge-ICCS/Summer-school-Intro-Git)
+
+- Joe Wallwork and Tom Meltzer: [Intermediate Git and GitHub](https://hackmd.io/@jwallwork/2024-07-10-intermediate-git-tools?type=slide#/1)
+
+<br>
+
+```{r}
+#| fig-align: "center"
+knitr::include_graphics("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGdyMnhseGczY3NheHU1cHhtdGRzdWRxaXJ1Z3BsdWF6MWdwZm84ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7JG6cq7EWesFcQ/giphy.gif")
+```
+
+## {background="#43464B"}
+
+```{css, echo = FALSE}
+img.circle {border-radius:50%;}
+```
+
+::: {layout-ncol="2"}
+<img class="circle" src="https://github.com/damien-dupre.png" />
+
+**Thanks for your attention and don't hesitate to ask if you have any questions!**  
+[`r fa(name = "mastodon")` @damien_dupre](https://datasci.social/@damien_dupre)  
+[`r fa(name = "github")` @damien-dupre](https://github.com/damien-dupre)  
+[`r fa(name = "link")` https://damien-dupre.github.io](https://damien-dupre.github.io)  
+[`r fa(name = "paper-plane")` damien.dupre@dcu.ie](mailto:damien.dupre@dcu.ie)
+:::
