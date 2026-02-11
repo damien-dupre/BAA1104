@@ -1,6 +1,6 @@
 ---
 title: "Lecture 4: Git, GitHub, and Version Control"
-subtitle: BAA1104 - Workflow & Data Management 
+subtitle: BAA1104 - E-Portfolio and Business Analytics Challenges
 author: Damien Dupré
 format:
   revealjs:
@@ -99,52 +99,61 @@ include_graphics("https://pbs.twimg.com/media/Fgg4vIWWIAAUJiq.jpg")
 
 To check if Git is already installed, run the following in the Terminal:
 
-:::: {layout="[1,1,1]"}
-::: {#first-column}
-
-```{.bash filename="zsh (Linux/MacOS)"}
-which git
+```bash
+git --version
 ```
 
-If asked to install the Xcode command line tools, say yes!
+::: {.callout-important}
+## MacOS
+
+If Git is NOT installed, a pop-up window will appear asking if you want to install the "command line developer tools". **Click Install or Agree**.
 :::
 
+## Downloading and Installing Git {background="#43464B"}
+
+:::: {layout="[1,1]"}
 ::: {#second-column}
-```{.bash filename="cmd (windows)"}
-where git
-```
-:::
+- MacOS
 
-::: {#third-column}
-```{.bash filename="PowerShell (windows)"}
-where.exe git
-```
-:::
-::::
-
-Check the version of your Git if you have one
+Open Terminal and type:
 
 ```bash
 git --version
 ```
 
-## Downloading and Installing Git
+MacOS will ask to install the Command Line Tools. Click Install and wait for it to finish.
 
-If Git is not installed: 
+If that does not appear, use the following code:
 
-- Download the installer from [https://git-scm.com/downloads](https://git-scm.com/downloads) 
-- Run keeping all the default settings. 
+```bash
+xcode-select –install
+```
+
+This will install Git as well. Then check that Git is there by running:
+
+```bash
+git --version
+```
+:::
+
+::: {#third-column}
+- Windows
+
+Download the installer from <https://git-scm.com/downloads>
+
+Run keeping all the default settings. 
 
 Use `git --version` again to check that Git is installed.
 
 :::{.callout-note collapse=false appearance='default' icon=true}
 ## If the Windows installer hangs with the progress bar at 100%:
 
- - Close the installer with Task Manager
  - Press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Delete</kbd>;  
- - Select Task Manager;  
  - Find Git for Windows installer and close.
 :::
+
+:::
+::::
 
 ## Git Bash for Windows
 
@@ -154,9 +163,11 @@ Git, the version control manager software, comes with `Git Bash` on Windows.
 
 **However, all Command-Lines to use Git can be run not only in `Git Bash`, but also with `cmd` and `PowerShell`.**
 
+![](https://www.gitkraken.com/wp-content/uploads/2021/07/GitBashLogo.jpg.webp)
+
 ## Setting up Git
 
-The first step is to set up some configuration variables which helps git to keep track of contributor and contributors contribution.
+Setting up your identity is the first essential step after you install Git on your computer. When you save your work in Git, which is known as a commit, the software attaches your name and email address to that save. This is very important because **it lets you and other people know exactly who made specific changes to the code**. You usually only need to configure this one time, and Git will remember it for all your future projects.
 
 To set up the basic changes we will run `git config` command.
 
@@ -165,6 +176,12 @@ To set up the basic changes we will run `git config` command.
 git config --global user.name "Your Name"
 git config --global user.email "Your Email"
 ```
+
+::: {.callout-important}
+## Warning
+
+It is best to use the same email address that you used for code hosting websites like GitHub or GitLab.
+:::
 
 ## Your Turn: Setting up Git {background="#43464B"}
 
@@ -212,30 +229,171 @@ To see where the settings file are defined, we can run bellow command:
 # displaying setting files location command
 git config --list --show-origin
 ```
-## Setting up Git
 
-Once we set up the global variables, we will initialize the project. To do so, we have to go to that directory from the command line.
+# Version Control with your Local Repository and GitHub
+
+## Connect Git and GitHub
+
+![](https://gowithcode.com/wp-content/uploads/2021/04/git-vs-github.jpg)
+
+## Connect Git and GitHub
+
+1. Manually create the `my_new_project` repository in the `projects` folder on your computer and add a text file called `hello.txt`.
+
+2. Manually create the `my_new_project` repository on GitHub.
+
+::: {.callout-important}
+## Important
+
+Leave the boxes for "Add a README file" and ".gitignore" empty because checking them will cause errors.
+:::
+
+3. Connect your local repository with your remote repository:
 
 ```bash
-# changing directory command
-cd folder/location
-```
-
-Once we are in the desired directory, we will initialize our project using `git init` or `git clone`
-
-```bash
-# Initialise a New Repo
+cd projects/my_new_project
 git init
+git remote add origin https://github.com/yourusername/my_new_project.git
 ```
+
+This command acts like a switch that tells Git to wake up and start watching this specific folder for any changes you make.
+
+## Add, Commit, and Push
+
+Next, do your first commit using:
 
 ```bash
-# Cloning an Existing Repo
-git clone https://github.com/username/repository.git
+git add .
+git commit -m "init"
 ```
 
-## Setting up Git
+Finally, to push your first commit on the remote repository, you need:
 
-It will create a `.git` file in the same directory and by default it's hidden. To see that, we need to type `ls -la` command on terminal.
+```bash
+git push -u origin main 
+```
+
+The terminal or a pop up window will ask you to sign in to your GitHub account to prove you have permission to write there. 
+
+Go back to your browser and refresh the page to see your files are now safely stored online.
+
+## Add, Commit, and Push Again
+
+After pushing this first init commit, all the snapshot of the projects can be taken using:
+
+```bash
+git add .
+git commit -m "modification ABC"
+git push
+```
+
+## Your Turn: Init Repository {background="#43464B"}
+
+1. Create the local repository `another_test` in the `projects` folder. Add a `hello.txt` file manually.
+
+2. Create the remote repository `another_test` on GitHub.
+
+3. Connect your local repository with your remote repository:
+
+```bash
+cd projects/another_test
+git init
+git remote add origin https://github.com/yourusername/another_test.git
+```
+
+4. Do your first commit:
+
+```bash
+git add .
+git commit -m "init"
+git push -u origin main 
+```
+
+```{r}
+countdown(minutes = 5, warn_when = 60)
+```
+
+# Version Control with Someone Else's Repository on GitHub
+
+## Connect Git and GitHub
+
+![](https://www.linode.com/docs/guides/how-to-install-git-and-clone-a-github-repository/git-github-workflow-1000w.png)
+
+## Connect Git and GitHub
+
+1. Clone the repository on your computer, for example:
+
+```bash
+cd projects
+git clone https://github.com/damien-dupre/my_simple_website.git
+```
+
+2. On the GitHub repository, click `Fork` to copy on your own account:
+
+![](https://docs.github.com/assets/cb-34352/mw-1440/images/help/repository/fork-button.webp)
+
+3. Connect your local clone with the remote fork:
+
+```bash
+cd my_simple_website
+git remote remove origin
+git remote add origin https://github.com/yourusername/my_simple_website.git
+git branch -m master main # old repositories might have a master branch instead of a main branch
+git push -u origin main
+```
+
+## Add, Commit, and Push
+
+This will create a new tracked folder on your computer called `my_simple_website` with all the files contained in this folder.
+
+You can modify these files as normal. Then when you want to save, use:
+
+```bash
+git add .
+git commit -m "modification ABC"
+```
+
+Finally, to push your changes on the remote repository, just use:
+
+```bash
+git push
+```
+
+## Your Turn: Clone Repository {background="#43464B" .smaller}
+
+1. Clone the repository `my_simple_website` from the `damien-dupre` GitHub account to your local computer using the terminal:
+
+```bash
+cd ~ # brings you back to the root/home of your computer
+cd projects # moves the terminal to the "projects" folder
+git clone https://github.com/damien-dupre/my_simple_website.git
+```
+
+2. Modify the h1 header of `my-first-web-page.html`, add, commit, and push your modification to a new repository on your GitHub account:
+
+```bash
+git add .
+git commit -m "modification header"
+git push -u origin main 
+```
+
+3. Modify the background colour of `my-first-web-page.html`, add, commit, and push your modification to the remote repository:
+
+```bash
+git add .
+git commit -m "modification bgr colour"
+git push 
+```
+
+```{r}
+countdown(minutes = 5, warn_when = 60)
+```
+
+# Understanding Git
+
+## Init and Clone
+
+Both ways will create a `.git` file in the same directory and by default it's hidden. To see that, we need to type `ls -la` command on terminal.
 
 `git init` or `git clone` commands initialize the project for us and make files that are necessary for keeping track of our changes. We can change the directory to see what files have been created by the `git init` or `git clone` commands.
 
@@ -245,20 +403,6 @@ ls -la
 ```
 
 It will display that git has created a several files to keep the tracks of our changes.
-
-## Your Turn: Clone Repository {background="#43464B"}
-
-1. Clone this repository from your terminal
-
-```bash
-cd ~ # brings you back to the root/home of your computer
-cd projects # moves the terminal to the "projects" folder
-git clone https://github.com/damien-dupre/my_simple_website.git
-```
-
-```{r}
-countdown(minutes = 5, warn_when = 60)
-```
 
 ## Git Add
 
@@ -314,21 +458,6 @@ git commit message should be short and precise. What are the changes being made,
 
 **git commit message should be like email subject. **
 
-## Your Turn: First Command Line Commit {background="#43464B"}
-
-1. Open the `my-first-web-page.html` file
-2. Modify 1 word in the text displayed in the website (title or content)
-3. Perform your first commit with the following code:
-
-```bash
-git add .
-git commit -m "My first command line commit"
-```
-
-```{r}
-countdown(minutes = 5, warn_when = 60)
-```
-
 ## Working with remote repositories  
 
 * `git clone`: creates a copy of the codebase on your local machine.
@@ -349,33 +478,6 @@ countdown(minutes = 5, warn_when = 60)
 
 ## Git and GitHub
 
-Once your changes have been commited, it is time to send them to GitHub:
-
-```bash
-git push origin main
-```
-
-Be sure that your git project folder is connected to GitHub repository:  
-
-```bash
-git remote add origin https://github.com/YOURUSERNAME/my_simple_website.git
-```
-
-## Your Turn: First Push to GitHub{background="#43464B"}
-
-Just type: 
-
-```bash
-git push
-```
-And observe the results on your GitHub repository
-
-```{r}
-countdown(minutes = 5, warn_when = 60)
-```
-
-## Git and GitHub
-
 If you want to update your project with the version hosted on github:
 
 ```bash
@@ -385,7 +487,6 @@ git pull origin master
 This command pulls changes from the remote repository and merges them into your local branch.
 
 This is useful when you are collaborating on a repository and working on different branches.
-
 
 ## Git Information
 

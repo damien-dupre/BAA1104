@@ -1,0 +1,1275 @@
+---
+title: "Lecture 5: The Final Workflow of Git, GitHub and Quarto with VS Code"
+subtitle: BAA1104 - E-Portfolio and Business Analytics Challenges
+author: Damien Dupré
+format:
+  revealjs:
+    theme: [theme/metropolis.scss]
+    toc-depth: 1
+    chalkboard: false
+    menu: true
+    slide-number: true
+title-slide-attributes:
+    data-background-iframe: logo-fall/index.html
+preload-iframes: true
+knitr: 
+  opts_chunk:
+    fig.align: center
+---
+
+```{r setup, include = FALSE}
+# libraries --------------------------------------------------------------------
+library(anicon)
+library(countdown)
+library(fontawesome)
+library(knitr)
+
+# functions --------------------------------------------------------------------
+include_img <- function(img_name) {
+  paste0("https://raw.githubusercontent.com/damien-dupre/img/main/", img_name) |> 
+  knitr::include_graphics()
+}
+
+# https://www.paulogcd.com/portfolio_tutorial/1_git_and_github.html
+# https://hmc-e155.github.io/tutorials/
+# https://github.com/SaulDiazInfante/intro-quarto-unison-2024/blob/ada2253a578965e0d996e66ca203c5a0e90b7b86/materials/02-authoring.qmd#L140
+# https://github.com/hamishgibbs/soda_python_foundations/blob/0034f28eebb2cd44571c5176a9eb1f76db31d554/slides/slides_VS Code_python.qmd#L4
+
+# https://github.com/tracykteal/quarto-GT-pyopensci/blob/84f42f6d458e1152b8a331882bb9930db4a97b64/1-2-documents/1-2-documents.qmd#L113
+# https://github.com/coffm049/GDCVS CodeIntro/blob/49f03a5beeddb8c4c4a6255b3db96d4d4f08d786/whyVS CodePresentation/whyVS CodePresentation.qmd#L2
+# https://github.com/spider-z3r0/ULpsych_programing_club/blob/d255dbfb57b15526461820e891773577fc10b829/presentations/Day 0/Day0-0Slides.qmd#L5
+
+# https://visualstudiomagazine.com/articles/2022/07/12/python-vs-code.aspx
+# https://datasciencerocks.hashnode.dev/python-notes-for-pythonist-ide
+# https://www.google.com/imgres?q=what%20is%20the%20main%20IDE%20for%20python%20development%20poll&imgurl=https%3A%2F%2Fcdn-bpaab.nitrocdn.com%2FovmYDbOhMgMfItYufwmmRlRlkhckslfH%2Fassets%2Fimages%2Foptimized%2Frev-8763df0%2Fdjangostars.com%2Fblog%2Fwp-content%2Fuploads%2F2022%2F08%2FThe-Most-Popular-Python-Editors-and-IDEs.png&imgrefurl=https%3A%2F%2Fdjangostars.com%2Fblog%2Fpython-ide%2F&docid=L4BJflU4BVs3nM&tbnid=9YU0sTXGMPDFAM&vet=12ahUKEwiRs5Kd4raLAxUOW0EAHdPCAhgQM3oECBcQAA..i&w=1440&h=1860&hcb=2&ved=2ahUKEwiRs5Kd4raLAxUOW0EAHdPCAhgQM3oECBcQAA
+
+# https://www.kdnuggets.com/2018/12/most-popular-python-ide-editor.html
+# https://medium.com/@gianlucaita/9-most-used-ides-ee4fc8628fd5
+# https://survey.stackoverflow.co/2024/technology#3-programming-scripting-and-markup-languages
+# https://www.freecodecamp.org/news/visual-studio-vs-visual-studio-code/
+# https://talkpython.fm/episodes/show/493/quarto-open-source-technical-publishing
+```
+
+# Discovering VS Code
+
+## Which IDE to Use?
+
+An **Integrated Development Environment** (IDE) is a software application that provides comprehensive tools to facilitate writing, testing, and debugging code. 
+
+Popular Python IDEs include **PyCharm**, **Visual Studio Code (aka VS Code)**, **Spyder**, and **IDLE**.
+
+Each offers unique features catering to different levels of expertise and use cases, from beginners to professional developers.
+
+## Which IDE to Use?
+
+A good IDE enhances productivity by offering features such as:
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+
+1. **Code Editor** – A text editor with syntax highlighting, auto-completion, and indentation support.
+2. **Debugger** – A tool to help identify and fix errors by allowing breakpoints, step-through execution, and variable inspection.
+3. **Integrated Terminal** – A built-in terminal for running bash without switching applications.
+:::
+
+::: {#second-column}
+4. **Package Management** – Easy installation and management of Python libraries and dependencies.
+5. **Version Control Integration** – Support for Git and other version control systems to track code changes.
+6. **Project Management** – Features to organise files, modules, and projects efficiently.
+:::
+::::
+
+## Which IDE to Use?
+
+You have already experienced an IDE in Semester 1. While it is a useful tool, it is not the most widely used IDE if it's not VS CODE. 
+
+I believe it would be beneficial to transition from a lesser-known IDE to **one of the major contenders**.
+
+## Which IDE to Use?
+
+```{r}
+include_img("ide_2025.png")
+```
+<center>Source [`r fa(name = "globe")` Stackoverflow Survey 2025](https://survey.stackoverflow.co/2025/technology#most-popular-technologies-dev-envs)</center>
+
+## What is VS Code?
+
+- Visual Studio Code (VS Code) is a **free, open-source** code editor developed by Microsoft.
+- It supports multiple programming languages, including Python, JavaScript, C++, and more.
+- Provides features like **syntax highlighting, debugging, Git integration, and extensions**.
+
+::: {.callout-important}
+## Important
+
+Visual Studio Code and️ Visual Studio are very different
+:::
+
+## Why Use VS Code?
+
+- **Lightweight and fast** compared to full-fledged IDEs.
+- **Highly customisable** with themes and extensions.
+- **Integrated terminal** for running commands within the editor.
+- **Great support for multiple programming languages**.
+- **Built-in Git support** for version control.
+
+### VS Code is market leader with strong community!
+
+## Installing VS Code
+
+### Step 1: Download
+- Go to the [official VS Code website](https://code.visualstudio.com/).
+- Download the installer for your operating system (Windows, macOS, or Linux).
+
+### Step 2: Install
+- Run the downloaded installer and follow the setup instructions:
+  - Windows users: [https://code.visualstudio.com/docs/setup/windows](https://code.visualstudio.com/docs/setup/windows)
+  - MacOS users: [https://code.visualstudio.com/docs/setup/mac](https://code.visualstudio.com/docs/setup/mac)
+
+## Installing VS Code
+
+Once installed, you can launch VS Code directly from its short cut.
+
+Then, need to download some essential extensions. 
+
+- On the left side of the window, there will be a bar with some icons. 
+- Click on the extensions icon to Open the Extensions Marketplace:
+
+![](https://i0.wp.com/www.phdata.io/wp-content/uploads/2021/06/VSCode-Extension-Icon-.png)
+
+Alternatively, use the keyboard shortcut:
+
+- Windows: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd>
+- MacOS: <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd>
+
+You could have a look at [GitHub Copilot & GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) and any others that seem interesting or useful such as **Prettier** (for code formatting) or **GitLens** (for enhanced Git support)
+
+## Configure Settings and Environement
+
+Optionally:
+
+- Go to **File > Preferences > Settings**
+- Adjust editor preferences, key bindings, and themes.
+
+[![](https://www.gitkraken.com/wp-content/uploads/2024/04/Best-VS-Code-themes-hero-2.png.webp)](https://www.gitkraken.com/wp-content/uploads/2024/04/Best-VS-Code-themes-hero-2.png.webp)
+
+## Configure Settings and Environement {background="#43464B"}
+
+::: {.callout-important}
+## Important
+
+An important setting in VSCODE has to be changed! Let's do it together.
+:::
+
+1. Go to the settings in VS CODE
+
+2. Type `Rebase When Sync` in the Search Settings bar
+
+3. Tick the box to force Git to use rebase
+
+![](https://emtech.cc/static/vscode-git-pull/vscode.webp)
+
+## Visual Studio Code
+
+![](https://raw.githubusercontent.com/spider-z3r0/ULpsych_programing_club/d255dbfb57b15526461820e891773577fc10b829/presentations/Day%200/images/VSCODEexplorer%20highlighted.jpg)
+
+## Visual Studio Code
+
+The left-hand side of the window is the **activity bar**.
+
+- It contains icons for the different views and panels in VS Code.
+- You can click on these icons to switch between views.
+- The main one you'll use is the 'explorer' icon, top of the activity bar, which will show you the files and folders in your project.
+
+## Visual Studio Code
+
+![](https://raw.githubusercontent.com/spider-z3r0/ULpsych_programing_club/d255dbfb57b15526461820e891773577fc10b829/presentations/Day%200/images/VSCODEexplorer_terminal_highlighted.jpg)
+
+## Visual Studio Code
+
+The bottom panel is the **terminal**.
+
+-   This is where you can run commands with a shell (e.g., BASH, ZSH, CMD, or PowerShell) and see the output of those commands.
+-   You can also run your code here.
+-   You can open the terminal by clicking on the `terminal` icon in the bar along the top of the VS Code window.
+
+## Visual Studio Code
+
+![](https://raw.githubusercontent.com/spider-z3r0/ULpsych_programing_club/d255dbfb57b15526461820e891773577fc10b829/presentations/Day%200/images/VSCODEhighlighted.jpg)
+
+## Visual Studio Code
+
+The largest panel is the **editor**.
+
+-   This is where you write your code and text.
+-   But it's also like a browser, you can have multiple tabs open at once, and different types of files
+-   You can split the editor into multiple panes to allow for previews, to view your data while you work, or even compare different parts of the same document! 
+
+## Visual Studio Code
+
+![](https://raw.githubusercontent.com/spider-z3r0/ULpsych_programing_club/d255dbfb57b15526461820e891773577fc10b829/presentations/Day%200/images/VSCODEwelcome.jpg)
+
+When you open VS Code for the first time, you'll see a welcome screen, this gives you some options for how you want VS Code to look and feel, and some options for what you want to do with it.
+
+## Visual Studio Code
+
+Do these choices matter? Not really so don't stress. They are aesthetic choices, and you can change them at any time, but they're there because you'll be spending a lot of time in VS Code and you should be comfortable there. 
+
+ - Take some time and look around the screen, I'll be walking around to make sure that you see everything.
+ - Try out the different themes, and see what you like. 
+ - When you're ready click on the little blue 'welcome' button in the top left of the window to move on.
+
+# Practising Git and GitHub with VS Code
+
+Let's do all these following steps together
+
+## Check your Git Installation
+
+You can verify your `Git` installation by typing in the VS Code terminal:
+
+```{.bash filename="Terminal"}
+git --version
+```
+
+It the installation is correct, it should print the version of your Git (e.g., `git version 2.33.1`)
+
+## Git-GitHub Version Control with VS Code
+
+1. Create a Local Repository called `VSCODE_test_1` in the `projects` folder and add a `hello.txt` file.
+
+2. Open `VSCODE_test_1` in VS Code
+
+3. In the `Source Control` Icon of the left Pane, click on `Initialize Repository`
+
+![](https://code.visualstudio.com/assets/docs/sourcecontrol/quickstart/initialize-repository.png)
+
+## Add, Commit, and Push
+
+To observe practice with the Git/GitHub workflow in VS Code:
+
+1. In the `Source Control` panel, click <kbd>+</kbd> in `Changes` to "Add" your changes.
+
+2. Then add a mandatory message and click <kbd>✔️ Commit</kbd>
+
+3. Click <kbd>☁ Publish Branch</kbd> and select the public branch. You should see you little cloud icon climbing up the levels of yours commits.
+
+::: {.callout-note}
+If you forgot the add files and directly click commit, VS Code will prompt a message proposing to add all files and commit them, which is convenient as well.
+:::
+
+## Connect VS Code to your GitHub Account
+
+You should be prompted the following message: 
+
+![](https://cdn.jasongaylord.com/images/2020/06/09/vscode-github-authorized.jpg)
+
+Click `Continue`
+
+## Add, Commit, and Push Again
+
+1. Open your `hello.txt` file and make a new modification
+
+2. In the `Source Control` panel, click <kbd>+</kbd> in `Changes` to "Add" your changes.
+
+3. Then add a mandatory message and click <kbd>✔️ Commit</kbd>
+
+4. Click <kbd>Synch Changes</kbd>. You should see you little cloud icon climbing up the levels of yours commits.
+
+::: {.callout-note}
+If you forgot the add files and directly click commit, VS Code will prompt a message proposing to add all files and commit them, which is convenient as well.
+:::
+
+## Connect VS Code to your GitHub Account
+
+```{r}
+include_img("vscode_github.jpg")
+```
+
+## Connect VS Code to your GitHub Account
+
+These actions are the same and could be done from the terminal using the following code:
+
+```{.bash filename="Terminal"}
+cd projects/VSCODE_test_1
+git init
+git remote add origin https://github.com/yourusername/VSCODE_test_1.git
+git add .
+git commit -m "init"
+git push -u origin main 
+```
+
+## From Local to GitHub
+
+```{r}
+include_img("vscode_git.webp")
+```
+
+## From Local to GitHub
+
+Let's repeat these steps, but this time without cloning an already existing repository on GitHub. This time we will take a project on your computer and push it on GitHub.
+
+## Your Turn: Add, Commit, and Push {background="#43464B"}
+
+1. Create a `VSCODE_test_2` repository and add a `hello.txt` file.
+
+2. Open `VSCODE_test_2` in VS Code
+
+3. In the `Source Control` Icon of the left Pane, click on `Initialize Repository`
+
+4. In the `Source Control` panel, click <kbd>+</kbd> in `Changes` to "Add" your changes.
+
+5. Then add a mandatory message and click <kbd>✔️ Commit</kbd>
+
+6. Click <kbd>☁ Publish Branch</kbd> and select the public branch.
+
+7. Open your `hello.txt` file and make a new modification
+
+8. In the `Source Control` panel, click <kbd>+</kbd> in `Changes` to "Add" your changes.
+
+9. Then add a mandatory message and click <kbd>✔️ Commit</kbd>
+
+10. Click <kbd>Synch Changes</kbd>.
+
+```{r}
+countdown(minutes = 5, warn_when = 60)
+```
+
+# Using Quarto in VS Code
+
+## What is Quarto?
+
+- Quarto revolutionizes technical publishing by enabling you to write once, then render to multiple high-quality outputs.
+
+- Whether you need a polished PDF, a full-featured website, or an internal report, Quarto’s command-line tool, multi-language support, and tight Pandoc integration streamline the entire process. 
+
+- With an active community, broad editor integrations, and flexible publishing options, Quarto offers a powerful path to reproducible and professional-grade data science communication.
+
+## What is Quarto?
+
+![](https://quarto.org/docs/tools/images/vscode-render.png)
+
+## Together: Installing Quarto {background="#43464B"}
+
+Outside VS Code (Quarto has it own app)
+
+- Download from [quarto.org](https://quarto.org/)
+- Install with default settings
+
+Verify Quarto's installation by running:
+
+```{.bash filename="Terminal"}
+quarto check
+```
+
+Quarto needs both `python` and the `jupyterlab` libraries but we will sort this out later if you don't have them.
+
+<!-- ## Troubleshooting Quarto -->
+
+<!-- When multiple versions of `python` are installed on your computer, quarto might connect to a version without `jupyter`. -->
+
+<!-- Windows user can specify the anaconda `python` path by following the steps indicated here from the 6th minute: [https://www.youtube.com/watch?v=uOwCiZKj2rg&t=376s](https://www.youtube.com/watch?v=uOwCiZKj2rg&t=376s) -->
+
+<!-- ```{=html} -->
+<!-- <!-- <iframe width="780" height="500" src="https://www.youtube.com/embed/uOwCiZKj2rg?si=q7Ibe2FcBYvASGe3" title="YouTube video player"></iframe> --> -->
+<!-- ``` -->
+
+
+<!-- ## Step 3: Verify Quarto in VS Code -->
+
+<!-- 1. Open VS Code and create a new file `example.qmd` -->
+<!-- 2. Write some sample Quarto Markdown: -->
+<!--    ```markdown -->
+<!--    --- -->
+<!--    title: "My First Quarto Document" -->
+<!--    format: html -->
+<!--    --- -->
+
+<!--    # Hello, Quarto! -->
+<!--    This is a test document. -->
+<!--    ``` -->
+<!-- 3. Render the document by running: -->
+<!--    ```sh -->
+<!--    quarto render example.qmd -->
+<!--    ``` -->
+<!-- 4. Open the generated `example.html` in your browser. -->
+
+<!-- ## Troubleshooting -->
+
+<!-- - If Quarto is not recognised in VS Code, check: -->
+<!--   - **VS Code settings**: Ensure the Quarto extension is enabled. -->
+<!--   - **PATH variable**: Verify `quarto` is in your system PATH (`quarto --version` should return a valid version). -->
+<!-- - Check the **Quarto documentation** at [quarto.org/docs](https://quarto.org/docs/) -->
+
+## Practising Quarto
+
+Quarto is an open-source scientific and technical publishing system that builds on standard markdown with features essential for scientific communication.
+
+- Computations: Python, R, Julia, Observable JS
+- Markdown: Pandoc flavoured markdown with many enhancements
+- Output: Documents, presentations, websites, books, blogs
+
+See [https://quarto.org](https://quarto.org) for more details
+
+## Practising Quarto
+
+The Goal is to create a document that is all-in-one
+
+- Documents that include source code for their production
+- Notebook AND plain-text flavours
+- Programmatic automation and reproducibility
+
+And it has a template for websites, see tutorial here: [https://adtarie.net/posts/007-quarto-python-tutorial/](https://adtarie.net/posts/007-quarto-python-tutorial/)
+
+<!-- ## Rendering Notebooks -->
+
+<!-- - Code files (like .py or .r) only contain code plus comments -->
+<!-- - Notebook files (like .ipynb, .Rmd, or .qmd) can contain both text and code -->
+<!-- - When you **Render** a notebook, you create a shareable report -->
+<!-- - Different format are possible: html, pdf, word, ... -->
+<!-- - **Markdown** is the markup language that formats a rendered text -->
+
+<!-- ::: {.callout-warning} -->
+<!-- Notebooks and Code files are only working documents, they are not made to report your analyses and results to other  -->
+<!-- stakeholders/clients. -->
+<!-- ::: -->
+
+<!-- ## Exercise 2: Rendering Notebooks {background="#43464B"} -->
+
+<!-- While your file `hello.ipynb` is open: -->
+
+<!-- 1. go to the top URL -->
+<!-- 2. Type `> Quarto Preview` -->
+
+<!-- ```{r} -->
+<!-- countdown(minutes = 3, warn_when = 60) -->
+<!-- ``` -->
+
+<!-- ## Your turn! -->
+
+<!-- 1/ Download the file `hello.ipynb`  -->
+<!-- - from here: https://quarto.org/docs/get-started/hello/jupyter.html -->
+<!-- - or by clicking here: <a href="https://quarto.org/docs/get-started/hello/_hello.ipynb" download="hello.ipynb" data-original-href="https://quarto.org/docs/get-started/hello/_hello.ipynb">Download hello.ipynb</a> -->
+
+<!-- 2/ Open Jupyter Lab and drop the `hello.ipynb` in the list of files in Jupyter (left pane) -->
+
+<!-- 3/ Open a new Terminal window (on Jupyter Lab or on your OS) and run the following instructions: -->
+
+<!-- ```markdown -->
+<!-- quarto render hello.ipynb --to html -->
+<!-- ``` -->
+
+<!-- and then: -->
+
+<!-- ```markdown -->
+<!-- open hello.html -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- countdown(minutes = 5, warn_when = 60) -->
+<!-- ``` -->
+
+
+##  Quarto Editor vs Output
+
+```{r out.width='100%'}
+include_graphics("https://quarto.org/docs/get-started/hello/images/jupyter-quarto-preview.png")
+```
+
+##  Quarto Structure
+
+Quarto files have 3 different types of content:
+
+#### 1. The YAML
+
+In a cell of type "Raw", displayed between two series of `---` signs, it corresponds to the metadata shown in the header of the output file (e.g., title, author, date, ...) and the type of output (e.g., pdf, html, doc, ...)
+
+#### 2. The Text
+
+Written in Markdown style (i.e., text without formatting), it is used as core description in the output document
+
+#### 3. The Code
+
+Inserted in the Quarto inside code cells, the code is processed when creating the output and can display figures and tables
+
+# 1. The YAML
+
+## The YAML
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+### Simple
+
+```
+---
+format: html
+---
+```
+:::
+
+::: {#second-column}
+### Default
+
+```
+---
+title: Quarto Basics
+format: html
+date: "99/99/9999"
+---
+```
+:::
+::::
+
+::: {.callout-warning}
+indentation is very important, every line finishing with `:` involves 1 Tab indentation on the following line.
+:::
+
+
+```
+---
+title: Quarto Basics
+date: "99/99/9999"
+format: 
+  html:
+    code-fold: true
+---
+```
+
+##  Execute Python Code
+
+Quarto can use R or Python to execute code
+
+- Python code is executed natively with the `python3` engine
+
+```yaml
+---
+engine: python3
+---
+```
+
+- Quarto can _also_ use the `jupyter` engine to execute Julia, Python, or other languages that Jupyter supports
+
+```yaml
+---
+jupyter: python3
+---
+```
+
+# 2. Markdown Style
+
+## Overview
+
+Markdown is a plain text format that is designed to be easy to write, and, even more importantly, easy to read:
+
+> A Markdown-formatted document should be publishable as-is, as plain text, without looking like it's been marked up with tags or formatting instructions. -- [John Gruber](https://daringfireball.net/projects/markdown/syntax#philosophy)
+
+This document provides examples of the most commonly used markdown syntax. See the full documentation of [Markdown](https://pandoc.org/MANUAL.html#pandocs-markdown) for more in-depth documentation.
+
+## Text Formatting
+
++-----------------------------------------+-----------------------------------------+
+| Markdown Syntax                         | Output                                  |
++=========================================+=========================================+
+| ``` markdown                            | *italics*, **bold**, ***bold italics*** |
+| *italics*, **bold**, ***bold italics*** |                                         |
+| ```                                     |                                         |
++-----------------------------------------+-----------------------------------------+
+| ``` markdown                            | superscript^2^ / subscript~2~           |
+| superscript^2^ / subscript~2~           |                                         |
+| ```                                     |                                         |
++-----------------------------------------+-----------------------------------------+
+| ``` markdown                            | ~~strikethrough~~                       |
+| ~~strikethrough~~                       |                                         |
+| ```                                     |                                         |
++-----------------------------------------+-----------------------------------------+
+| ``` markdown                            | `verbatim code`                         |
+| `verbatim code`                         |                                         |
+| ```                                     |                                         |
++-----------------------------------------+-----------------------------------------+
+
+## Headings {#headings}
+
++-----------------+-----------------------------------+
+| Markdown Syntax | Output                            |
++=================+===================================+
+| ``` markdown    | # Header 1 {.heading-output}      |
+| # Header 1      |                                   |
+| ```             |                                   |
++-----------------+-----------------------------------+
+| ``` markdown    | ## Header 2 {.heading-output}     |
+| ## Header 2     |                                   |
+| ```             |                                   |
++-----------------+-----------------------------------+
+| ``` markdown    | ### Header 3 {.heading-output}    |
+| ### Header 3    |                                   |
+| ```             |                                   |
++-----------------+-----------------------------------+
+| ``` markdown    | #### Header 4 {.heading-output}   |
+| #### Header 4   |                                   |
+| ```             |                                   |
++-----------------+-----------------------------------+
+| ``` markdown    | ##### Header 5 {.heading-output}  |
+| ##### Header 5  |                                   |
+| ```             |                                   |
++-----------------+-----------------------------------+
+| ``` markdown    | ###### Header 6 {.heading-output} |
+| ###### Header 6 |                                   |
+| ```             |                                   |
++-----------------+-----------------------------------+
+
+```{=html}
+<style type="text/css">
+.heading-output {
+  border-bottom: none;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+</style>
+```
+
+## Links
+
++--------------------------------------------------------------+--------------------------------------------------------------------------------------------------------+
+| Markdown Syntax                                              | Output                                                                                                 |
++==============================================================+========================================================================================================+
+| ``` markdown                                                 | <https://quarto.org>                                                                                   |
+| <https://quarto.org>                                         |                                                                                                        |
+| ```                                                          |                                                                                                        |
++--------------------------------------------------------------+--------------------------------------------------------------------------------------------------------+
+| ``` markdown                                                 | [Quarto](https://quarto.org)                                                                           |
+| [Quarto](https://quarto.org)                                 |                                                                                                        |
+| ```                                                          |                                                                                                        |
++--------------------------------------------------------------+--------------------------------------------------------------------------------------------------------+
+
+## Images
+
+Images are created using a similar notation to links.
+
+They are done in the format
+
+`![]()`
+
+- The ! lets markdown know it's an image
+- Inside the [] you can optionally put a caption.
+- Inside the () you place a link to the image relative to the location of the document OR on the web.
+
+## Web Image Example
+
+`![](https://avatars.githubusercontent.com/u/107476423?s=400&u=84c1b49966ea958785a8954726c116b7952b2041&v=4)`
+
+![](https://avatars.githubusercontent.com/u/107476423?s=400&u=84c1b49966ea958785a8954726c116b7952b2041&v=4)
+
+## Local Image Example
+
+`![Image of a white robot holding a magnifying glass](resources/cover_image.jpeg)`
+
+This points towards an image where there is a folder called 'resources' at the same level as the .qmd file being written. It moves into the resources folder, then looks for an image called `cover_image.jpeg`.
+
+![Image of a white robot surrounded holding a magnifying glass](https://static.vecteezy.com/system/resources/previews/000/686/003/non_2x/white-friendly-android-robot-looking-through-magnifying-glass-vector.jpg)
+
+## Images
+
++----------------------------------------------+-----------------------------------------------+
+| Markdown Syntax                              | Output                                        |
++==============================================+===============================================+
+| ``` markdown                                 | ![](image.png)                                |
+| ![](image.png)                               |                                               |
+| ```                                          |                                               |
++----------------------------------------------+-----------------------------------------------+
+| ``` markdown                                 | ![Caption](image.png)                         |
+| ![Caption](image.png)                        |                                               |
+| ```                                          |                                               |
++----------------------------------------------+-----------------------------------------------+
+| ``` markdown                                 | [![Caption](image.png)](https://quarto.org)   |
+| [![Caption](image.png)](https://quarto.org)  |                                               |
+| ```                                          |                                               |
++----------------------------------------------+-----------------------------------------------+
+
+## List
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+```markdown              
+* unordered list         
+    + sub-item 1         
+    + sub-item 2         
+        - sub-sub-item 1 
+```                      
+:::
+
+::: {#second-column}
+* unordered list        
+    + sub-item 1        
+    + sub-item 2        
+        - sub-sub-item 1
+:::
+::::
+
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+``` markdown                   
+*   item 2                     
+                               
+    Continued (indent 4 spaces)
+```                                                 
+:::
+
+::: {#second-column}
+                               
+-   item 2                     
+                               
+    Continued (indent 4 spaces)
+:::
+::::
+
+## List
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+``` markdown                
+1. ordered list             
+2. item 2                   
+    i) sub-item 1           
+         A.  sub-sub-item 1 
+```                                             
+:::
+
+::: {#second-column}
+                             
+ 1. ordered list             
+ 2. item 2                   
+     i) sub-item 1           
+          A.  sub-sub-item 1 
+:::
+::::
+
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+``` markdown  
+- [ ] Task 1  
+- [x] Task 2  
+```                                                      
+:::
+
+::: {#second-column}
+               
+- [ ] Task 1   
+- [x] Task 2   
+:::
+::::
+
+## List
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+``` markdown               
+(@)  A list whose numbering
+                           
+continues after            
+                           
+(@)  an interruption       
+```                                                                 
+:::
+
+::: {#second-column}
+                           
+(1) A list whose numbering 
+                           
+continues after            
+                           
+(2) an interruption        
+                           
+:::
+::::
+
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+``` markdown                
+::: {}                      
+1. A list                   
+:::                         
+                            
+::: {}                      
+1. Followed by another list 
+:::                         
+```                                                                        
+:::
+
+::: {#second-column}
+                            
+::: {}                      
+1. A list                   
+:::                         
+                            
+::: {}                      
+1. Followed by another list 
+:::                         
+                            
+:::
+::::
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+``` markdown     
+term             
+: definition     
+```                                                                                   
+:::
+
+::: {#second-column}
+            
+term        
+: definition
+:::
+::::
+
+## List
+
+Note that unlike other Markdown renderers (notably Jupyter and GitHub), lists in Quarto require an entire blank line above the list. 
+
+Otherwise the list will not be rendered in list form, rather it will all appear as normal text along a single line.
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+```markdown              
+Some text:
+
+* First bullet point
+* Second bullet point
+```                      
+:::
+
+::: {#second-column}
+Some text:
+
+* First bullet point
+* Second bullet point
+:::
+::::
+
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+```markdown              
+Some text:
+* First bullet point
+* Second bullet point
+```                                                 
+:::
+
+::: {#second-column}
+Some text:
+* First bullet point
+* Second bullet point
+:::
+::::
+
+## Footnotes
+
+Markdown supports numbering and formatting footnotes using the following syntax:
+
+``` markdown
+Here is a footnote reference,[^1] and another.[^longnote]
+
+[^1]: Here is the footnote.
+
+[^longnote]: Here's one with multiple blocks.
+
+    Subsequent paragraphs are indented to show that they
+belong to the previous footnote.
+
+        { some.code }
+
+    The whole paragraph can be indented, or just the first
+    line.  In this way, multi-paragraph footnotes work like
+    multi-paragraph list items.
+
+This paragraph won't be part of the note, because it
+isn't indented.
+```
+
+## Footnotes
+
+The above syntax generates the following output:
+
+Here is a footnote reference,[^1] and another.[^2]
+
+This paragraph won't be part of the note, because it isn't indented.
+
+[^1]: Here is the footnote.
+
+[^2]: Here's one with multiple blocks.
+
+    Subsequent paragraphs are indented to show that they belong to the previous footnote.
+
+        { some.code }
+
+    The whole paragraph can be indented, or just the first line. In this way, multi-paragraph footnotes work like multi-paragraph list items.
+
+## Footnotes
+
+In addition, you can also write single paragraph footnotes inline using the following syntax:
+
+``` markdown
+Here is an inline note.^[Inlines notes are easier to write,
+since you don't have to pick an identifier and move down to
+type the note.]
+```
+
+This syntax generates the following output:
+
+::: {.border .p-3}
+Here is an inline note.[^3]
+:::
+
+[^3]: Inlines notes are easier to write, since you don't have to pick an identifier and move down to type the note.
+
+## Footnotes
+
+::: {.callout-note}
+
+## Footnote IDs should be unique
+
+Footnote identifiers, e.g., the `1` in `^1`, need to be unique within a document. 
+In Quarto books, chapters are combined into a single document for certain formats (including PDF, DOCX, and EPUB),
+so footnote identifiers need to be unique **across** chapters. 
+
+:::
+
+The footnotes that are generated from the above examples are included in the [Example Footnotes](https://quarto.org/docs/authoring/markdown-basics.html#example-footnotes) section at the bottom of the page. See the [Markdown Footnotes](https://pandoc.org/MANUAL.html#footnotes) for additional information.
+
+## Tables
+
+#### Markdown Syntax
+
+``` markdown
+| Right | Left | Default | Center |
+|------:|:-----|---------|:------:|
+|   12  |  12  |    12   |    12  |
+|  123  |  123 |   123   |   123  |
+|    1  |    1 |     1   |     1  |
+```
+
+#### Output
+
+| Right | Left | Default | Center |
+|------:|:-----|---------|:------:|
+|    12 | 12   | 12      |   12   |
+|   123 | 123  | 123     |  123   |
+|     1 | 1    | 1       |   1    |
+
+Learn more in the article on [Tables](https://quarto.org/docs/authoring/tables.html).
+
+## Raw Content
+
+Raw content can be included directly without Quarto parsing it using [Pandoc's raw attribute](https://pandoc.org/MANUAL.html#extension-raw_attribute). A raw block starts with ` ```{=` followed by a format and closing `}`, e.g. here's a raw HTML block:
+
+```` markdown
+```{=html}
+<iframe src="https://quarto.org/" width="500" height="400"></iframe>
+```
+````
+
+You can also include raw content inline:
+```markdown
+ Here's some raw inline HTML: `<a>html</a>`{=html}
+```
+
+## Equations
+
+Use `$` delimiters for inline math and `$$` delimiters for display math. For example:
+
++---------------------------+-------------------------+
+| Markdown Syntax           | Output                  |
++===========================+=========================+
+| ``` markdown              |                         |
+| inline math: $E = mc^{2}$ | inline math: $E=mc^{2}$ |
+| ```                       |                         |
++---------------------------+-------------------------+
+| ``` markdown              |                         |
+| display math:             | display math:           |
+|                           |                         |
+| $$E = mc^{2}$$            | $$E = mc^{2}$$          |
+| ```                       |                         |
++---------------------------+-------------------------+
+
+## Diagrams
+
+Quarto has native support for embedding [Mermaid](https://mermaid-js.github.io/mermaid/#/) and [Graphviz](https://graphviz.org/) diagrams. This enables you to create flowcharts, sequence diagrams, state diagrams, Gantt charts, and more using a plain text syntax inspired by markdown.
+
+For example, here we embed a flowchart created using Mermaid:
+
+```{mermaid}
+%%| echo: fenced
+flowchart LR
+  A[Hard edge] --> B(Round edge)
+  B --> C{Decision}
+  C --> D[Result one]
+  C --> E[Result two]
+```
+
+Learn more in the article on [Diagrams](https://quarto.org/docs/authoring/diagrams.html).
+
+## Videos
+
+You can include videos in documents using the `{{{< video >}}}` [shortcode](https://quarto.org/docs/authoring/shortcodes.html). For example, here we embed a YouTube video:
+
+``` {.markdown shortcodes="false"}
+{{< video https://www.youtube.com/embed/_f3latmOhew >}}
+```
+
+You can also use raw html code chunks:
+
+```` markdown
+```{=html}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_f3latmOhew"></iframe>
+```
+````
+
+Videos can refer to video files (e.g. MPEG) or can be links to videos published on YouTube, Vimeo, or Brightcove. Learn more in the article on [Videos](https://quarto.org/docs/authoring/videos.html).
+
+## Divs and Spans
+
+You can add classes, attributes, and other identifiers to regions of content using Divs and Spans (you'll see an example of this below in [Callout Blocks]).
+
+For example, here we add the "border" class to a region of content using a div (`:::`):
+
+``` markdown
+::: {.border}
+This content can be styled with a border
+:::
+```
+
+Once rendered to HTML, Quarto will translate the markdown into:
+
+``` html
+<div class="border">
+  <p>This content can be styled with a border</p>
+</div>
+```
+
+## Divs and Spans
+
+Divs start with a fence containing at least three consecutive colons plus some attributes. The Div ends with another line containing a string of at least three consecutive colons. The Div should be separated by blank lines from preceding and following blocks. 
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+Divs may also be nested. For example:
+
+``` markdown
+::::: {#special .sidebar}
+
+::: {.warning}
+Here is a warning.
+:::
+
+More content.
+:::::
+```                                               
+:::
+
+::: {#second-column}
+Once rendered to HTML, Quarto will translate the markdown into:
+
+``` html
+<div id="special" class="sidebar">
+  <div class="warning">
+    <p>Here is a warning.</p>
+  </div>
+  <p>More content.</p>
+</div>
+```
+:::
+::::
+
+## Divs and Spans
+
+A bracketed sequence of inlines, as one would use to begin a link, will be treated as a `Span` with attributes if it is followed immediately by attributes:
+
+``` markdown
+[This is *some text*]{.class key="val"}
+```
+
+Once rendered to HTML, Quarto will translate the markdown into:
+
+``` html
+<span class="class" data-key="val">
+  This is <em>some text</em>
+</span>
+```
+
+Typically, you'll use CSS and/or a [Filter](https://quarto.org/docs/extensions/filters.qmd) along with Divs and Spans to provide styling or other behavior within rendered documents.
+
+## Ordering of Attributes
+
+Both divs and spans in Pandoc can have any combination of identifiers, classes, and (potentially many) key-value attributes. In order for these to be recognized, they have to be provided in a specific order: identifiers, classes, and then key-value attributes. Any of these can be omitted, but must follow that order if they are provided. For example, the following is valid:
+
+``` markdown
+[This is good]{#id .class key1="val1" key2="val2"}
+```
+
+However, the following *will not be recognized*:
+
+``` markdown
+[This does *not* work!]{.class key="val" #id}
+```
+
+This ordering restriction applies to both divs and spans. See the documentation on [Divs and Spans](https://pandoc.org/MANUAL.html#divs-and-spans) for additional details.
+
+## Callout Blocks
+
+#### Markdown Syntax
+
+``` markdown
+:::{.callout-note}
+Note that there are five types of callouts, including: 
+`note`, `tip`, `warning`, `caution`, and `important`.
+:::
+```
+
+#### Output
+
+::: callout-note
+Note that there are five types of callouts, including `note`, `tip`, `warning`, `caution`, and `important`.
+:::
+
+Learn more in the article on [Callout Blocks](https://quarto.org/docs/authoring/callouts.html).
+
+## Other Blocks
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+``` markdown
+> Blockquote
+```                                                    
+:::
+
+::: {#second-column}
+> Blockquote 
+:::
+::::
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+``` markdown    
+::: {.classname}
+Div             
+:::             
+```                                                                
+:::
+
+::: {#second-column}
+::: classname
+Div          
+:::          
+:::
+::::
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+``` markdown           
+| Line Block           
+|   Spaces and newlines
+|   are preserved      
+```                                                                                  
+:::
+
+::: {#second-column}
+| Line Block            
+|    Spaces and newlines
+|    are preserved      
+:::
+::::
+
+## Special Characters
+
++-----------------+---------------+
+| Markdown Syntax | Output        |
++=================+===============+
+| ``` markdown    | endash: --    |
+| endash: --      |               |
+| ```             |               |
++-----------------+---------------+
+| ``` markdown    | emdash: ---   |
+| emdash: ---     |               |
+| ```             |               |
++-----------------+---------------+
+
+
+## Keyboard Shortcuts
+
+The `kbd` [shortcode](https://quarto.org/docs/authoring/shortcodes.html) can be used to describe keyboard shortcuts in documentation. On Javascript formats, it will attempt to detect the operating system of the format and show the correct shortcut. On print formats, it will print the keyboard shortcut information for all operating systems.
+
+For example, writing the following markdown:
+
+``` md
+To print, press {{{< kbd Shift-Ctrl-P >}}}. To open an existing new project, press {{{< kbd mac=Shift-Command-O win=Shift-Control-O linux=Shift-Ctrl-L >}}}.
+```
+
+will render the keyboard shortcuts as:
+
+To print, press {{< kbd Shift-Ctrl-P >}}. To open an existing new project, press {{< kbd mac=Shift-Command-O win=Shift-Control-O linux=Shift-Ctrl-L >}}.
+
+## Markdown Example
+
+:::: {layout="[1,1]"}
+::: {#first-column}
+**Example of a markdown document...**
+
+```
+## Introduction
+
+
+
+
+
+Welcome to my **awesome** class. You 
+will learn all kinds of useful things 
+about Quarto.
+
+
+- Markdown is simple
+- You can add `python` code
+```
+:::
+
+::: {#second-column}
+**Here's what the output looks like...**
+
+### Introduction
+<br>
+Welcome to my **awesome** class. You will learn 
+all kinds of useful things about Quarto. 
+
+- Markdown is simple
+- You can add `python` code
+:::
+::::
+
+
+## Quarto platforms
+
+Quarto can be used with any platform.
+
+A tutorial is offered for the following ones at [https://quarto.org/docs/get-started/hello](https://quarto.org/docs/get-started/hello):
+
+```{r out.width='80%'}
+include_img("quarto_platform.png")
+```
+
+## {background="#43464B"}
+
+```{css, echo = FALSE}
+img.circle {border-radius:50%;}
+```
+
+::: {layout-ncol="2"}
+<img class="circle" src="https://github.com/damien-dupre.png" />
+
+**Thanks for your attention and don't hesitate to ask if you have any questions!**  
+[`r fa(name = "mastodon")` @damien_dupre](https://datasci.social/@damien_dupre)  
+[`r fa(name = "github")` @damien-dupre](https://github.com/damien-dupre)  
+[`r fa(name = "link")` https://damien-dupre.github.io](https://damien-dupre.github.io)  
+[`r fa(name = "paper-plane")` damien.dupre@dcu.ie](mailto:damien.dupre@dcu.ie)
+:::

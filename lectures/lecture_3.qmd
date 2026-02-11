@@ -1,6 +1,6 @@
 ---
 title: "Lecture 3: Publishing with GitHub Pages"
-subtitle: BAA1104 - Workflow & Data Management 
+subtitle: BAA1104 - E-Portfolio and Business Analytics Challenges
 author: Damien Dupré
 format:
   revealjs:
@@ -67,7 +67,7 @@ include_img <- function(img_name) {
 
 #### 1. Find these slides at:
 
-[https://damien-dupre.github.io/BAA1028/lecture_3](https://damien-dupre.github.io/BAA1028/lecture_3)
+<https://damien-dupre.github.io/BAA1104/lecture_3>
 
 #### 2. Homework Exercise done
 

@@ -196,7 +196,7 @@
 
 <section id="title-slide" data-background-iframe="logo-fall/index.html" class="quarto-title-block center">
   <h1 class="title">Lecture 4: Git, GitHub, and Version Control</h1>
-  <p class="subtitle">BAA1104 - Workflow &amp; Data Management</p>
+  <p class="subtitle">BAA1104 - E-Portfolio and Business Analytics Challenges</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -276,45 +276,43 @@ Damien Dupré
 <section id="check-if-git-is-already-installed" class="slide level2">
 <h2>Check if Git is Already Installed</h2>
 <p>To check if Git is already installed, run the following in the Terminal:</p>
-<div class="quarto-layout-panel" data-layout="[1,1,1]">
-<div class="quarto-layout-row">
-<div id="first-column" class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>zsh (Linux/MacOS)</strong></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="fu">git</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="zsh (Linux/MacOS)"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="fu">which</span> git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>MacOS</strong></p>
 </div>
-<p>If asked to install the Xcode command line tools, say yes!</p>
-</div>
-<div id="second-column" class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>cmd (windows)</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="cmd (windows)"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="ex">where</span> git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-<div id="third-column" class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>PowerShell (windows)</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-filename="PowerShell (windows)"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="ex">where.exe</span> git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout-content">
+<p>If Git is NOT installed, a pop-up window will appear asking if you want to install the “command line developer tools”. <strong>Click Install or Agree</strong>.</p>
 </div>
 </div>
 </div>
-</div>
-<p>Check the version of your Git if you have one</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="fu">git</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="downloading-and-installing-git" class="slide level2">
+<section id="downloading-and-installing-git" class="slide level2" data-background="#43464B">
 <h2>Downloading and Installing Git</h2>
-<p>If Git is not installed:</p>
+<div class="quarto-layout-panel" data-layout="[1,1]">
+<div class="quarto-layout-row">
+<div id="second-column" class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <ul>
-<li>Download the installer from <a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a></li>
-<li>Run keeping all the default settings.</li>
+<li>MacOS</li>
 </ul>
+<p>Open Terminal and type:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="fu">git</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>MacOS will ask to install the Command Line Tools. Click Install and wait for it to finish.</p>
+<p>If that does not appear, use the following code:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="ex">xcode-select</span> –install</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This will install Git as well. Then check that Git is there by running:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="fu">git</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="third-column" class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<ul>
+<li>Windows</li>
+</ul>
+<p>Download the installer from <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a></p>
+<p>Run keeping all the default settings.</p>
 <p>Use <code>git --version</code> again to check that Git is installed.</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -326,13 +324,13 @@ Damien Dupré
 </div>
 <div class="callout-content">
 <ul>
-<li>Close the installer with Task Manager</li>
 <li>Press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Delete</kbd>;<br>
-</li>
-<li>Select Task Manager;<br>
 </li>
 <li>Find Git for Windows installer and close.</li>
 </ul>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -342,14 +340,28 @@ Damien Dupré
 <p>Git, the version control manager software, comes with <code>Git Bash</code> on Windows.</p>
 <p><code>Git Bash</code> is the same Bash as the one used in Linux and MacOS.</p>
 <p><strong>However, all Command-Lines to use Git can be run not only in <code>Git Bash</code>, but also with <code>cmd</code> and <code>PowerShell</code>.</strong></p>
-</section>
+
+<img data-src="https://www.gitkraken.com/wp-content/uploads/2021/07/GitBashLogo.jpg.webp" class="r-stretch"></section>
 <section id="setting-up-git" class="slide level2">
 <h2>Setting up Git</h2>
-<p>The first step is to set up some configuration variables which helps git to keep track of contributor and contributors contribution.</p>
+<p>Setting up your identity is the first essential step after you install Git on your computer. When you save your work in Git, which is known as a commit, the software attaches your name and email address to that save. This is very important because <strong>it lets you and other people know exactly who made specific changes to the code</strong>. You usually only need to configure this one time, and Git will remember it for all your future projects.</p>
 <p>To set up the basic changes we will run <code>git config</code> command.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href=""></a><span class="co"># git config command</span></span>
 <span id="cb5-2"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span>
 <span id="cb5-3"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"Your Email"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>It is best to use the same email address that you used for code hosting websites like GitHub or GitLab.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="your-turn-setting-up-git" class="slide level2" data-background="#43464B">
 <h2>Your Turn: Setting up Git</h2>
@@ -375,7 +387,7 @@ Damien Dupré
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="countdown" id="timer_aafa9486" data-warn-when="60" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_c9c1bbd2" data-warn-when="60" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
@@ -392,52 +404,174 @@ Damien Dupré
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href=""></a><span class="co"># displaying setting files location command</span></span>
 <span id="cb10-2"><a href=""></a><span class="fu">git</span> config <span class="at">--list</span> <span class="at">--show-origin</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="setting-up-git-2" class="slide level2">
-<h2>Setting up Git</h2>
-<p>Once we set up the global variables, we will initialize the project. To do so, we have to go to that directory from the command line.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href=""></a><span class="co"># changing directory command</span></span>
-<span id="cb11-2"><a href=""></a><span class="bu">cd</span> folder/location</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Once we are in the desired directory, we will initialize our project using <code>git init</code> or <code>git clone</code></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href=""></a><span class="co"># Initialise a New Repo</span></span>
-<span id="cb12-2"><a href=""></a><span class="fu">git</span> init</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href=""></a><span class="co"># Cloning an Existing Repo</span></span>
-<span id="cb13-2"><a href=""></a><span class="fu">git</span> clone https://github.com/username/repository.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section>
+<section id="version-control-with-your-local-repository-and-github" class="title-slide slide level1 center">
+<h1>Version Control with your Local Repository and GitHub</h1>
+
 </section>
-<section id="setting-up-git-3" class="slide level2">
-<h2>Setting up Git</h2>
-<p>It will create a <code>.git</code> file in the same directory and by default it’s hidden. To see that, we need to type <code>ls -la</code> command on terminal.</p>
-<p><code>git init</code> or <code>git clone</code> commands initialize the project for us and make files that are necessary for keeping track of our changes. We can change the directory to see what files have been created by the <code>git init</code> or <code>git clone</code> commands.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href=""></a><span class="bu">cd</span> .git</span>
-<span id="cb14-2"><a href=""></a><span class="fu">ls</span> <span class="at">-la</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>It will display that git has created a several files to keep the tracks of our changes.</p>
-</section>
-<section id="your-turn-clone-repository" class="slide level2" data-background="#43464B">
-<h2>Your Turn: Clone Repository</h2>
+<section id="connect-git-and-github" class="slide level2">
+<h2>Connect Git and GitHub</h2>
+
+<img data-src="https://gowithcode.com/wp-content/uploads/2021/04/git-vs-github.jpg" class="r-stretch"></section>
+<section id="connect-git-and-github-1" class="slide level2">
+<h2>Connect Git and GitHub</h2>
 <ol type="1">
-<li>Clone this repository from your terminal</li>
+<li><p>Manually create the <code>my_new_project</code> repository in the <code>projects</code> folder on your computer and add a text file called <code>hello.txt</code>.</p></li>
+<li><p>Manually create the <code>my_new_project</code> repository on GitHub.</p></li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href=""></a><span class="bu">cd</span> ~ <span class="co"># brings you back to the root/home of your computer</span></span>
-<span id="cb15-2"><a href=""></a><span class="bu">cd</span> projects <span class="co"># moves the terminal to the "projects" folder</span></span>
-<span id="cb15-3"><a href=""></a><span class="fu">git</span> clone https://github.com/damien-dupre/my_simple_website.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p>Leave the boxes for “Add a README file” and “.gitignore” empty because checking them will cause errors.</p>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Connect your local repository with your remote repository:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href=""></a><span class="bu">cd</span> projects/my_new_project</span>
+<span id="cb11-2"><a href=""></a><span class="fu">git</span> init</span>
+<span id="cb11-3"><a href=""></a><span class="fu">git</span> remote add origin https://github.com/yourusername/my_new_project.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This command acts like a switch that tells Git to wake up and start watching this specific folder for any changes you make.</p>
+</section>
+<section id="add-commit-and-push" class="slide level2">
+<h2>Add, Commit, and Push</h2>
+<p>Next, do your first commit using:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href=""></a><span class="fu">git</span> add .</span>
+<span id="cb12-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"init"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Finally, to push your first commit on the remote repository, you need:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin main </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The terminal or a pop up window will ask you to sign in to your GitHub account to prove you have permission to write there.</p>
+<p>Go back to your browser and refresh the page to see your files are now safely stored online.</p>
+</section>
+<section id="add-commit-and-push-again" class="slide level2">
+<h2>Add, Commit, and Push Again</h2>
+<p>After pushing this first init commit, all the snapshot of the projects can be taken using:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href=""></a><span class="fu">git</span> add .</span>
+<span id="cb14-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"modification ABC"</span></span>
+<span id="cb14-3"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="your-turn-init-repository" class="slide level2" data-background="#43464B">
+<h2>Your Turn: Init Repository</h2>
+<ol type="1">
+<li><p>Create the local repository <code>another_test</code> in the <code>projects</code> folder. Add a <code>hello.txt</code> file manually.</p></li>
+<li><p>Create the remote repository <code>another_test</code> on GitHub.</p></li>
+<li><p>Connect your local repository with your remote repository:</p></li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href=""></a><span class="bu">cd</span> projects/another_test</span>
+<span id="cb15-2"><a href=""></a><span class="fu">git</span> init</span>
+<span id="cb15-3"><a href=""></a><span class="fu">git</span> remote add origin https://github.com/yourusername/another_test.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="4" type="1">
+<li>Do your first commit:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href=""></a><span class="fu">git</span> add .</span>
+<span id="cb16-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"init"</span></span>
+<span id="cb16-3"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin main </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="countdown" id="timer_a52dd40d" data-warn-when="60" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_92a0b486" data-warn-when="60" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 </div>
 </div>
+</section></section>
+<section>
+<section id="version-control-with-someone-elses-repository-on-github" class="title-slide slide level1 center">
+<h1>Version Control with Someone Else’s Repository on GitHub</h1>
+
+</section>
+<section id="connect-git-and-github-2" class="slide level2">
+<h2>Connect Git and GitHub</h2>
+
+<img data-src="https://www.linode.com/docs/guides/how-to-install-git-and-clone-a-github-repository/git-github-workflow-1000w.png" class="r-stretch"></section>
+<section id="connect-git-and-github-3" class="slide level2">
+<h2>Connect Git and GitHub</h2>
+<ol type="1">
+<li>Clone the repository on your computer, for example:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href=""></a><span class="bu">cd</span> projects</span>
+<span id="cb17-2"><a href=""></a><span class="fu">git</span> clone https://github.com/damien-dupre/my_simple_website.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="2" type="1">
+<li>On the GitHub repository, click <code>Fork</code> to copy on your own account:</li>
+</ol>
+
+<img data-src="https://docs.github.com/assets/cb-34352/mw-1440/images/help/repository/fork-button.webp" class="r-stretch"><ol start="3" type="1">
+<li>Connect your local clone with the remote fork:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href=""></a><span class="bu">cd</span> my_simple_website</span>
+<span id="cb18-2"><a href=""></a><span class="fu">git</span> remote remove origin</span>
+<span id="cb18-3"><a href=""></a><span class="fu">git</span> remote add origin https://github.com/yourusername/my_simple_website.git</span>
+<span id="cb18-4"><a href=""></a><span class="fu">git</span> branch <span class="at">-m</span> master main <span class="co"># old repositories might have a master branch instead of a main branch</span></span>
+<span id="cb18-5"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="add-commit-and-push-1" class="slide level2">
+<h2>Add, Commit, and Push</h2>
+<p>This will create a new tracked folder on your computer called <code>my_simple_website</code> with all the files contained in this folder.</p>
+<p>You can modify these files as normal. Then when you want to save, use:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href=""></a><span class="fu">git</span> add .</span>
+<span id="cb19-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"modification ABC"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Finally, to push your changes on the remote repository, just use:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="your-turn-clone-repository" class="slide level2 smaller" data-background="#43464B">
+<h2>Your Turn: Clone Repository</h2>
+<ol type="1">
+<li>Clone the repository <code>my_simple_website</code> from the <code>damien-dupre</code> GitHub account to your local computer using the terminal:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href=""></a><span class="bu">cd</span> ~ <span class="co"># brings you back to the root/home of your computer</span></span>
+<span id="cb21-2"><a href=""></a><span class="bu">cd</span> projects <span class="co"># moves the terminal to the "projects" folder</span></span>
+<span id="cb21-3"><a href=""></a><span class="fu">git</span> clone https://github.com/damien-dupre/my_simple_website.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="2" type="1">
+<li>Modify the h1 header of <code>my-first-web-page.html</code>, add, commit, and push your modification to a new repository on your GitHub account:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href=""></a><span class="fu">git</span> add .</span>
+<span id="cb22-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"modification header"</span></span>
+<span id="cb22-3"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin main </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
+<li>Modify the background colour of <code>my-first-web-page.html</code>, add, commit, and push your modification to the remote repository:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href=""></a><span class="fu">git</span> add .</span>
+<span id="cb23-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"modification bgr colour"</span></span>
+<span id="cb23-3"><a href=""></a><span class="fu">git</span> push </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="countdown" id="timer_6e7791db" data-warn-when="60" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="understanding-git" class="title-slide slide level1 center">
+<h1>Understanding Git</h1>
+
+</section>
+<section id="init-and-clone" class="slide level2">
+<h2>Init and Clone</h2>
+<p>Both ways will create a <code>.git</code> file in the same directory and by default it’s hidden. To see that, we need to type <code>ls -la</code> command on terminal.</p>
+<p><code>git init</code> or <code>git clone</code> commands initialize the project for us and make files that are necessary for keeping track of our changes. We can change the directory to see what files have been created by the <code>git init</code> or <code>git clone</code> commands.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href=""></a><span class="bu">cd</span> .git</span>
+<span id="cb24-2"><a href=""></a><span class="fu">ls</span> <span class="at">-la</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It will display that git has created a several files to keep the tracks of our changes.</p>
 </section>
 <section id="git-add" class="slide level2">
 <h2>Git Add</h2>
 <p>After initializing the git, we need to add the files in the staging environment with <code>git add</code> command. Staging is a temporary area that we can store files that we want to commit later.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href=""></a><span class="co"># Basic command for adding Files</span></span>
-<span id="cb16-2"><a href=""></a><span class="fu">git</span> add filename.extension <span class="co"># it adds single file at a time and it's a good</span></span>
-<span id="cb16-3"><a href=""></a><span class="ex">practices</span></span>
-<span id="cb16-4"><a href=""></a><span class="co"># Alternative Options</span></span>
-<span id="cb16-5"><a href=""></a><span class="fu">git</span> add <span class="at">--all</span> <span class="co"># it adds all the file in the directory to the staging environment</span></span>
-<span id="cb16-6"><a href=""></a><span class="fu">git</span> add <span class="at">-A</span> <span class="co"># does the same thing as --all but it's a shortcut</span></span>
-<span id="cb16-7"><a href=""></a><span class="fu">git</span> add . <span class="co"># same as --all and -A</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href=""></a><span class="co"># Basic command for adding Files</span></span>
+<span id="cb25-2"><a href=""></a><span class="fu">git</span> add filename.extension <span class="co"># it adds single file at a time and it's a good</span></span>
+<span id="cb25-3"><a href=""></a><span class="ex">practices</span></span>
+<span id="cb25-4"><a href=""></a><span class="co"># Alternative Options</span></span>
+<span id="cb25-5"><a href=""></a><span class="fu">git</span> add <span class="at">--all</span> <span class="co"># it adds all the file in the directory to the staging environment</span></span>
+<span id="cb25-6"><a href=""></a><span class="fu">git</span> add <span class="at">-A</span> <span class="co"># does the same thing as --all but it's a shortcut</span></span>
+<span id="cb25-7"><a href=""></a><span class="fu">git</span> add . <span class="co"># same as --all and -A</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="git-commit" class="slide level2">
 <h2>Git Commit</h2>
@@ -466,30 +600,12 @@ Damien Dupré
 <section id="git-commit-3" class="slide level2">
 <h2>Git Commit</h2>
 <p>Last step is to commit the changes using the <code>git commit</code> command.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href=""></a><span class="co"># basic commit command with commit Message</span></span>
-<span id="cb17-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Commit Message"</span></span>
-<span id="cb17-3"><a href=""></a><span class="co"># commit command with description along with commit Message</span></span>
-<span id="cb17-4"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Commit Message"</span> <span class="at">-m</span> <span class="st">"Commit Description"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href=""></a><span class="co"># basic commit command with commit Message</span></span>
+<span id="cb26-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Commit Message"</span></span>
+<span id="cb26-3"><a href=""></a><span class="co"># commit command with description along with commit Message</span></span>
+<span id="cb26-4"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Commit Message"</span> <span class="at">-m</span> <span class="st">"Commit Description"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>git commit message should be short and precise. What are the changes being made, why are the changes and the functionalities it will add.</p>
 <p><strong>git commit message should be like email subject. </strong></p>
-</section>
-<section id="your-turn-first-command-line-commit" class="slide level2" data-background="#43464B">
-<h2>Your Turn: First Command Line Commit</h2>
-<ol type="1">
-<li>Open the <code>my-first-web-page.html</code> file</li>
-<li>Modify 1 word in the text displayed in the website (title or content)</li>
-<li>Perform your first commit with the following code:</li>
-</ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href=""></a><span class="fu">git</span> add .</span>
-<span id="cb18-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"My first command line commit"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="countdown" id="timer_8c6e52bd" data-warn-when="60" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
-<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
-<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
-</div>
-</div>
-</div>
 </section>
 <section id="working-with-remote-repositories" class="slide level2">
 <h2>Working with remote repositories</h2>
@@ -515,37 +631,16 @@ Damien Dupré
 </section>
 <section id="git-and-github" class="slide level2">
 <h2>Git and GitHub</h2>
-<p>Once your changes have been commited, it is time to send them to GitHub:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href=""></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Be sure that your git project folder is connected to GitHub repository:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href=""></a><span class="fu">git</span> remote add origin https://github.com/YOURUSERNAME/my_simple_website.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="your-turn-first-push-to-github" class="slide level2" data-background="#43464B">
-<h2>Your Turn: First Push to GitHub</h2>
-<p>Just type:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>And observe the results on your GitHub repository</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="countdown" id="timer_516b6ab3" data-warn-when="60" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
-<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
-<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
-</div>
-</div>
-</div>
-</section>
-<section id="git-and-github-1" class="slide level2">
-<h2>Git and GitHub</h2>
 <p>If you want to update your project with the version hosted on github:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href=""></a><span class="fu">git</span> pull origin master</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href=""></a><span class="fu">git</span> pull origin master</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This command pulls changes from the remote repository and merges them into your local branch.</p>
 <p>This is useful when you are collaborating on a repository and working on different branches.</p>
 </section>
 <section id="git-information" class="slide level2">
 <h2>Git Information</h2>
 <p>To verify git is keeping the track of our work we can use <code>git log</code> command.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href=""></a><span class="co"># verifying command to check if git is keeping track </span></span>
-<span id="cb23-2"><a href=""></a><span class="fu">git</span> log</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href=""></a><span class="co"># verifying command to check if git is keeping track </span></span>
+<span id="cb28-2"><a href=""></a><span class="fu">git</span> log</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>It will show the entries that has been made in the <code>.git</code> folder. It shows the commit hash, author name, date with timestamp, and commit message.</p>
 </section>
 <section id="git-information-1" class="slide level2">
@@ -563,14 +658,14 @@ Date:   Sun Dec 17 16:32:29 2023 -0330 # detailed time of the commit
 <section id="git-environments" class="slide level2">
 <h2>Git Environments</h2>
 <p>We can see this with <code>git status</code> viewing command.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href=""></a><span class="co"># Viewing status command</span></span>
-<span id="cb25-2"><a href=""></a><span class="fu">git</span> status</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href=""></a><span class="co"># Viewing status command</span></span>
+<span id="cb30-2"><a href=""></a><span class="fu">git</span> status</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If a file goes into Modified Stage, we have two option for that file. One is adding that file using <code>git add</code> command or we can restore it using <code>git restore</code> command.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href=""></a><span class="co"># restoring file command</span></span>
-<span id="cb26-2"><a href=""></a><span class="fu">git</span> restore FILENAME</span>
-<span id="cb26-3"><a href=""></a><span class="co"># Alternative options</span></span>
-<span id="cb26-4"><a href=""></a><span class="fu">git</span> restore . <span class="co"># restore all the files into it's previous state</span></span>
-<span id="cb26-5"><a href=""></a><span class="fu">git</span> checkout . <span class="co"># older version of restore command</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href=""></a><span class="co"># restoring file command</span></span>
+<span id="cb31-2"><a href=""></a><span class="fu">git</span> restore FILENAME</span>
+<span id="cb31-3"><a href=""></a><span class="co"># Alternative options</span></span>
+<span id="cb31-4"><a href=""></a><span class="fu">git</span> restore . <span class="co"># restore all the files into it's previous state</span></span>
+<span id="cb31-5"><a href=""></a><span class="fu">git</span> checkout . <span class="co"># older version of restore command</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="ignoring-files" class="slide level2">
 <h2>Ignoring Files</h2>
@@ -587,60 +682,60 @@ Date:   Sun Dec 17 16:32:29 2023 -0330 # detailed time of the commit
 <section id="ignoring-files-1" class="slide level2">
 <h2>Ignoring Files</h2>
 <p>we can also use global ignore file to ignoring files or pattern that we don’t want git to upload.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href=""></a><span class="co"># global git ignore command</span></span>
-<span id="cb27-2"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> core.excludesfile <span class="pp">[</span><span class="ss">file</span><span class="pp">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href=""></a><span class="co"># global git ignore command</span></span>
+<span id="cb32-2"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> core.excludesfile <span class="pp">[</span><span class="ss">file</span><span class="pp">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Clearing the cahce using below command.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href=""></a><span class="co"># cache clearing command</span></span>
-<span id="cb28-2"><a href=""></a><span class="fu">git</span> rm <span class="at">-r</span> <span class="at">--cached</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href=""></a><span class="co"># cache clearing command</span></span>
+<span id="cb33-2"><a href=""></a><span class="fu">git</span> rm <span class="at">-r</span> <span class="at">--cached</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="deleting" class="slide level2">
 <h2>Deleting</h2>
 <p>It can be done in two ways, from command line and another is doing manually from the IDE interface. we use <code>git rm</code> command to delete file.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href=""></a><span class="co"># delete file command</span></span>
-<span id="cb29-2"><a href=""></a><span class="fu">git</span> rm FILENAME</span>
-<span id="cb29-3"><a href=""></a><span class="co"># force fully delete file </span></span>
-<span id="cb29-4"><a href=""></a><span class="fu">git</span> rm <span class="at">-f</span> FILENAME</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href=""></a><span class="co"># delete file command</span></span>
+<span id="cb34-2"><a href=""></a><span class="fu">git</span> rm FILENAME</span>
+<span id="cb34-3"><a href=""></a><span class="co"># force fully delete file </span></span>
+<span id="cb34-4"><a href=""></a><span class="fu">git</span> rm <span class="at">-f</span> FILENAME</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If we delete the file using <code>git rm</code> command, it deletes the file and moved that deletion automatically into staging. But if we do it manually from IDE interface we have do move that file from staging.</p>
 </section>
 <section id="deleting-1" class="slide level2">
 <h2>Deleting</h2>
 <p>After deleting a certain file using <code>git rm</code> command, if we want to restore the file we need to execute below command</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href=""></a><span class="co"># restoring deleted file command</span></span>
-<span id="cb30-2"><a href=""></a><span class="fu">git</span> restore <span class="at">--staged</span> FILENAME</span>
-<span id="cb30-3"><a href=""></a><span class="co"># git restore -S FILENAME</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href=""></a><span class="co"># restoring deleted file command</span></span>
+<span id="cb35-2"><a href=""></a><span class="fu">git</span> restore <span class="at">--staged</span> FILENAME</span>
+<span id="cb35-3"><a href=""></a><span class="co"># git restore -S FILENAME</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>after executing the above command we have to execute below command as well.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href=""></a><span class="fu">git</span> restore FILENAME</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href=""></a><span class="fu">git</span> restore FILENAME</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="renaming" class="slide level2">
 <h2>Renaming</h2>
 <p>This is a tricky part if we do it from the IDE interface manually. It will track two action: first deletion of certain file and second creating a new file. if we want to restore the manually renamed file using <code>git restore</code> command, git will keep both the files.</p>
 <p>To do it from the command line we have to use <code>git mv</code> command</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href=""></a><span class="co"># file renaming command</span></span>
-<span id="cb32-2"><a href=""></a><span class="fu">git</span> mv OLD_FILE_NAME NEW_FILE_NAME</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href=""></a><span class="co"># file renaming command</span></span>
+<span id="cb37-2"><a href=""></a><span class="fu">git</span> mv OLD_FILE_NAME NEW_FILE_NAME</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>To restore the renamed file to it’s previous name, we can use the same command <code>git mv</code> with just changing the order of file names.</p>
 </section>
 <section id="branches" class="slide level2">
 <h2>Branches</h2>
 <p>to see the brances we can use <code>git branch</code> command. It will show all the available branc in our project.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href=""></a><span class="co"># checking git branch command</span></span>
-<span id="cb33-2"><a href=""></a><span class="fu">git</span> branch</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href=""></a><span class="co"># checking git branch command</span></span>
+<span id="cb38-2"><a href=""></a><span class="fu">git</span> branch</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>To create a new branch we will have to take a copy of a snapshot from another branch and start working from there. To do so,</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href=""></a><span class="co"># copying a branch command</span></span>
-<span id="cb34-2"><a href=""></a><span class="fu">git</span> switch <span class="at">-c</span> NAME</span>
-<span id="cb34-3"><a href=""></a><span class="co"># Alternative Option</span></span>
-<span id="cb34-4"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> NAME <span class="co"># older version of git switch</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href=""></a><span class="co"># copying a branch command</span></span>
+<span id="cb39-2"><a href=""></a><span class="fu">git</span> switch <span class="at">-c</span> NAME</span>
+<span id="cb39-3"><a href=""></a><span class="co"># Alternative Option</span></span>
+<span id="cb39-4"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> NAME <span class="co"># older version of git switch</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="branches-1" class="slide level2">
 <h2>Branches</h2>
 <p><code>git merge</code> command will merge the changes from one branch into the current branch.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href=""></a><span class="co"># merge command syntax</span></span>
-<span id="cb35-2"><a href=""></a><span class="fu">git</span> merge <span class="op">&lt;</span>branch<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href=""></a><span class="co"># merge command syntax</span></span>
+<span id="cb40-2"><a href=""></a><span class="fu">git</span> merge <span class="op">&lt;</span>branch<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>When we merge a feature into main branch, it’s a good idea to delete that branch. To do that, we use below command</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href=""></a><span class="co"># git branch delete command syntax</span></span>
-<span id="cb36-2"><a href=""></a><span class="fu">git</span> branch <span class="at">--delete</span> NAME</span>
-<span id="cb36-3"><a href=""></a><span class="co"># Alternative Option</span></span>
-<span id="cb36-4"><a href=""></a><span class="fu">git</span> branch <span class="at">-d</span> NAME <span class="co"># we can use this as long as branches have no conflicts</span></span>
-<span id="cb36-5"><a href=""></a><span class="fu">git</span> branch <span class="at">-D</span> NAME <span class="co"># ignore any conflicts, forcefully delete the branch</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href=""></a><span class="co"># git branch delete command syntax</span></span>
+<span id="cb41-2"><a href=""></a><span class="fu">git</span> branch <span class="at">--delete</span> NAME</span>
+<span id="cb41-3"><a href=""></a><span class="co"># Alternative Option</span></span>
+<span id="cb41-4"><a href=""></a><span class="fu">git</span> branch <span class="at">-d</span> NAME <span class="co"># we can use this as long as branches have no conflicts</span></span>
+<span id="cb41-5"><a href=""></a><span class="fu">git</span> branch <span class="at">-D</span> NAME <span class="co"># ignore any conflicts, forcefully delete the branch</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>These sequence of doing things is also called git flow.</p>
 </section>
 <section id="best-practices" class="slide level2">
@@ -694,7 +789,7 @@ img.circle {border-radius:50%;}
 </div>
 </div>
 
-</section>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
