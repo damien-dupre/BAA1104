@@ -183,7 +183,7 @@ h1, h2, h3, h4, h5, h6 {
 
 Note that the variables section is denoted by the `/*-- scss:defaults --*/` comment and the rules section (where normal CSS rules go) is denoted by the `/*-- scss:rules --*/` comment.
 
-## Exercise 3: Bootstrap Theme {background="#43464B"}
+## Exercise: Bootstrap Theme {background="#43464B"}
 
 Have a look at the different themes from the [Bootswatch](https://bootswatch.com/) project.
 
@@ -603,7 +603,7 @@ include_graphics("images/orange-navbar.png")
 
 Our resulting website, which is primarily themed using `cosmo`, but with a custom orange navbar.
 
-## Exercise 4: Sass Variables {background="#43464B"}
+## Exercise: Sass Variables {background="#43464B"}
 
 1. Create a `.scss` file in your repo's root directory using the Terminal:
 
@@ -780,7 +780,7 @@ $font-family-monospace: 'Roboto Mono', monospace;
 
 **{{< fa angle-right >}}** You must import a higher font weight (e.g. 800), in addition to your standard "regular" weight, if you wish to **bold** text -- even bolding text using markdown syntax (e.g. `**this text is bold**`) will not work unless a higher font weight style is imported).
 
-## Exercise 5: Google Font {background="#43464B"}
+## Exercise: Google Font {background="#43464B"}
 
 1. Select the Montserrat Google font family from <https://fonts.google.com>;
 
