@@ -1,0 +1,948 @@
+---
+title: "Lecture 12: Python Apps without Server"
+subtitle: BAA1028 - Workflow & Data Management 
+author: Damien Dupré
+format:
+  revealjs:
+    theme: [theme/metropolis.scss]
+    toc-depth: 1
+    chalkboard: false
+    menu: true
+    slide-number: true
+title-slide-attributes:
+    data-background-iframe: logo-fall/index.html
+preload-iframes: true
+
+
+# https://github.com/posit-conf-2024/intro-to-shiny-for-python/blob/ac044e105877785cad07fb11ec87422c02f0e333/docs/shiny-express-slides.qmd#L8
+# https://shiny.posit.co/py/docs/overview.html
+
+
+---
+
+```{r setup, include = FALSE}
+# libraries --------------------------------------------------------------------
+library(anicon)
+library(countdown)
+library(fontawesome)
+library(knitr)
+
+# functions --------------------------------------------------------------------
+include_img <- function(img_name) {
+  paste0("https://raw.githubusercontent.com/damien-dupre/img/main/", img_name) |> 
+  knitr::include_graphics()
+}
+```
+
+## Python Apps without Server
+
+Enter the world of interactive Python in the browser. Running code directly in the browser opens the door for many new and exciting uses for data science on the web.
+
+This is thanks to the amazing technology brought to you by Pyodide. But first, let's talk about WebAssembly.
+
+## What is WebAssembly? 
+
+:::{layout="[1,1]"}
+:::{}
+- [WebAssembly](https://webassembly.github.io/spec/core/) is a **binary instruction format** designed with safety in mind
+  - Containerization/sandboxing (isolated "user-space" environments)
+- It has "near-native execution speed" in-browser or on system
+- Available in most web browsers
+
+:::
+:::{}
+![](https://talks.thecoatlessprofessor.com/stats352-guest-lectures-on-dynamic-interactions-wasm/assets/wasm-images/webassembly.svg){fig-alt="The logo for WebAssembly" width="150%"}
+
+:::
+:::
+
+## WebAssembly
+
+WebAssemby is a low-level, high-performance binary instruction format that allows code to run in web browsers.
+
+```{r}
+include_graphics("https://raw.githubusercontent.com/ivelasq/2025-02-21_r-python-shiny-in-the-browser/refs/heads/main/images/wasm.png")
+```
+
+## WebAssembly
+
+Python has had a browser solution for a while. Pyodide compiles the Python interpreter CPython to WebAssembly using Emscripten, making it possible to run Python in the browser.
+
+```{r}
+include_graphics("https://raw.githubusercontent.com/ivelasq/2025-02-21_r-python-shiny-in-the-browser/refs/heads/main/images/pyodide.png")
+```
+
+It is possible to run python code directly in a web browser without the need for traditional servers to execute the code. All that is required is a web server such as GitHub Pages or Netlify.
+
+## WebAssembly and Python: Pyodide
+
+- [Pyodide](https://pyodide.org/en/stable/) is a version of the Python interpreter built for WebAssembly.
+  - Created by [Michael Droettboom](https://github.com/mdboom) and [Pyodide Contributors](https://zenodo.org/records/5156931)
+- Features a robust seamless Javascript ⟺ Python foreign function interface.
+- Allows for **Python** code to be directly run in a web browser, _without a Python server_.
+
+![](https://talks.thecoatlessprofessor.com/stats352-guest-lectures-on-dynamic-interactions-wasm/assets/wasm-images/pyodide-logo.png)
+
+## Pyodide REPL
+
+🔗 <https://pyodide.org/en/stable/console.html>
+
+```{=html}
+<iframe allow="cross-origin-isolated" style="display:block; margin: 0 auto;" width="90%" height="75%" src="https://pyodide.org/en/stable/console.html">
+</iframe>
+```
+
+## JupyterLab
+
+🔗 [JupyterLite's JupyterLab Version](https://jupyterlite.readthedocs.io/en/stable/_static/lab/index.html)
+
+```{=html}
+<iframe allow="cross-origin-isolated" width="90%" height="75%" src="https://jupyterlite.readthedocs.io/en/stable/_static/lab/index.html">
+</iframe>
+```
+
+
+## JupyterNotebook
+
+🔗 [JupyterLite's JupyterNotebook Version](https://jupyterlite.readthedocs.io/en/stable/_static/notebooks/index.html?path=intro.ipynb)
+
+```{=html}
+<iframe allow="cross-origin-isolated" style="display:block; margin: 0 auto;"  width="90%" height="80%" src="https://jupyterlite.readthedocs.io/en/stable/_static/notebooks/index.html?path=intro.ipynb">
+</iframe>
+```
+
+## Wait, what is a "server"?
+
+{{< fa server size="2x" >}} A **server** is a type of computer that is operating 24/7 on the internet that is interacting with your own computer.
+  
+. . . 
+
+We can think of servers in two ways: 
+
+1. **Compute**
+2. **Web**
+
+:::{.callout-note}
+There are more types of servers available; but, our discussion rests solely on those two.
+:::
+
+## Data Science with Web Servers
+
+:::{layout="[1,1]"}
+:::{}
+![](https://talks.thecoatlessprofessor.com/stats352-guest-lectures-on-dynamic-interactions-wasm/assets/wasm-images/server-images/compute-server.png)
+
+:::
+:::{}
+![](https://talks.thecoatlessprofessor.com/stats352-guest-lectures-on-dynamic-interactions-wasm/assets/wasm-images/server-images/web-server.png)
+
+:::
+
+:::
+
+::: {.callout-note}
+We can substitute the R logo with Python's in these diagrams.
+:::
+
+## How many _Python_ packages are available? 
+
+Outside of the [Python packages built-in to Pyodide](https://pyodide.org/en/stable/usage/packages-in-pyodide.html), the number of Python packages varies as there is no central repository.
+
+- If a Python package is "pure" (`*py3-none-any.whl`), then the package can be used as-is.
+  - e.g. [`basic-colormath`](https://pypi.org/project/basic-colormath/#files) on [PyPI](https://pypi.org)
+- Otherwise, the packages must be [compiled for Pyodide](https://pyodide.org/en/stable/development/new-packages.html) under specific Python and Emscripten versions.
+  - e.g. `*-cp310-cp310-emscripten_3_1_27_wasm32.whl`
+
+## How to use Pyodide
+
+**Install the package:**
+
+```bash
+npm i pyodide
+```
+
+**Import the pyodide class:**
+
+```bash
+const { loadPyodide } = require("pyodide");
+let pyodide = await loadPyodide();
+await pyodide.runPythonAsync("1+1");
+```
+
+. . .
+
+What if you don't know JavaScript? 😅
+
+pyodide aims to be as quick and easy to use as possible for those familiar with JavaScript web development, which raises the question... what if you don't know Javascript?
+
+# Quarto and Quarto Live
+
+## Introduction to Quarto
+
+:::{layout="[1,1]"}
+:::{}
+- Next generation publishing system.
+- Unify and extends the R Markdown ecosystem.
+- **Develop** and **Switch** formats without hassle.
+
+:::
+:::{}
+![](https://talks.thecoatlessprofessor.com/stats352-guest-lectures-on-dynamic-interactions-wasm/assets/wasm-images/logo-quarto.png)
+
+:::
+:::
+
+## Anatomy of a Quarto document
+
+::: {.r-stack}
+
+````{.qmd  code-line-numbers=|1-6|8,10|12|13-16|18-43}
+---
+title: "quarto demo"
+format: 
+  html:
+    code-fold: true
+---
+
+## Meet Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+```{{python}}
+#| label: plot-penguins
+#| echo: false
+#| message: false
+#| warning: false
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+from palmerpenguins import load_penguins
+
+penguins = load_penguins()
+custom_palette = {"Adelie": "darkorange", "Chinstrap": "purple", "Gentoo": "cyan4"}
+
+plt.figure(figsize=(8, 6))
+sns.scatterplot(
+    data=penguins, 
+    x="flipper_length_mm", 
+    y="bill_length_mm", 
+    hue="species", 
+    style="species", 
+    palette=custom_palette
+)
+
+plt.title("Flipper and Bill Length")
+plt.suptitle("Dimensions for Penguins at Palmer Station LTER", fontsize=10)
+plt.xlabel("Flipper Length (mm)")
+plt.ylabel("Bill Length (mm)")
+plt.legend(title="Penguin Species")
+
+sns.set_style("whitegrid")
+
+plt.show()
+```
+````
+
+![](https://raw.githubusercontent.com/ivelasq/2025-02-21_r-python-shiny-in-the-browser/refs/heads/main/images/knitr-plot.png){.fragment fig-align="center" width=50%}
+
+:::
+
+## Quarto extensions
+
+Quarto extensions let you customize and extend Quarto’s functionality beyond its built-in features. 
+
+- Enable New Output Formats
+- Create custom templates for reports, presentations, or interactive documents,  Custom Layouts & Themes
+- Design unique styling and layouts for HTML, PDF, or Word outputs. Custom Shortcodes & Filters
+- Modify how Quarto processes content, such as adding new syntax or automating formatting
+
+## Quarto extensions
+
+For example, there's a [fontawesome](https://github.com/quarto-ext/fontawesome) extension.
+
+Install the extension:
+
+```{.bash filename="Terminal"}
+quarto add quarto-ext/fontawesome
+```
+
+## Quarto extensions
+
+Add to your Quarto document YAML heading:
+
+````{.qmd filename="example.qmd" code-line-numbers=6,7}
+---
+title: "quarto demo"
+format: 
+  html:
+    code-fold: true
+    filters:
+      - fontawesome
+---
+````
+
+Use the extension in the doc:
+
+```md
+{{{< fa brands github >}}}
+```
+
+Results in:
+
+{{< fa brands github >}}
+
+## Quarto extensions
+
+Quarto extension gallery by Mickaël Canouil
+
+![](https://raw.githubusercontent.com/ivelasq/2025-02-21_r-python-shiny-in-the-browser/refs/heads/main/images/extensions.png){width=80% fig-align="center"}
+
+::: aside
+[Link](https://m.canouil.dev/quarto-extensions/)
+:::
+
+## Quarto live
+
+Quarto Live allows you to embed WebAssembly-powered code blocks and exercises in Quarto documents through the quarto-live extension. There's support for Python via Pyodide. 
+
+Features include interactive code blocks, exercises with hints and solutions, and rich output like plots. And most importantly, web development skills are not needed to use Pyodide in your content.
+
+## Introduction to Quarto Live
+
+Quarto Live embeds WebAssembly powered code blocks and exercises for Python into Quarto documents with HTML-based output formats.
+
+After a short loading period, a Run code button will appear. Python code can be edited and executed in an editor like this one.
+
+## How to install Quarto Live {auto-animate=true}
+
+Install the extension:
+
+```{.bash filename="Terminal"}
+quarto add r-wasm/quarto-live
+```
+
+Add to your Quarto document YAML header:
+
+```{.qmd filename="example.qmd"}
+---
+format: live-html
+---
+
+```
+
+## How to install Quarto Live {auto-animate=true}
+
+Install the extension:
+
+```{.bash filename="Terminal"}
+quarto add r-wasm/quarto-live
+```
+
+Add to your Quarto document YAML header:
+
+```{.qmd filename="example.qmd"}
+---
+format: live-html
+engine: python3
+---
+
+{{{< include ./_extensions/r-wasm/live/_python3.qmd >}}}
+```
+
+## How to use Quarto Live {.auto-animate}
+
+* Place code in a `pyodide` code chunk for Python
+
+````{.qmd filename="example.qmd"}
+```{{pyodide}}
+for x in range(1, 6):
+    print(x ** 2)
+```
+````
+
+## {quarto-pyodide}: In Action
+
+![{quarto-pyodide} Extension in Action](https://talks.thecoatlessprofessor.com/stats352-guest-lectures-on-dynamic-interactions-wasm/assets/gifs/quarto-pyodide-initial-demo.gif)
+
+## Use cases
+
+- For {quarto-pyodide}, the extension is relatively new (~Feb 2024)
+   - Prof Louis Moresi's [EMSC program](https://anu-rses-education.github.io/EMSC-getting-going-with-python/book/Basics/Ex1-IntroWebPython.html) ([Source](https://github.com/ANU-RSES-Education/EMSC-getting-going-with-python))
+   - Rémi Genet's [Introduction to Python (French)](https://remigenet.github.io/Introduction-Python/) ([Code adoption](https://github.com/remigenet/Introduction-Python/commit/4f01e38d69287682ebc52dacf125413354a5087e#diff-4bb7e59494d3ed710da3c018cbfeeb68127fb60fb6bda1c491ceaabc82cc40cc))
+   - Prof. Kendra Burbank's [STAT 24320 course notes](https://kburbank.github.io/stat24320/) ([Source](https://github.com/KBurbank/stat24320))
+
+# Shiny and Shinylive
+
+## Introduction to Shiny
+
+Shiny allows you to create web apps, no web development skills required.
+
+![](https://raw.githubusercontent.com/ivelasq/2025-02-21_r-python-shiny-in-the-browser/refs/heads/main/images/shiny-site.png){width=60% fig-align="center"}
+
+::: aside
+[shiny.posit.co](https://shiny.posit.co/)
+:::
+
+## Components 
+
+::::{layout="[1,1]"}
+:::{}
+Each Shiny app consists of:
+
+1. Inputs
+2. Outputs
+3. Instructions on how to build outputs from inputs
+
+:::
+::: {}
+::: {.r-stack}
+
+![](https://posit-conf-2024.github.io/intro-to-shiny-for-python/docs/images/app-components.001.png){.fragment}
+
+![](https://posit-conf-2024.github.io/intro-to-shiny-for-python/docs/images/app-components.002.png){.fragment}
+
+![](https://posit-conf-2024.github.io/intro-to-shiny-for-python/docs/images/app-components.003.png){.fragment}
+:::
+:::
+
+::::
+
+## Reactivity 
+
+When an input changes, Shiny reacts by rebuilding the outputs that depend on it, and _only those outputs_.
+
+![](https://posit-conf-2024.github.io/intro-to-shiny-for-python/docs/images/app-components.003.png)
+
+## Spreadsheet Analogy
+
+![](https://posit-conf-2024.github.io/intro-to-shiny-for-python/docs/images/spreadsheets.gif){height=300 fig-align="center"}
+
+1. Inputs
+2. Outputs
+3. Instructions on how to build outputs from inputs
+
+## Spreadsheet Analogy
+
+![](https://posit-conf-2024.github.io/intro-to-shiny-for-python/docs/images/spreadsheets-2.gif){height=300 fig-align="center"}
+
+Updates:
+
+1. When an input changes
+2. Only the parts of the app that depend on the input
+
+## Key features of reactivity
+
+-   Easy enough to use for prototypes
+-   Efficient enough to handle complexity
+-   Scales to build production quality apps
+
+## Inputs component gallery
+
+![](https://posit-conf-2024.github.io/intro-to-shiny-for-python/docs/images/input-component-gallery.png){height=700 fig-align="center"}
+
+<https://shiny.posit.co/py/components/>
+
+## Inputs
+
+Notice:
+
+- Inputs all begin with `ui.Input_`.
+- Every input requires:
+    1.  An id for the value to collect  
+    1.  A label to display  
+    1.  Input specific options
+    
+## Outputs component gallery
+
+![](https://posit-conf-2024.github.io/intro-to-shiny-for-python/docs/images/output-component-gallery.png){height=700 fig-align="center"}
+
+<https://shiny.posit.co/py/components/>
+
+## Outputs
+
+Notice:
+
+- Outputs are created by a `@render.` decorator
+- Pass the decorator a _set of instructions for building the output_ (in the form of a function that returns the contents of the output)
+
+Python has a convenient syntax for decorators. So these would do the same thing:  
+
+```python
+decorator(function, args)
+```
+\
+```python
+@decorator(args)
+function
+```
+
+## To make an app reactive...
+
+Use an input value to build an output.  
+
+To access an input's value, call `input.<id>()` where `<id>` is the string you passed to the input, e.g:
+
+```python
+ui.input_slider(
+    id="n", 
+    label="Choose n", 
+    min=0, 
+    max=100, 
+    value=20
+)
+```
+Value:
+
+```python
+input.n()
+```
+
+## Traditional Shiny architecture
+
+:::: {layout="[1,1]"}
+::: {}
+![](https://raw.githubusercontent.com/ivelasq/2025-02-21_r-python-shiny-in-the-browser/refs/heads/main/images/trad-shiny.png){width=60% fig-align="center"}
+
+::: aside
+[Source](https://georgestagg.github.io/shiny-without-a-server-2023/#/traditional-shiny-architecture)
+:::
+:::
+::: {}
+The traditional way of deploying Shiny involves in a separate server and client. A server is a machine, connected to the Internet, that runs 24/7, ready to run your Shiny app. The server runs Python and Shiny, and clients connect via the web browser. 
+
+Each client keeps an open websocket connection as long as they are using the application.
+:::
+:::
+
+## Shiny Express
+
+Shiny Express is designed to make it significantly easier to get started with Shiny, and to write simple apps with a minimum of boilerplate.
+
+Here's what a simple "Hello, World" app looks like in Shiny Express:
+
+:::: {layout="[1,1]"}
+::: {}
+
+```python
+from shiny.express import input, render, ui
+
+ui.input_text("name", "What's your name?", value="World")
+
+@render.text
+def greeting():
+    return f"Hello, {input.name()}!"
+```
+
+:::
+::: {}
+```{r}
+include_graphics("https://shyr-test-center.netlify.app/blog/posts/shiny-express/hello-world.png")
+```
+
+[View app on shinylive.io.](https://shinylive.io/py/editor/#code=NobwRAdghgtgpmAXGKAHVA6VBPMAaMAYwHsIAXOcpMAMwCdiYACAZwAsBLCbDOAD1R04LFkw4xUxOmTERUAVzJ4mQiABM4dZfI4AdCPp0YuCsgH0KfMgApdkWHDvK7AdTZQyAclHZi8ukzQ8AD8TkwAblAANvJwALyuUlFqdgCU+voAAqoadBiWZPoaNEwA5kJwZFyl1qmI+kyNKpX+EEw0dgAScFFRxMogJooYQXC1AL4AhHb6YOMAukA)
+
+:::
+:::
+
+## Shiny Express
+
+:::: {.columns }
+::: {.column width="46%"}
+```{python eval=FALSE, echo=TRUE}
+#| code-line-numbers: "|1-2|4-5|7-9|"
+from shiny import render, ui
+from shiny.express import input
+
+ui.panel_title("Hello Shiny!")
+ui.input_slider("n", "N", 0, 100, 20)
+
+@render.text
+def txt():
+    return f"n*2 is {input.n() * 2}"
+```
+
+:::
+::: {.column width="46%"}
+```{r}
+include_graphics("https://deepshamenghani.quarto.pub/shiny-for-python-slides/quartopptimages/appbasic.png")
+```
+
+:::
+:::
+
+## Shiny Express
+
+Ui and server do not have to be separate in Shiny Express
+
+:::: {.columns }
+::: {.column width="46%"}
+```{python eval=FALSE, echo=TRUE}
+#| code-line-numbers: "|1-2|4-5|7-9|11-12|14-16"
+from shiny import render, ui
+from shiny.express import input
+
+ui.panel_title("Hello Shiny!")
+ui.input_slider("n", "N", 0, 100, 20)
+
+@render.text
+def txt():
+    return f"n*2 is {input.n() * 2}"
+
+ui.panel_title("Hello again Shiny!")
+ui.input_slider("z", "Z", 50, 100, 70)
+
+@render.text
+def txt2():
+    return f"Z*3 is {input.z() * 3}"
+
+```
+
+:::
+::: {.column width="46%"}
+![](https://deepshamenghani.quarto.pub/shiny-for-python-slides/quartopptimages/appbasic_expressexample.png)
+
+:::
+:::
+
+## Shiny Express
+
+The `ui.input_text()` function creates a text input, and the `@render.text` decorator makes the output of the `greeting()` function appear on the page.
+
+After installing Shiny with `pip install shiny`, you can save this code as `app.py` and start the app with `shiny run app.py`.
+
+Or, skip the install and [try the app in the online editor](https://shinylive.io/py/editor/#code=NobwRAdghgtgpmAXGKAHVA6VBPMAaMAYwHsIAXOcpMAMwCdiYACAZwAsBLCbDOAD1R04LFkw4xUxOmTERUAVzJ4mQiABM4dZfI4AdCPp0YuCsgH0KfMgApdkWHDvK7AdTZQyAclHZi8ukzQ8AD8TkwAblAANvJwALyuUlFqdgCU+voAAqoadBiWZPoaNEwA5kJwZFyl1qmI+kyNKpX+EEw0dgAScFFRxMogJooYQXC1AL4AhHb6YOMAukA).
+
+## Shiny Express Dashboards
+
+```{r}
+include_app("https://shinylive.io/py/app/#code=NobwRAdghgtgpmAXGKAHVA6VBPMAaMAYwHsIAXOcpMAMwCdiYACAZwAsBLCbJjmVYnTJM6cKITIcAbnAA6Eeo1aduGOAA9Uoli179BwrqgCuZPCMoATOHXPGO8xc3ZdsAdw6WA5nDK6+AkIWENZ0APqoADbEZJHY8vL2WFA+YcSofgAUkrFwALyyYAAKlF72ELqWUOwARsRQdJaF5jQckZFQNZH5ACp0xnAAlAkQHmRsTEksnnA1DZmDiPJMK5McGEamYSxw3RIcAF5wmcurZ4VSDc1MhQDKu3ASTJd0HJ3dzadnK8CFNW2RMLdCBecZhGAwa5-AFhawZNjgyH4G60SIcdA2IGlMEQqFgOqWbDg6osMJePHYMR0QoAXS+TGGEDOSU2ZDCEGM8FehBO+K4LDxADlOTUbExiDQmP8KtcAMwABkZ8gAAqJxJIZBhCFBIoR5NZJZYaAslkzVk4mKgdVzUKVyv59EFolBLBE7fz6aIyMY6Ezna7bSD7QtgKyMC8FnSIPIxhMktrGpkaMZ2ttCKJKHk+gNFvTVVZMVEYnF6QamJwWGQTfSzgEDJborFsGpNNpdNVLeoa6tUEw8p2MBWyMQvHRYJkjQtzBBpSw8mHZwtGd8exgOthiKYMMZUFUKJl2MQ3N0fCE8gAxHU7Zcrize32WsAAXxpQA", height = "600px")
+```
+
+## Shiny Express Dashboards
+
+```python
+from shiny import reactive
+from shiny.express import input, render, ui
+from shinywidgets import render_plotly
+
+ui.page_opts(title="Penguins dashboard", fillable=True)
+
+with ui.sidebar():
+    ui.input_selectize(
+        "var", "Select variable",
+        ["bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g", "year"]
+    )
+    ui.input_numeric("bins", "Number of bins", 30)
+
+@reactive.calc
+def df():
+    from palmerpenguins import load_penguins
+    return load_penguins()[input.var()]
+
+with ui.card(full_screen=True):
+    @render_plotly
+    def hist():
+        import plotly.express as px
+        p = px.histogram(df(), nbins=input.bins())
+        p.layout.update(showlegend=False)
+        return p
+```
+
+## Shiny Express Dashboards
+
+While Shiny Express is easy to pick up, it’s powered by Shiny’s proven reactive programming framework, extensive (and growing) suite of components, and deeply customizable approach to UI—just in a more approachable syntax that minimizes the fuss. It’s suitable for writing everything from throwaway prototypes, to realtime dashboards, to cutting edge model demos, to production-quality business workflow apps.
+
+```{r}
+include_graphics("https://shyr-test-center.netlify.app/blog/posts/shiny-express/tipping-dashboard.png")
+```
+
+
+## Shiny Express in Quarto Dashboards
+
+Shiny Express syntax is now supported within Quarto Dashboards! This makes it even easier to create interactive data dashboards with Shiny and Quarto.
+
+````md
+---
+title: "Palmer Penguins"
+format: dashboard
+server: shiny
+---
+
+```{{python}}
+#| context: setup
+import seaborn as sns
+from shiny.express import render, ui, input
+penguins = sns.load_dataset("penguins")
+```
+
+# {.sidebar}
+
+```{{python}}
+species = list(penguins["species"].value_counts().index)
+ui.input_checkbox_group(
+    "species", "Species:",
+    species, selected = species
+)
+```
+
+# Plots
+
+```{{python}}
+@render.plot
+def depth():
+    data = penguins[penguins["species"].isin(input.species())]
+    return sns.displot(
+        data, x = "bill_depth_mm",
+        hue = "species", kind = "kde",
+        fill = True
+    )
+```
+
+````
+
+## Shiny Express in Quarto Dashboards
+
+```{r}
+include_graphics("https://shyr-test-center.netlify.app/blog/posts/shiny-python-0.9.0/quarto-and-shiny-express.png")
+```
+
+## Hosting Shiny apps
+
+:::: {layout="[1,1]"}
+::: {}
+
+On-Prem
+
+-   [Shiny Server](https://shiny.posit.co/py/docs/deploy.html#deploy-to-shiny-server-open-source) (open source)
+-   [Posit Connect](https://shiny.posit.co/py/docs/deploy.html#deploy-to-posit-connect-commercial) (enterprise)
+-   [Roll your own](https://shiny.posit.co/py/docs/deploy.html#other-hosting-options)
+:::
+::: {}
+
+Cloud
+
+-   [shinyapps.io](https://shiny.posit.co/py/docs/deploy.html#deploy-to-shinyapps.io-cloud-hosting)
+-   [Posit Connect Cloud](https://connect.posit.cloud/)
+-   [Roll your own](https://shiny.posit.co/py/docs/deploy.html#other-hosting-options)
+
+:::
+:::: 
+
+There are options for hosting Shiny apps, i.e., hosting their servers, you could have a Server on your laptop. But say you need scalability or additional security for your app, you could pay Posit money to have them host your servers for you with Posit Connect. 
+
+There are also cloud-based solutions like shinyapps.io and Posit Connect. There's a spectrum in terms of number of users, for some, it might just be a few people and for others, we're talking thousands. 
+
+## Hosting Shiny apps
+
+Some web services offer scalability, features, and cost:
+
+* [GitHub Pages](https://pages.github.com/)
+* [Netlify](https://www.netlify.com/)
+* [Quarto Pub](https://quartopub.com/)
+
+. . .
+
+But they can't run traditional Shiny apps!
+
+This is static web hosting. And it's great in terms of reach and affordabilty. You don't have to think about servers anymore, you just give them your app files. But, there's no way to run Shiny apps or dynamic Python code.
+
+Shinylive uses Pyodide to enable fully in-browser Shiny apps without a backend. It offers an online editor, conversion of existing Shiny apps, and embedding Shiny apps in Quarto documents.
+
+## Introduction to Shinylive
+
+With Shinylive, anybody can create their own serverless Shiny apps to run in the browser.
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 500
+
+library(shiny)
+library(bslib)
+
+ui <- page_sidebar(
+  title = "Simple Shiny App",
+  theme = bs_theme(bootswatch = "flatly"),
+  
+  sidebar = sidebar(
+    numericInput("number", "Enter a number:", value = 5, min = 1, max = 100),
+    selectInput("color", "Choose color:", 
+                choices = c("red", "blue", "green", "purple"))
+  ),
+  
+  card(
+    card_header("Result"),
+    card_body(
+      plotOutput("plot")
+    )
+  )
+)
+
+server <- function(input, output) {
+  output$plot <- renderPlot({
+    plot(1:input$number, 
+         col = input$color,
+         pch = 19,
+         cex = 2,
+         main = "Simple Plot",
+         xlab = "Index",
+         ylab = "Value")
+  })
+}
+
+shinyApp(ui, server)
+```
+
+## Shinylive architecture
+
+![](https://raw.githubusercontent.com/ivelasq/2025-02-21_r-python-shiny-in-the-browser/refs/heads/main/images/shinylive-arch.png){width=40% fig-align="center"}
+
+[Source](https://georgestagg.github.io/shiny-without-a-server-2023/#/traditional-shiny-architecture)
+
+All you need to run Shinylive is one of these static web servers. When an application is deployed with Shinylive, Python and Shiny run in the web browser: the browser is effectively both the client and server for the application.
+
+## How to use Shinylive
+
+1. Shinylive online editor
+2. Convert a Shiny app
+3. Embed a Shiny app with Quarto
+
+## How to use Shinylive
+
+[![](https://raw.githubusercontent.com/ivelasq/2025-02-21_r-python-shiny-in-the-browser/refs/heads/main/images/shinylive-editor.png){width=50% fig-align="center"}](https://shinylive.io/py/examples/#app-with-plot){target=_blank}
+
+[Link](https://shinylive.io/py/examples/#app-with-plot)
+
+There's an online Shinylive editor for Python. The editor is on the left, so you can change the app in real time. Build it live! You can share apps via the share button, with a URL that you can sent to someone else.
+
+## How to use Shinylive
+
+To convert a Shiny app (see [Python docs](https://shiny.posit.co/py/docs/shinylive.html)), install the package:
+
+```{.bash filename="Terminal"}
+pip install shinylive
+shinylive export myapp site
+```
+
+> Converting the app takes an app in the my app directory and produces an output directory site and then you can load the files to a static web hosting service.
+
+Start a web server for the directory:
+
+```{.bash filename="Terminal"}
+cd site
+python -m http.server 8000
+```
+
+> If you want to preview the app, you can run this and it'll open it up in a web browser.
+
+## How to use Shinylive
+
+To embed a Shiny app with Quarto, install the Quarto extension:
+
+```{.bash filename="Terminal"}
+quarto add quarto-ext/shinylive
+```
+
+Add to your Quarto document YAML heading:
+
+```{.qmd filename="example.qmd"}
+filters:
+  - shinylive
+```
+
+Insert a code block with `{shinylive-python}`
+
+````{.qmd filename="example.qmd"}
+```{{shinylive-python}}
+#| standalone: true
+
+/* App code here */
+
+```
+````
+
+## Example: Shiny for Python docs
+
+[![](https://raw.githubusercontent.com/ivelasq/2025-02-21_r-python-shiny-in-the-browser/refs/heads/main/images/pyshiny.png){width=80% fig-align="center"}](https://shiny.posit.co/py/docs/overview.html){target=_blank}
+
+::: aside
+[Link](https://shiny.posit.co/py/docs/overview.html)
+:::
+
+## Example: Claus Wilke's Color Picker App
+
+[![](https://raw.githubusercontent.com/ivelasq/2025-02-21_r-python-shiny-in-the-browser/refs/heads/main/images/shinylive-example.png){width=80% fig-align="center"}](https://wilkelab.org/SDS366/apps/bin/choose-color/)
+
+::: aside
+[Link](https://wilkelab.org/SDS366/apps/bin/choose-color/)
+:::
+
+## Example: Shiny Assistant
+
+[![](https://raw.githubusercontent.com/ivelasq/2025-02-21_r-python-shiny-in-the-browser/refs/heads/main/images/shinyassistant.png){width=80% fig-align="center"}](https://gallery.shinyapps.io/assistant/#){target=_blank}
+
+::: aside
+[Link](https://gallery.shinyapps.io/assistant/#)
+:::
+
+## Benefits of web-based Python
+
+* Share interactive reports and dashboards easily
+* No installation required for the user
+* Works on any device (tablets, Chromebooks)
+
+Pyodide shines in accessibility. Your content can be hosted on any static web hosting service and you can share with just a URL. Users can run code without installing software. It can be run on tablets or mobile. In terms of ease of deployment, you don't need a supporting computational python server. You can host your code or app on static web hosting services like GitHub Pages. 
+
+## Limitations and considerations
+
+* Under active development and things might change
+* Some packages are not yet supported in WebAssembly
+    * Some packages may depend on network access and may not work
+* Security considerations (everything runs client-side)
+* Performance limitations for large datasets and packages or intensive tasks
+
+No secrets with a Shinylive app. All the source code goes to client, all the data goes to the client, don't include credentials, don't include sensitive data.
+
+## Best practices
+
+* Keep computations lightweight
+* Structure code efficiently
+* Manage dependencies
+* Choose the right tool for the job
+
+## People Behind
+
+- Pyodide Core: [Michael Droettboom](https://github.com/mdboom) and [Pyodide Contributors](https://zenodo.org/records/5156931)
+- Shinylive Core: [Winston Chang](https://github.com/wch/) and [Barret Schloerke](https://github.com/schloerke)
+- Quarto Core: [J.J.](https://github.com/jjallaire), [Carlos](https://github.com/cscheid), [Charles](https://github.com/dragonstyle), [Christophe](https://github.com/cderv), [Mickaël](https://github.com/mcanouil) & [Yihui](https://github.com/Yihui)
+- Emscripten: [Alon Zakai](https://www.linkedin.com/in/alonzakai/)
+- Contributors: [JooYoung Seo](https://ischool.illinois.edu/people/jooyoung-seo), [Ute Hahn](https://github.com/ute), [E. Eli Holmes](https://eeholmes.github.io/), [boB Rudis](https://rud.is/b/), and [Stathis Gennatas](https://github.com/egenn)
+
+## References
+
+Huge thanks the following people who have generated and shared most of the content of this lecture:
+
+- James Balamuta: [Dynamic Interactions for R and Python Using Quarto and WebAssembly](https://talks.thecoatlessprofessor.com/stats352-guest-lectures-on-dynamic-interactions-wasm/day01a-wasm)
+
+- Isabella Velásquez: [Interactive R, Python, and Shiny in the Browser with Quarto and Shinylive ](https://ivelasq.github.io/2025-02-21_r-python-shiny-in-the-browser)
+
+- Deepsha Menghani: [Shiny for Python](https://deepshamenghani.quarto.pub/shiny-for-python-slides)
+
+- Gordon Shotwell, Joe Cheng, Garrett Grolemund, and Andrie de Vries: [Getting started with Shiny Express](https://posit-conf-2024.github.io/intro-to-shiny-for-python/docs/shiny-express-slides)
+
+<br>
+
+```{r}
+include_graphics("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGdyMnhseGczY3NheHU1cHhtdGRzdWRxaXJ1Z3BsdWF6MWdwZm84ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7JG6cq7EWesFcQ/giphy.gif")
+```
+
+## {background="#43464B"}
+
+::: {layout-ncol="2"}
+<img src="https://github.com/damien-dupre.png" style="border-radius: 50%;"/>
+
+**Thanks for your attention and don't hesitate to ask if you have any questions!**  
+[`r fa(name = "mastodon")` @damien_dupre](https://datasci.social/@damien_dupre)  
+[`r fa(name = "github")` @damien-dupre](https://github.com/damien-dupre)  
+[`r fa(name = "link")` https://damien-dupre.github.io](https://damien-dupre.github.io)  
+[`r fa(name = "paper-plane")` damien.dupre@dcu.ie](mailto:damien.dupre@dcu.ie)
+:::

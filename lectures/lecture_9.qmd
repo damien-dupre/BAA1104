@@ -1,0 +1,696 @@
+---
+title: "Lecture 9: Python in your Project Pages"
+subtitle: BAA1028 - Workflow & Data Management 
+author: Damien Dupré
+format:
+  revealjs:
+    theme: [theme/metropolis.scss]
+    toc-depth: 1
+    chalkboard: false
+    menu: true
+    slide-number: true
+title-slide-attributes:
+    data-background-iframe: logo-fall/index.html
+preload-iframes: true
+---
+
+```{r setup, include = FALSE}
+# libraries --------------------------------------------------------------------
+library(anicon)
+library(countdown)
+library(fontawesome)
+library(knitr)
+
+# functions --------------------------------------------------------------------
+include_img <- function(img_name) {
+  paste0("https://raw.githubusercontent.com/damien-dupre/img/main/", img_name) |> 
+  knitr::include_graphics()
+}
+
+
+```
+
+## Before we proceed...
+
+Start again from scratch!
+
+You have made incredible progress with your eportfolio but you should not mess it up. Let's practice on a fresh website!
+
+In the terminal of VS Code type:
+
+```{.bash filename="Terminal"}
+quarto create project website baa1028-lecture12
+quarto preview
+```
+
+Today, we will learn how to add code to project pages.
+
+## Project Pages
+
+Project Pages on your website will serve as dedicated sections showcasing specific projects or topics.
+
+Some pages will focus on academic or personal, non-coding projects, such as group work or volunteer experiences, using only Markdown and illustrative content. 
+
+```{=html}
+<iframe width="560" height="315" src="https://nrennie.rbind.io/blog/talking-about-tech/"></iframe>
+```
+
+## Project Pages
+
+Others will feature coding projects, incorporating both Markdown and code snippets within your Quarto pages.
+
+```{=html}
+<iframe width="560" height="315" src="https://themockup.blog/posts/2022-11-16-rolling-summaries-with-slider-in-r/"></iframe>
+```
+
+Today’s lecture will concentrate on integrating code into your Project Pages effectively.
+
+# Non Active Code Chunks
+
+## Source Code
+
+Use ```` ``` ```` to delimit blocks of source code:
+
+:::: {layout="[1,1]"}
+::: {}
+
+What you write:
+```` markdown
+```
+code
+```
+````
+
+:::
+::: {}
+What you see:
+```
+code
+```
+
+:::
+::::
+
+## Source Code
+
+Add a language to syntax highlight code blocks
+
+:::: {layout="[1,1]"}
+::: {}
+What you write:
+```` markdown
+```python
+print("Hello world")
+```
+````
+
+:::
+::: {}
+What you see:
+```python
+print("Hello world")
+```
+
+:::
+::::
+
+:::: {layout="[1,1]"}
+::: {}
+What you write:
+```` markdown
+```sql
+SELECT first_name, last_name
+FROM employees
+WHERE first_name = 'Luca';
+```
+````
+
+:::
+::: {}
+What you see:
+```sql
+SELECT first_name, last_name
+FROM employees
+WHERE first_name = 'Luca';
+```
+
+:::
+::::
+
+## Source Code
+
+Markdown supports syntax highlighting for over [140 different languages](https://github.com/jgm/skylighting/tree/master/skylighting-core/xml). 
+
+If your language is not supported then you can use the `default` language to get a similar visual treatment:
+
+:::: {layout="[1,1]"}
+::: {}
+What you write:
+```` markdown
+```default
+code
+```
+````
+
+:::
+::: {}
+What you see:
+```default
+code
+```
+
+:::
+::::
+
+## Source Code
+
+Equivalent to the short form used in the examples above is a longer form that uses the language as a class (i.e. `.python`) inside braces
+
+:::: {layout="[1,1]"}
+::: {}
+What you write:
+```` markdown
+```{.python}
+print("Hello world")
+```
+````
+
+:::
+::: {}
+What you see:
+```{.python}
+print("Hello world")
+```
+
+:::
+::::
+
+:::: {layout="[1,1]"}
+::: {}
+What you write:
+```` markdown
+```{.sql}
+SELECT first_name, last_name
+FROM employees
+WHERE first_name = 'Luca';
+```
+````
+
+:::
+::: {}
+What you see:
+```{.sql}
+SELECT first_name, last_name
+FROM employees
+WHERE first_name = 'Luca';
+```
+
+:::
+::::
+
+## Source Code
+
+The longer form allows you to add attributes to the block in a similar way to [Divs]().  Some specific features that use this syntax are [Lines Numbers](https://quarto.org/docs/output-formats/html-code.qmd#line-numbers) and [Code Filename](https://quarto.org/docs/output-formats/html-code.qmd#code-filename). 
+
+Here is an example of the latter:
+
+:::: {layout="[1,1]"}
+::: {}
+What you write:
+```` markdown
+```{.python filename="run.py"}
+code
+```
+````
+
+:::
+::: {}
+What you see:
+```{.python filename="run.py"}
+code
+```
+
+:::
+::::
+
+If you are creating HTML output there is a wide variety of options available for code block output. See the article on [HTML Code](https://quarto.org/docs/output-formats/html-code.html) for additional details.
+
+## 🛠️ Your Turn!
+
+Write a project page which only includes non active code to describe how to read a csv file, select some columns, and filter some values with the `pandas` library in python.
+
+1. Create a `.qmd` document in your new website
+2. Generate a tutorial to use the `pandas` library in python
+3. Organise this tutorial in your `.qmd` document to display non-active python code
+
+```{r}
+countdown(minutes = 5, warn_when = 60)
+```
+
+# Active Code Chunks
+
+## Active Code Chunks
+
+Instead of just showing the code in a fancy way, Quarto can also run the code from the code chunks and print out their outputs.
+
+In stand alone Quarto document you would specify the `engine: python3` argument in your YAML but in a website, there is no action to take beside including "Active" code cells/chunks.
+
+An "Active" python code cells/chunks uses ```` ```{python} ```` to start the cells/chunks and ```` ``` ```` to finish it.
+
+## Active Code Chunks
+
+What you write:
+
+```` markdown
+```{{python}}
+print("Hello world")
+```
+````
+
+What you see:
+
+```{python, echo=TRUE}
+print("Hello world")
+```
+
+## Anatomy of a Code Cell
+
+```{{python}}
+#| label: hello-world
+#| echo: false
+
+print('Hello, world!')
+```
+
+Place options underneath, behind the `#|` (hashpipe): `#| option1: value`  
+
+Cells output can be customized with this hashpipe options (i.e., arguments set after the `#|`). Above, we use 1 argument:
+
+See the **[Quarto Reference Guide](https://quarto.org/docs/reference/cells/cells-knitr.html)** for a complete list of chunk options.
+
+## Figures in the Output Document
+
+As long as an object is created in the first chunk, then a __visualisation can be used in a separated cell__:
+
+````markdown
+---
+title: "Untitled"
+---
+
+```{{python}}
+# libraries
+import plotly.express as px  
+# code
+fig = px.scatter(x=[0, 1, 2, 3, 4], y=[0, 1, 4, 9, 16])
+```
+
+# My Section Title
+
+My text followed by my figure.
+
+```{{python}}
+
+fig.show()
+```
+````
+
+## Visualisation Specific Options
+
+Some cell options are specific to visualisations outputs:
+
+- fig-cap: "caption of the figure"
+- fig-height: 5
+- fig-width: 5
+
+Note, the default unit for height and width is inches.
+
+````markdown
+```{{python}}
+#| fig-cap: "caption of the figure"
+#| fig-height: 5
+#| fig-width: 5
+
+fig.show()
+```
+````
+
+## 🛠️ Your Turn!
+
+In your tutorial to use the `pandas` library in python, turn all the non active code cells/chunks into active code.
+
+```{r}
+countdown(minutes = 5, warn_when = 60)
+```
+
+## 🛠️ Your Turn!
+
+Write a second project page which describes how to do a linear regression in python. 
+
+This project page should include some python visualisations.
+
+Add hashpipe options to change the output of these visualisations.
+
+```{r}
+countdown(minutes = 5, warn_when = 60)
+```
+
+# General Code Options
+
+## General Code Options
+
+Some options specified for each code cell/chunk with a hashpipe can also been set globally for the whole document in the YAML
+
+:::: {layout="[1,1]"}
+::: {}
+Instead of:
+
+````markdown
+---
+title: "Untitled"
+---
+
+```{{python}}
+#| echo: false
+print('Hello, world!')
+```
+
+# My Section Title
+
+My text followed by my figure.
+
+```{{python}}
+#| echo: false
+print('Hello, world again!')
+```
+````
+
+:::
+::: {}
+You can have:
+
+````markdown
+---
+title: "Untitled"
+echo: false
+---
+
+```{{python}}
+print('Hello, world!')
+```
+
+# My Section Title
+
+My text followed by my figure.
+
+```{{python}}
+print('Hello, world again!')
+```
+````
+
+:::
+::::
+
+## General Code Options
+
+The option `code-line-numbers:true` or `code-line-numbers:false` includes or hiddes line numbers in code block output
+
+:::: {layout="[1,1]"}
+::: {}
+Instead of:
+
+````markdown
+---
+title: "Untitled"
+---
+
+```{{python}}
+#| code-line-numbers:false
+print('Hello, world!')
+```
+
+# My Section Title
+
+My text followed by my figure.
+
+```{{python}}
+#| code-line-numbers:false
+print('Hello, world again!')
+```
+````
+
+:::
+::: {}
+You can have:
+
+````markdown
+---
+title: "Untitled"
+code-line-numbers:false
+---
+
+```{{python}}
+print('Hello, world!')
+```
+
+# My Section Title
+
+My text followed by my figure.
+
+```{{python}}
+print('Hello, world again!')
+```
+````
+
+:::
+::::
+
+## General Code Options
+
+For example, the option `code-fold: true` collapses the code into an HTML "details" tag so the user can display it on-demand.
+
+:::: {.columns}
+::: {.column width="46%"}
+What you write:
+````markdown
+---
+title: "Untitled"
+code-fold: true
+---
+
+```{{python}}
+# libraries
+import plotly.express as px  
+# code
+fig = px.scatter(
+  x=[0, 1, 2, 3, 4], 
+  y=[0, 1, 4, 9, 16]
+)
+
+fig.show()
+```
+````
+
+:::
+::: {.column width="46%"}
+What you see:
+```{python}
+#| echo: true
+#| code-fold: true
+
+# libraries
+import plotly.express as px  
+# code
+fig = px.scatter(
+  x=[0, 1, 2, 3, 4], 
+  y=[0, 1, 4, 9, 16]
+)
+
+fig.show()
+```
+
+:::
+::::
+
+## General Code Options
+
+You can include a **Code** menu in the header of your document that provides various tools for readers to interact with the source code. Specify `code-tools: true` to activate these tools:
+
+``` yaml
+code-tools: true
+```
+
+## General Code Options
+
+If you have a document that includes folded code blocks then the **Code** menu will present options to show and hide the folded code as well as view the full source code of the document:
+
+![](https://quarto.org/docs/output-formats/images/code-tools-01.png)
+
+This document specifies `code-tools: true` in its options so you should see the **Code** menu above next to the main header.
+
+## General Code Options
+
+You can control which of these options are made available as well as the "Code" caption text using sub-options of `code-tools`. 
+
+For example, here we specify that we want only "View Source" (no toggling of code visibility) and no caption on the code menu:
+
+``` yaml
+code-tools:
+  source: true
+  toggle: false
+  caption: none
+```
+
+Note that the `code-tools` option is not available when you disable the standard HTML theme (e.g. if you specify the `theme: none` option).
+
+## Appearance
+
+By default code blocks are rendered with a left border whose color is derived from the current theme. 
+
+You can customize code chunk appearance with some simple options that control the background color and left border. Options can either be booleans to enable or disable the treatment or can be legal CSS color strings (or they could even be SASS variable names!).
+
+## Appearance
+
+:::: {layout="[1,1]"}
+::: {}
+Here is the default appearance for code blocks (`code-block-background: true`):
+
+:::
+::: {}
+![](https://quarto.org/docs/output-formats/images/code-bg.png)
+
+:::
+::::
+
+:::: {layout="[1,1]"}
+::: {}
+You can instead use a left border treatment using the `code-block-border-left` option:
+
+``` yaml
+code-block-border-left: true
+```
+
+:::
+::: {}
+![](https://quarto.org/docs/output-formats/images/code-default.png)
+
+:::
+::::
+
+## Appearance
+
+You can combine a background and border treatment as well as customize the left border color:
+
+``` yaml
+code-block-bg: true
+code-block-border-left: "#31BAE9"
+```
+
+![](https://quarto.org/docs/output-formats/images/code-custom.png)
+
+## Highlighting
+
+Quarto will automatically highlight syntax in [fenced code blocks](https://pandoc.org/MANUAL.html#fenced-code-blocks) that are marked with a language name. 
+
+For example:
+
+```python
+1 + 1
+```
+
+You can specify the code highlighting style using `highlight-style` and specifying one of the supported themes. These themes are "adaptive", which means they will automatically switch between a dark and light mode based upon the theme of the website. 
+
+## Highlighting
+
+:::: {layout="[1,1,1]"}
+::: {}
+These are designed to work well with sites that include a dark and light mode.
+
+-   a11y
+-   arrow
+-   atom-one
+-   ayu
+-   breeze
+-   github
+-   gruvbox
+
+:::
+::: {}
+All of the standard Quarto themes are also available:
+
+-   pygments
+-   tango
+-   espresso
+-   zenburn
+-   kate
+-   monochrome
+-   breezedark
+-   haddock
+
+:::
+::: {}
+As well as an additional set of extended themes, including:
+
+-   dracula
+-   monokai
+-   nord
+-   oblivion
+-   printing
+-   radical
+-   solarized
+-   vim-dark
+
+:::
+::::
+
+## Highlighting
+
+The `highlight-style` option determines which theme is used. 
+
+For example:
+
+``` yaml
+highlight-style: github
+```
+
+Highlighting themes can provide either a single highlighting definition or two definitions, one optimized for a light colored background and another optimized for a dark color background. 
+
+When available, Quarto will automatically select the appropriate style based upon the code chunk background color's darkness.
+
+By default, code is highlighted using the `arrow` theme, which is optimized for accessibility. 
+
+## Highlighting
+
+Examples of the light and dark themes:
+
+:::: {layout="[1,1]"}
+::: {}
+#### Arrow (light)
+
+![](https://quarto.org/docs/output-formats/images/arrow.png){fig.alt="A block of code showcasing the Arrow (light) theme."}
+
+#### Ayu (light)
+
+![](https://quarto.org/docs/output-formats/images/ayu.png){fig.alt="A block of code showcasing the Ayu (light) theme."}
+:::
+::: {}
+#### Arrow (dark)
+
+![](https://quarto.org/docs/output-formats/images/arrow-dark.png){fig.alt="A block of code showcasing the Arrow (dark) theme."}
+
+#### Ayu (dark)
+
+![](https://quarto.org/docs/output-formats/images/ayu-dark.png){.preview-image fig.alt="A block of code showcasing the Ayu (dark) theme."}
+:::
+::::
+
+## {background="#43464B"}
+
+::: {layout-ncol="2"}
+<img src="https://github.com/damien-dupre.png" style="border-radius: 50%;"/>
+
+**Thanks for your attention and don't hesitate to ask if you have any questions!**  
+[`r fa(name = "mastodon")` @damien_dupre](https://datasci.social/@damien_dupre)  
+[`r fa(name = "github")` @damien-dupre](https://github.com/damien-dupre)  
+[`r fa(name = "link")` https://damien-dupre.github.io](https://damien-dupre.github.io)  
+[`r fa(name = "paper-plane")` damien.dupre@dcu.ie](mailto:damien.dupre@dcu.ie)
+:::

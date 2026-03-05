@@ -1,0 +1,1011 @@
+---
+title: "Lecture 8: Displaying Projects in a Quarto Website"
+subtitle: BAA1028 - Workflow & Data Management 
+author: Damien Dupré
+format:
+  revealjs:
+    theme: [theme/metropolis.scss]
+    toc-depth: 1
+    chalkboard: false
+    menu: true
+    slide-number: true
+code-line-numbers: false
+title-slide-attributes:
+    data-background-iframe: logo-fall/index.html
+preload-iframes: true
+knitr: 
+  opts_chunk:
+    fig.align: center
+
+# https://github.com/posit-conf-2024/quarto-websites/
+# https://samanthacsik.github.io/posts/2022-10-24-quarto-blogs/
+# https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html
+---
+
+```{r setup, include = FALSE}
+# libraries --------------------------------------------------------------------
+library(anicon)
+library(countdown)
+library(fontawesome)
+library(knitr)
+
+# functions --------------------------------------------------------------------
+include_img <- function(img_name) {
+  paste0("https://raw.githubusercontent.com/damien-dupre/img/main/", img_name) |> 
+  knitr::include_graphics()
+}
+```
+
+## Before we proceed...
+
+Start again from scratch!
+
+You have made incredible progress with your eportfolio but you should not mess it up. Let's practice on a fresh website!
+
+In the terminal of VS Code type:
+
+```{.bash filename="Terminal"}
+quarto create project website baa1028-lecture9
+quarto preview
+```
+
+Today, we will learn how to add and modify a "Projects" list of multiple projects pages
+
+## Let's Add a Page!
+
+-   Create a new page: `/projects.qmd`
+-   Add some content
+-   Preview: `< site url >/projects.html`
+    
+``` {.markdown shortcodes="false" filename="projects.qmd"}
+---
+title: Projects
+---
+
+{{< lipsum 1 >}}
+{{< placeholder 400 400 >}}
+```
+
+## Adding Pages
+
+Two decisions:
+
+1. **Structure** Where will it live in your website project?
+2. **Navigation** How will people discover it on your website?
+
+# Structure
+
+## File path becomes URL path
+
+::::{layout="[1,1]"}
+:::{}
+File location
+
+`projects.qmd`
+
+`projects/projects.qmd`
+:::
+:::{}
+URL
+
+`{ site url }/projects.html`
+
+`{ site url }/projects/projects.html`
+:::
+:::::
+
+## index.html is special
+
+::::{layout="[1,1]"}
+:::{}
+File location
+
+`index.qmd`
+
+`projects/index.qmd`
+:::
+:::{}
+URL
+
+`{ site url }`
+
+`{ site url }/projects`
+:::
+:::::
+
+`index.qmd` (or `.md`, or `.ipynb`) -\> `index.html`
+
+`index.html` acts like a default page for the site or directory.
+
+. . . 
+
+### But you aren't limited to `.html`!
+
+::::{layout="[1,1]"}
+:::{}
+File location
+
+`data/monthly.csv`
+
+`cv.pdf`
+:::
+:::{}
+URL
+
+`{ site url }/data/monthly.csv`
+
+`{ site url }/cv.pdf`
+:::
+:::::
+
+## Structure helps ...
+
+- **You**: Navigate and organize your content
+
+- **Your readers**: Understand context of content from its URL
+
+## Exercise 1
+
+Add a new subfolder `projects` to your site and, inside this subfolder, a new page `index.qmd`:
+
+``` {.markdown shortcodes="false" filename="index.qmd"}
+---
+title: Projects
+---
+
+{{< lipsum 1 >}}
+{{< placeholder 400 400 >}}
+```
+
+# Navigation
+
+## In-text Links
+
+::::{layout="[1,1]"}
+:::{}
+Use relative paths
+
+Use `.qmd` rather than `.html`
+:::
+:::{}
+``` {.markdown filename="index.qmd"}
+More [about me](about.qmd).
+
+You might like to look at 
+my projects [projects](projects/)
+```
+:::
+:::::
+
+. . . 
+
+::::{layout="[1,1]"}
+:::{}
+Use `/` to refer to site root
+:::
+:::{}
+``` {.markdown filename="projects/index.qmd"}
+More [about me](/about.qmd).
+```
+:::
+:::::
+
+::: footer
+https://quarto.org/docs/websites/#linking
+:::
+
+## Navigation Bar
+
+In `_quarto.yml` under `website: navbar`
+
+Here is a path from site root:
+
+``` {.yaml filename="_quarto.yml"}
+website:
+  navbar:
+    right: 
+      - about.qmd
+```
+
+. . . 
+
+Here is a path from site root with a subfolder:
+
+``` {.yaml filename="_quarto.yml"}
+website:
+  navbar:
+    right: 
+      - about.qmd
+      - projects/index.qmd
+```
+
+## Exercise 2
+
+Provide links to your new page:
+
+-   From somewhere in the content of `index.qmd`
+-   After "Home" in the navigation bar
+
+## Navigation Items
+
+::::{layout="[1,1]"}
+:::{}
+A path:
+
+``` {.yaml filename="_quarto.yml"}
+website:
+  navbar:
+    right:
+      - about.qmd
+      - projects/index.qmd
+```
+:::
+:::{}
+A nav item object:
+
+``` {.yaml filename="_quarto.yml"}
+website:
+  navbar:
+    right:
+      - href: projects/index.qmd
+        text: Projects
+        icon: megaphone
+```
+:::
+:::::
+
+Options for `icon`: [Bootstrap Icons](https://icons.getbootstrap.com)
+
+## Navigation Bar Links
+
+Use navigation items in `left`, `right` and `tools`
+
+::: columns
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/navigation-navbar-navitems.png)
+:::
+
+## Navigation Bar Links
+
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/navigation-navbar-navitems.png)
+
+``` {.yaml filename="_quarto.yml" code-line-numbers="true"}
+website:
+  navbar:
+    right: 
+      - text: Talks
+        href: talks.qmd
+    left:
+      - text: Home
+        href: index.qmd
+        icon: house-door-fill
+    tools: 
+      - icon: github
+        href: https://github.com/cwickham
+```
+
+::: footer
+https://quarto.org/docs/websites/website-navigation.html#top-navigation
+:::
+
+## Navigation Bar Options
+
+Other customization: `title`, `logo`, `search`
+
+::: columns
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/navigation-navbar-options.png)
+:::
+
+::: footer
+https://quarto.org/docs/websites/website-navigation.html#top-navigation
+:::
+
+## Navigation Bar Options
+
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/navigation-navbar-options.png)
+
+``` {.yaml filename="_quarto.yml" code-line-numbers="3-5"}
+website:
+  navbar:
+    title: cwick.co.nz 
+    logo: logo.png
+    search: true
+    right: 
+      - talks.qmd
+    left:
+      - text: Home
+        href: index.qmd
+        icon: house-door-fill
+    tools: 
+      - icon: github
+        href: https://github.com/cwickham
+```
+
+::: footer
+https://quarto.org/docs/websites/website-navigation.html#top-navigation
+:::
+
+# When things get more complicated...
+
+## Navigation Elements {.scrollable}
+
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/navigation-quarto-web-annotated.jpg)
+
+...
+
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/navigation-quarto-web-footer-annotated.jpg)
+
+## Primary Navigation
+
+::::{layout="[1,1]"}
+:::{}
+Top navigation
+
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/navigation-top.png)
+:::
+:::{}
+Side navigation
+
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/navigation-side.png)
+:::
+:::::
+
+## Primary Navigation
+
+::::{layout="[1,1]"}
+:::{}
+Top navigation
+
+``` {.yaml filename="_quarto.yml" code-line-numbers=""}
+website:
+  navbar:
+    left:
+      - index.qmd
+      - talks.qmd
+      - projects/index.qmd
+    tools:
+      - text: GitHub
+        href: http://github.com
+        icon: github        
+```
+
+Add items to `left`, `right` and `tools`
+:::
+:::{}
+Side navigation
+
+``` {.yaml filename="_quarto.yml" code-line-numbers="|2|3"}
+website:
+  sidebar:
+    contents:
+      - index.qmd
+      - talks.qmd
+      - projects/index.qmd
+    tools:
+      - text: GitHub
+        href: http://github.com
+        icon: github    
+```
+
+Add items to `contents` and `tools`
+:::
+:::::
+
+## Nested Navigation
+
+::::{layout="[1,1]"}
+:::{}
+Top navigation
+
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/navigation-top-nested.png)
+:::
+:::{}
+Side navigation
+
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/navigation-side-nested.png)
+:::
+:::::
+
+## Nested Navigation
+
+::::{layout="[1,1]"}
+:::{}
+Top navigation
+
+``` {.yaml filename="_quarto.yml" code-line-numbers="|5-8"}
+website:
+  navbar:
+    left:
+      - index.qmd
+      - text: Work
+        menu: 
+          - talks.qmd
+          - projects/index.qmd
+```
+
+Add a `text` item along with `menu`
+:::
+:::{}
+Side navigation
+
+``` {.yaml filename="_quarto.yml" code-line-numbers="|5-8"}
+website:
+  sidebar:
+    contents:
+      - index.qmd
+      - section: Work
+        contents: 
+          - talks.qmd
+          - projects/index.qmd
+```
+
+Add a `section` with its own `contents`
+:::
+:::::
+
+## Hybrid Navigation
+
+Top navigation navigates between the different "sections" of the website.
+
+Each "section" has its own side navigation.
+
+::::{layout="[1,1]"}
+:::{}
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/navigation-hybrid-1.png)
+:::
+:::{}
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/navigation-hybrid-2.png)
+:::
+:::::
+
+## Hybrid Navigation
+
+::::{layout="[1,1]"}
+:::{}
+``` {.yaml filename="_quarto.yml" code-line-numbers="|5,9|6,11"}
+website:
+  navbar:
+    left:
+      - index.qmd
+      - text: Work
+        href: talks.qmd
+
+  sidebar:
+    - title: Work
+      contents:
+        - talks.qmd
+        - projects/index.qmd
+```
+:::
+:::{}
+1.  Match `navbar` item `text` to a `sidebar` item `title`
+2.  List `navbar` item `href` as first value in `sidebar` item `contents`
+:::
+:::::
+
+## Automatic Sidebar
+
+If your structure is good, an automatic sidebar can go a long way:
+
+``` {.yaml filename="_quarto.yml"}
+website:
+  sidebar:
+    contents: auto
+```
+
+## Pro and Cons
+
+### Side nav
+
+- `auto`: easy to generate and maintain 
+- Linearly present linear content (e.g. a progression through a tutorial)
+- Can be deeply nested
+- Can handle longer entries    
+- However, may show too much detail for sections that aren't of immediate interest |
+
+## Pro and Cons
+
+### Top nav
+
+-   First place most people look
+-   However, not good for long entries, e.g. keep to short single words
+-   Can't be nested beyond one level
+-   Nested content is hidden unless clicked on
+
+## Pro and Cons
+
+### Hybrid
+
+-   Organize lots of content without overwhelming viewer
+-   Harder to build and maintain                                            |
+
+# Other navigation elements
+
+*For reference*
+
+## GitHub Links
+
+<https://quarto.org/docs/websites/website-navigation.html#github-links>
+
+``` {.yaml filename="_quarto.yml"}
+website:
+  repo-url: https://github.com/quarto-dev/quarto-web
+  repo-actions: [edit, issue]
+```
+
+## Page Navigation
+
+Navigate between items in a `section` of `sidebar`
+
+<https://quarto.org/docs/websites/website-navigation.html#page-navigation>
+
+``` {.yaml filename="_quarto.yml"}
+website:
+  page-navigation: true
+```
+
+## Breadcrumbs
+
+<https://quarto.org/docs/websites/website-navigation.html#breadcrumbs>
+
+Navigate up levels in a nested sidebar. Displayed by default.
+
+``` {.yaml filename="_quarto.yml"}
+website:
+  bread-crumbs: false
+```
+
+## Footer
+
+<https://quarto.org/docs/websites/website-navigation.html#page-footer>
+
+``` {.yaml filename="_quarto.yml"}
+website:
+  page-footer: 
+    left: "Copyright 2021, Norah Jones" 
+    right: 
+      - icon: github
+        href: https://github.com/
+      - icon: twitter 
+        href: https://twitter.com/ 
+```
+
+## Table of Contents
+
+<https://quarto.org/docs/output-formats/html-basics.html#table-of-contents>
+
+Controlled by `format` not `website`:
+
+``` {.yaml filename="_quarto.yml"}
+format:
+  html: 
+    toc: true
+```
+
+# Project Listings
+
+## Before we proceed...
+
+We have created a subfolder `projects` at the root of the website with quarto file `index.qmd` inside this folder.
+
+We have referenced this `projects/index.qmd` in the navbar inside the `_quarto.yml` file.
+
+Today, we will populate the content of `projects/index.qmd` with a list of different projects!
+
+## Let's Add more Pages!
+
+-   Create a new subfolder called `list` inside `/projects`
+-   In this `list` sub-subfolder, create 3 quarto files: `project_1.qmd`, `project_2.qmd`, and `project_3.qmd`
+
+::::{layout="[1,1]"}
+:::{}
+Displaying a listing on `projects/index.qmd` is as simple as:
+
+``` yaml
+---
+title: My Projects
+listing: default
+---
+```
+:::
+:::{}
+Explicit default options:
+
+``` yaml
+---
+title: My Projects
+listing:
+  contents: /
+  sort: "date"
+  type: default
+  categories: false
+---
+```
+:::
+:::::
+
+## A listing is...
+
+::::{layout="[1,1]"}
+:::{}
+-   an automatically generated list of content
+-   styled via a template, (built-in `type`, or custom `template`)
+-   can be included on any page
+:::
+:::{}
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/listings-default.png)
+:::
+:::::
+
+## Generated from documents in `contents`
+
+::::{layout="[1,1]"}
+:::{}
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/listings-first.png)
+:::
+:::{}
+``` {.yaml filename="blog/third-post/index.qmd"}
+---
+title: "First Post"
+description: "Post description for first post"
+author: "Alicia"
+date: "5/22/2021"
+image: "cover.jpg"
+categories:
+  - Science
+  - Technology
+---
+```
+:::
+:::::
+
+## Why use a listing?
+
+-   Great for large collections
+-   Great for collections that grow
+
+## Your Turn
+
+1.  (Repeat) Make a new page `blog/index.qmd` which is a listing
+2.  Experiment with `type` and `categories`:
+    * `type`: `grid` or `table`
+    * `categories`: `true`, `unnumbered`, `cloud`
+
+    [Other listing options](https://quarto.org/docs/websites/website-listings.html#listing-options)
+3.  Discuss with your neighbor:
+    -   What makes this a blog?
+    -   What would you change if this was a gallery of your projects?
+
+## Default
+
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/listings-default.png)
+
+## Grid
+
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/listings-grid.png)
+
+## Table
+
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/listings-table.png)
+
+## Categories
+
+::::{layout="[1,1]"}
+:::{}
+![`true`/`numbered`](images/listings-categories-true.png)
+
+![`unnumbered`](images/listings-categories-unnumbered.png)
+:::
+:::{}
+
+![`cloud`](images/listings-categories-cloud.png)
+:::
+::: 
+
+## Use listings for \_ projects \_
+
+<https://ivelasq.rbind.io/project>
+
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/listings-projects-example.png)
+
+::: footer
+More examples at: <https://charlotte.quarto.pub/listings/>
+:::
+
+## Use listings for \_ talks \_
+
+<https://meghan.rbind.io/talks/>
+
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/listings-talks.png)
+
+::: footer
+More examples at: <https://charlotte.quarto.pub/listings/>
+:::
+
+## Use listings for \_ publications \_
+
+<https://mickael.canouil.fr/publications>
+
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/listings-publications.png)
+
+::: footer
+More examples at: <https://charlotte.quarto.pub/listings/>
+:::
+
+## Use listings for ... 
+ 
+<https://charlotte.quarto.pub/listings/>
+
+```{=html}
+<iframe src="https://charlotte.quarto.pub/listings/" width="100%" height="550" title="Listing Examples"></iframe>
+```
+
+## `contents` can be a YAML file
+
+::::{layout="[1,1]"}
+:::{}
+```{.yaml filename="projects/index.qmd"}
+---
+title: Projects
+listing:
+  contents: projects.yml
+  type: grid
+  max-description-length: 250
+---
+```
+:::
+:::{}
+```{.yaml filename="project/projects.yml"}
+- title: Predicting House Prices with Machine Learning
+  path: https://example.com/house-prices
+  # Photo by Breno Assis on Unsplash https://unsplash.com/photos/aerial-photography-of-rural-r3WAWU5Fi5Q 
+  image: images/breno-assis-r3WAWU5Fi5Q-unsplash.jpg
+  description: >
+    This project involves using machine learning algorithms to predict house prices based on
+    various features such as location, size, and amenities. It includes data cleaning,
+    feature engineering, and model selection.
+  categories: [Python, Machine Learning, Data Cleaning]
+  date: 2024-01-01
+  ...
+```
+`path` can be a relative path to a file in your site, or a URL
+
+You can use [Listing Fields](https://quarto.org/docs/websites/website-listings.html#listing-fields), or create custom ones.
+:::
+::: 
+
+
+## `contents` can be a YAML file
+
+![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/listings-projects.png)
+
+## Simple Customization: Select Fields
+
+::::{layout="[1,1]"}
+:::{}
+Use `fields` to specify which [Listing Fields](https://quarto.org/docs/websites/website-listings.html#listing-fields) are displayed.
+:::
+:::{}
+E.g. Exclude `date`:
+
+```{.yaml}         
+listing:
+  contents: projects.yml
+  type: grid
+  fields: ["image", "title", "categories", "description"]
+```
+:::
+::: 
+
+
+## Simple Customization: Rename Fields
+
+::::{layout="[1,1]"}
+:::{}
+
+Use `field-display-names` to provide a different label for a field 
+
+Mostly useful for `type: table`. 
+:::
+:::{}
+E.g. Rename `title` to `Project`
+
+```{.yaml}         
+listing:
+  contents: projects.yml
+  type: table
+  field-display-names: 
+    title: Project
+```
+:::
+::: 
+
+## Your Turn
+
+1. Switch to `type: table`
+
+2. Omit the `image` field from the listing
+
+3. Change the name of the "Categories" column to "Skills"
+
+4. Brainstorm:  What could you use a listing for on your own site?
+
+## Advanced Customization
+
+Example: <https://www.andrewheiss.com/teaching/>  
+
+Source: <https://github.com/andrewheiss/ath-quarto/blob/main/teaching/index.qmd>
+
+-   Listing in a custom location on a page
+-   More than one listing on a page 
+-   Custom Template 
+
+## Custom Location
+
+::::{layout="[1,1]"}
+:::{}
+```{.yaml filename="teaching/index.qmd"}
+---
+title: "Teaching"
+listing:
+  id: ay_23-24
+  contents: ay_23-24.yml
+---
+```
+Give the listing an `id`
+
+:::
+:::{}
+
+```{.markdown filename="teaching/index.qmd"}
+## 2023–24
+
+:::{#ay_23-24}
+:::
+
+## 2022–23
+```
+Use the `id` in a fenced div where you want it to appear
+:::
+::: 
+
+## Multiple Listings
+
+::::{layout="[1,1]"}
+:::{}
+```{.yaml filename="teaching/index.qmd"}
+---
+title: "Teaching"
+listing:
+  - id: ay_23-24
+    contents: ay_23-24.yml
+  - id: ay_22-23
+    contents: ay_22-23.yml
+---
+```
+Make `listing` an array, use `id`s
+
+:::
+:::{}
+
+```{.markdown filename="teaching/index.qmd"}
+## 2023–24
+
+:::{#ay_23-24}
+:::
+
+## 2022–23
+
+:::{#ay_22-23}
+:::
+```
+Place listings in the page by `id`
+:::
+:::
+
+## Custom template
+
+::::{layout="[1,1]"}
+:::{}
+```{.yaml filename="teaching/index.qmd"}
+---
+title: "Teaching"
+listing:
+  - id: ay_23-24
+    contents: ay_23-24.yml
+    template: ../html/teaching/listing.ejs
+---
+```
+Provide an `ejs` file to `template`
+:::
+:::{}
+````{.html filename="../html/teaching/listing.ejs"}
+```{=html}
+<div class="teaching">
+    <% for (const course of items) { %>
+    <div class="course-entry">
+        <div class="logo">
+            <% if (course.url) { %>
+            <a href="<%= course.url %>" target="_blank"><img src="<%= course.logo %>" alt="<%= course.title %>" title="<%= course.title %>" /></a>
+            <% } else { %>
+            <img src="<%= course.logo %>" alt="<%= course.title %>" title="<%= course.title %>" />
+            <% } %>
+        </div>
+        <div class="body">
+            <p class="course-title">
+                <% if (course.url) { %>
+                <a href="<%= course.url %>" target="_blank"><%= course.title %></a> 
+                <% } else { %>
+                <%= course.title %> 
+                <% } %>
+            </p>
+            <p class="course-details">
+                <span class="course-number"><%= course.number %></span> | 
+                <span class="course-university"><%= course.university %></span>
+                <% if (course.role) { %>
+                | <span class="course-role"><%= course.role %></span>
+                <% } %>
+            </p>
+            <p class="course-description"><%= course.description %></p>
+
+            <ul class="course-semesters">
+                <% for (const semester of course.semester) { %>
+                <% if (semester.url) { %>
+                <li><a href="<%= semester.url %>"><i class="fa-solid fa-building-columns"></i> <%= semester.name %></a></li>
+                <% } else { %> 
+                <li class="no-link"><i class="fa-solid fa-building-columns"></i> <%= semester.name %></li>
+                <% } %>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+    <% } %>
+</div>
+```
+````
+Define how item in `items` should be generated
+:::
+:::
+
+## Your Turn
+
+**Add a listing page to your site**: 
+
+1. Create a page to house the listing 
+
+2. Either: 
+    - populate a `.yml` file with a couple of items (use `projects/project.yml` as a template), or
+    - create some placeholder `.qmd` files.
+    
+3. Add the page to your site navigation
+
+4. Clean up any template listing pages/files/folders you don't want
+
+## References
+
+Huge thanks the following people who have generated and shared most of the content of this lecture:
+
+- Charlotte Wickham: [Quarto Websites: Navigation](https://posit-conf-2024.github.io/quarto-websites/04-navigation.html)
+
+- Charlotte Wickham: [Quarto Websites: Listings](https://posit-conf-2024.github.io/quarto-websites/06-listings#/listings)
+
+<br>
+
+```{r}
+include_graphics("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGdyMnhseGczY3NheHU1cHhtdGRzdWRxaXJ1Z3BsdWF6MWdwZm84ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7JG6cq7EWesFcQ/giphy.gif")
+```
+
+## {background="#43464B"}
+
+```{css, echo = FALSE}
+img.circle {border-radius:50%;}
+```
+
+::: {layout-ncol="2"}
+<img class="circle" src="https://github.com/damien-dupre.png" />
+
+**Thanks for your attention and don't hesitate to ask if you have any questions!**  
+[`r fa(name = "mastodon")` @damien_dupre](https://datasci.social/@damien_dupre)  
+[`r fa(name = "github")` @damien-dupre](https://github.com/damien-dupre)  
+[`r fa(name = "link")` https://damien-dupre.github.io](https://damien-dupre.github.io)  
+[`r fa(name = "paper-plane")` damien.dupre@dcu.ie](mailto:damien.dupre@dcu.ie)
+:::

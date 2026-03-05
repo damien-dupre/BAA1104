@@ -1,0 +1,905 @@
+---
+title: "Lecture 11: Quarto Dashboards"
+subtitle: BAA1028 - Workflow & Data Management 
+author: Damien Dupré
+format:
+  revealjs:
+    theme: [theme/metropolis.scss]
+    toc-depth: 1
+    chalkboard: false
+    menu: true
+    slide-number: true
+code-line-numbers: false
+title-slide-attributes:
+    data-background-iframe: logo-fall/index.html
+preload-iframes: true
+knitr: 
+  opts_chunk:
+    fig.align: center
+    
+# https://github.com/jjallaire/pydata-quarto-dashboards/blob/f62a2494caffe1942bac7dc100d1eae9b6a7e188/pydata-quarto-dashboards.qmd#L2
+# https://github.com/posit-conf-2024/quarto-dashboards/blob/b17b848ee4bfc83ce02e31e00e46057eb928f29b/2-dashboard-components/2-dashboard-components.qmd#L10
+
+---
+
+```{r setup, include = FALSE}
+# libraries --------------------------------------------------------------------
+library(anicon)
+library(countdown)
+library(fontawesome)
+library(knitr)
+
+# functions --------------------------------------------------------------------
+include_img <- function(img_name) {
+  paste0("https://raw.githubusercontent.com/damien-dupre/img/main/", img_name) |> 
+  knitr::include_graphics()
+}
+```
+
+## Quarto --- <https://quarto.org>
+
+::::{layout="[1,1]"}
+:::{}
+An open-source scientific and technical publishing system that builds on standard markdown with features essential for scientific communication.
+
+-   Pandoc Markdown
+
+-   Jupyter Kernels
+
+-   Dozens of Output Formats
+
+-   Specialized Project Types
+
+:::
+::: {}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/what-is-quarto.png){height="630px"}
+
+:::
+:::
+
+## How does Quarto work? {.nostretch}
+
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/ipynb-how-it-works.png){style="margin-left: 35px;" width="80%"}
+
+-   Computations: [Jupyter](https://jupyter.org)[^1]
+-   Markdown: [Pandoc](https://pandoc.org) w/ many enhancements
+-   Output: Documents, presentations, websites, books, blogs
+
+[^1]: [Knitr](https://yihui.name/knitr/) and [ObservableJS](https://observablehq.com/@observablehq/observable-javascript) also supported.
+
+## Render and Preview
+
+Render to output formats:
+
+``` bash
+# ipynb notebook
+quarto render notebook.ipynb
+quarto render notebook.ipynb --to docx
+
+# plain text qmd
+quarto render notebook.qmd 
+quarto render notebook.qmd --to pdf
+```
+
+Live preview server (re-render on save):
+
+``` bash
+# ipynb notebook
+quarto preview notebook.ipynb
+quarto preview notebook.ipynb --to docx
+
+# plain text qmd
+quarto preview notebook.qmd
+quarto preview notebook.qmd --to pdf
+```
+
+## Render and Preview
+
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/jupyterlab.png)
+
+## Plain Text Notebooks with .qmd Files {.smaller}
+
+::::{layout="[1,1]"}
+:::{}
+```` {.markdown filename="penguins.qmd" style="overflow-y: hidden" code-line-numbers="|1-7|9-16|18-20|22-31"}
+---
+title: "Palmer Penguins"
+author: Norah Jones
+date: March 12, 2023  
+format: html
+jupyter: python3
+---
+
+```{{python}}
+#| echo: false
+
+import pandas as pd
+df = pd.read_csv("palmer-penguins.csv") 
+df = df[["species", "island", "year", \
+         "bill_length_mm", "bill_depth_mm"]]
+```
+
+## Exploring the Data
+
+See @fig-bill-sizes for an exploration of bill sizes.
+
+```{{python}}
+#| label: fig-bill-sizes
+#| fig-cap: Bill Sizes by Species
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+g = sns.FacetGrid(df, hue="species", height=3)
+g.map(plt.scatter, "bill_length_mm", "bill_depth_mm") \
+  .add_legend()
+```
+````
+:::
+::: {.column width="46%"}
+
+-   Editable with any text editor (extensions for VS Code, Neovim, and Emacs)
+
+-   Cells always run in the same order
+
+-   Integrates well with version control
+
+-   Cache output with Jupyter Cache or Quarto freezer
+
+-   Lots of pros and cons visa-vi traditional `.ipynb` format/editors, use the right tool for each job
+:::
+:::
+
+## Rendering Pipeline
+
+Notebook workflow (no execution occurs by default):
+
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/ipynb-how-it-works.png){width="63%"}
+
+Plain text workflow (`.qmd` =\> `.ipynb` then execute cells):
+
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/qmd-how-it-works.png){width="80%"}
+
+## Render Notebook to PDF
+
+::::{layout="[1,1]"}
+:::{}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/demo-pdf.png)
+:::
+
+::: {}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/demo-pdf-output.png)
+:::
+:::
+
+## Render Notebook to Revealjs
+
+::::{layout="[1,1]"}
+:::{}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/demo-presentation.png)
+:::
+
+::: {}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/demo-presentation-output.png)
+:::
+:::
+
+## Render Notebook to HTML
+
+### default options
+
+::::{layout="[1,1]"}
+:::{}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/demo-basics.png)
+:::
+
+::: {}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/demo-basics-output.png)
+:::
+:::
+
+## Render Notebook to HTML
+
+### document level options
+
+::::{layout="[1,1]"}
+:::{}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/demo-doc-options.png)
+:::
+
+::: {}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/demo-doc-options-output.png)
+:::
+:::
+
+## Render Notebook to HTML
+
+### document and cell level options
+
+::::{layout="[1,1]"}
+:::{}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/demo-cell-options.png)
+:::
+
+::: {}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/demo-cell-options-output.png)
+:::
+:::
+
+## Render Notebook to HTML
+
+### document and cell level options
+
+::::{layout="[1,1]"}
+:::{}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/demo-cell-options.png)
+:::
+
+::: {}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/demo-cell-options-output-2.png)
+:::
+:::
+
+## Notebook ➝ Dashboard
+
+::::{layout="[1,1]"}
+:::{}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/demo-gapminder-notebook-1.png)
+:::
+
+::: {}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/demo-gapminder-notebook-output.png)
+:::
+:::
+
+## Notebook ➝ Dashboard
+
+::::{layout="[1,1]"}
+:::{}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/demo-gapminder-notebook-data.png)
+:::
+
+::: {}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/demo-gapminder-notebook-data-output.png)
+:::
+:::
+
+## Example 1
+
+![](https://vizdata.org/slides/20/images/dashboards/dashing-through-snow.png)
+
+## Example 2
+
+![](https://vizdata.org/slides/20/images/dashboards/customer-churn.png)
+
+## Example 3
+
+![](https://vizdata.org/slides/20/images/dashboards/mynorfolk.png)
+
+## Example 4
+
+![](https://vizdata.org/slides/20/images/dashboards/earthquakes.png)
+
+## Example 5
+
+![](https://vizdata.org/slides/20/images/dashboards/model-card.png)
+
+## Example 6
+
+![](https://vizdata.org/slides/20/images/dashboards/shiny-penguins.png)
+
+## Example 7
+
+![](https://vizdata.org/slides/20/images/dashboards/gapminder.png)
+
+## .qmd ➝ Dashboard
+
+``` {.markdown code-line-numbers="|3"}
+---
+title: "Dashing through the snow ❄️"
+format: dashboard
+---
+
+# content goes here...
+```
+
+
+See for example:
+
+  - Dashboard: <https://mine.quarto.pub/dashing-through-snow-py>
+  - Code: <https://github.com/mine-cetinkaya-rundel/dashing-through-snow/blob/main/snowdash-py.qmd>
+
+## Dashboard Components
+
+::: incremental
+1.  **Navigation Bar and Pages** --- Icon, title, and author along with links to sub-pages (if more than one page is defined).
+
+2.  **Sidebars, Rows & Columns, and Tabsets** --- Rows and columns using markdown heading (with optional attributes to control height, width, etc.).
+    Sidebars for interactive inputs.
+    Tabsets to further divide content.
+
+3.  **Cards (Plots, Tables, Value Boxes, Content)** --- Cards are containers for cell outputs and free form markdown text.
+    The content of cards typically maps to *cells* in your notebook or source document.
+:::
+
+::: fragment
+*All of these components can be authored and customized within notebook UI or plain text qmd.*
+:::
+
+
+## Navigation Bar and Pages
+
+```{r out.width='100%'}
+include_graphics("https://vizdata.org/slides/20/images/navigation-toolbar.png")
+```
+
+::: {style="margin-top: 0.7em;"}
+``` markdown
+--- 
+title: "Palmer Penguins"
+author: "Cobblepot Analytics"
+format: 
+  dashboard:
+    logo: images/penguins.png
+    nav-buttons: [linkedin, twitter, github]
+---
+
+# Bills
+
+# Flippers
+
+# Data
+```
+:::
+
+## Sidebars: Page Level
+
+::::{layout="[1,1]"}
+:::{}
+```` {.markdown style="margin-top: 45px;"}
+---
+title: "Sidebar"
+format: dashboard
+---
+    
+# Page 1
+
+## {.sidebar}
+
+```{{python}}
+```
+
+## Column 
+
+```{{python}}
+```
+
+```{{python}}
+```
+````
+:::
+:::{}
+![](https://vizdata.org/slides/20/images/chart-input-sidebar.png)
+:::
+::::
+
+## Sidebars: Global
+
+::::{layout="[1,1]"}
+:::{}
+```` {.markdown style="margin-top: 45px;"}
+---
+title: "Global Sidebar"
+format: dashboard
+---
+    
+# {.sidebar}
+
+Sidebar content (e.g. inputs)
+
+# Plot
+
+```{{python}}
+```
+
+# Data
+
+```{{python}}
+```
+````
+:::
+:::{}
+![](https://vizdata.org/slides/20/images/global-sidebar.png){width="80%"}
+:::
+:::
+
+## Layout: Rows
+
+::::{layout="[1,1]"}
+:::{}
+```` markdown
+---
+title: "Focal (Top)"
+format: dashboard
+---
+    
+## Row {height=70%}
+
+```{{python}}
+```
+
+## Row {height=30%}
+
+```{{python}}
+```
+
+```{{python}}
+```
+````
+:::
+:::{}
+![](https://vizdata.org/slides/20/images/chart-focal-top.png){width="90%"}
+:::
+:::
+
+## Example
+
+![](https://vizdata.org/slides/20/images/dashboards/customer-churn.png)
+
+## Layout: Columns
+
+::::{layout="[1,1]"}
+:::{}
+```` markdown
+---
+title: "Focal (Top)"
+format: 
+  dashboard:
+    orientation: columns
+---
+    
+## Column {width=60%}
+
+```{{python}}
+```
+
+## Column {width=40%}
+
+```{{python}}
+```
+
+```{{python}}
+```
+````
+:::
+:::{}
+![](https://vizdata.org/slides/20/images/chart-focal-left.png)
+:::
+:::
+
+## Example
+
+![](https://vizdata.org/slides/20/images/dashboards/housing-market.png)
+
+## Tabset
+
+::::{layout="[1,1]"}
+:::{}
+```` markdown
+---
+title: "Palmer Penguins"
+format: dashboard
+---
+    
+## Row
+
+```{{python}}
+```
+
+## Row {.tabset}
+
+```{{python}}
+#| title: Chart 2
+```
+
+```{{python}}
+#| title: Chart 3
+```
+````
+:::
+:::{}
+![](https://vizdata.org/slides/20/images/chart-tabset-row.png){width="87%"}
+:::
+:::
+
+## Example
+
+![](https://vizdata.org/slides/20/images/dashboards/mynorfolk.png)
+
+## Plots {.smaller}
+
+::::{layout="[1,1]"}
+:::{}
+[plotly](https://plotly.com/python/)
+````python
+```{{python}}
+#| title: GDP and Life Expectancy
+import plotly.express as px
+df = px.data.gapminder()
+px.scatter(
+  df, x="gdpPercap", y="lifeExp", 
+  animation_frame="year", animation_group="country",
+  size="pop", color="continent", hover_name="country", 
+  facet_col="continent", log_x=True, size_max=45, 
+  range_x=[100,100000], range_y=[25,90]
+)
+```
+````
+:::
+::: {}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/plotly-interactive.png)
+:::
+:::
+
+::::{layout="[1,1]"}
+:::{}
+[ipyleaflet](https://ipyleaflet.readthedocs.io)
+````python
+```{{python}}
+#| title: "World Map"
+#| padding: 0px
+from ipyleaflet import Map, basemaps, basemap_to_tiles
+Map(basemap=basemap_to_tiles(basemaps.OpenStreetMap.Mapnik),
+    center=(48.204793, 350.121558), zoom=2)
+```
+````
+:::
+::: {}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/leaflet-card-title-padding.png)
+:::
+:::
+
+## Tables
+
+::::{layout="[1,1]"}
+:::{}
+[tabulate](https://pypi.org/project/tabulate/)
+
+````python
+```{{python}}
+from tabulate import tabulate
+from IPython.display import Markdown
+Markdown(tabulate(penguins, showindex=False)}
+```
+````
+:::
+
+::: {}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/tabulate.png)
+:::
+:::
+
+::::{layout="[1,1]"}
+:::{}
+[itables](https://pypi.org/project/itables/)
+
+````python
+```{{python}}
+from itables import show
+show(penguins)
+```
+````
+:::
+::: {}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/itables-scrolling.png)
+:::
+
+:::
+
+## Value Boxes
+
+::::{layout="[1,1]"}
+:::{}
+````{.python .pymd style="margin-top: 45px;" code-line-numbers="|3-9|14-17|"}
+## Row
+
+```{{python}}
+#| component: valuebox
+#| title: "Current Price"
+dict(icon = "currency-dollar",
+     color = "secondary",
+     value = get_price(data))
+```
+
+```{{python}}
+#| component: valuebox
+#| title: "Change"
+change = get_change(data)
+dict(value = change['amount'],
+     icon = change['icon'],
+     color = change['color']) 
+```
+````
+:::
+::: {}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/value-box-app.png){.border width="80%"}
+:::
+:::
+
+## Text Content {.component-slide}
+
+::::{layout="[1,1]"}
+:::{}
+````{.python .pymd code-line-numbers="|17-22|"}
+## Column
+
+```{{python}}
+#| title: Population
+px.area(df, x="year", y="pop", 
+        color="continent", 
+        line_group="country")
+```
+
+```{{python}}
+#| title: Life Expectancy
+px.line(df, x="year", y="lifeExp", 
+        color="continent", 
+        line_group="country")
+```
+
+::: {.card}
+Gapminder combines data from multiple sources
+into unique coherent time-series that can’t be
+found elsewhere. Learn more about the Gampminder
+dataset at <https://www.gapminder.org/data/>.
+:::
+````
+:::
+::: {}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/text-content-column.png)
+:::
+:::
+
+## Expanding Cards
+
+Cards provide an **Expand** button which appears at bottom right on hover:
+
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/expanding-cards.png)
+
+## Expanding Cards
+
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/expanding-cards-expanded.png)
+
+## Dashboard Deployment
+
+Dashboards are typically just static HTML pages so can be deployed to any web server or web host.
+
+```{=html}
+<table id="deployment-table">
+<colgroup>
+<col style="width: 35%">
+<col style="width: 65%">
+</colgroup>
+<tbody>
+<tr class="odd fragment">
+<td>Static</td>
+<td><span>Rendered a single time (e.g.&nbsp;when underlying data won’t ever change)</span></td>
+</tr>
+<tr class="even fragment">
+<td>Scheduled</td>
+<td><span>Rendered on a schedule (e.g.&nbsp;via <code>cron</code> job) to accommodate changing data.</span></td>
+</tr>
+<tr class="odd fragment">
+<td>Parameterized</td>
+<td><span>Variations of static or scheduled dashboards based on parameters.</span></td>
+</tr>
+<tr class="even fragment">
+<td>Interactive</td>
+<td><span>Fully interactive dashboard using Shiny (requires a server for deployment).</span></td>
+</tr>
+</tbody>
+</table>
+
+<style type="text/css">
+#deployment-table td {
+  border-bottom: none;
+}
+#deployment-table td:first-of-type {
+  font-weight: 800;
+}
+</style>
+```
+
+
+## Parameterized Dashboards
+
+::::{layout="[1,1]"}
+:::{}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/stock-explorer-dashboard.png)
+:::
+:::{}
+Add a parameters tag to the first cell
+(based on [papermill](https://papermill.readthedocs.io/en/latest/usage-parameterize.html)) :
+
+````python
+```{{python}}
+#| tags: [parameters]
+ticker = "BA"
+```
+````
+
+Use the `-P` command line option to vary the parameter:
+
+````bash
+quarto render dashboard.qmd -P ticker:GOOG
+````
+:::
+:::
+
+## Interactive Dashboards
+
+<https://quarto.org/docs/dashboards/interactivity/shiny-python/>
+
+::::{layout="[1,1]"}
+:::{}
+
+- For interactive exploration, some dashboards can benefit from a live Python backend
+
+- To do this with Quarto Dashboards, add interactive [Shiny](https://shiny.posit.co/py/) components 
+
+-  _Note that this requires a server for deployment_
+
+:::
+::: {}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/shiny-homepage.png)
+:::
+:::
+
+## Hello, Shiny {.smaller}
+
+::::{layout="[1,1]"}
+:::{}
+````{.python .pymd code-line-numbers="|15-19|25-29|29|"}
+---
+title: "Penguin Bills"
+format: dashboard
+server: shiny
+---
+
+```{{python}}
+import seaborn as sns
+penguins = sns.load_dataset("penguins")
+```
+
+## {.sidebar}
+
+```{{python}}
+from shiny import render, ui
+ui.input_select("x", "Variable:",
+                choices=["bill_length_mm", "bill_depth_mm"])
+ui.input_select("dist", "Distribution:", choices=["hist", "kde"])
+ui.input_checkbox("rug", "Show rug marks", value = False)
+```
+
+## Column
+
+```{{python}}
+@render.plot
+def displot():
+    sns.displot(
+        data=penguins, hue="species", multiple="stack",
+        x=input.x(), rug=input.rug(),kind=input.dist())
+```
+````
+:::
+::: {}
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/hello-shiny-slide.png)
+:::
+:::
+
+## Hello, Shiny 
+
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/dashboards/shiny-penguins.png)
+
+## Shiny Deployment
+
+Shiny for Python applications are built on [Starlette](https://www.starlette.io) and [ASGI](https://asgi.readthedocs.io), and can deployed in server environments that support WebSockets and sticky sessions. 
+
+::::{layout="[1,1]"}
+:::{}
+Cloud
+
+- [shinyapps.io](https://shiny.posit.co/py/docs/deploy.html#deploy-to-shinyapps.io-cloud-hosting)
+- [Hugging Face](https://huggingface.co/docs/hub/spaces-sdks-docker-shiny)
+- [Roll your own](https://shiny.posit.co/py/docs/deploy.html#other-hosting-options)
+:::
+::: {}
+On-Prem
+
+- [Shiny Server](https://shiny.posit.co/py/docs/deploy.html#deploy-to-shiny-server-open-source) (open source)
+- [Posit Connect](https://shiny.posit.co/py/docs/deploy.html#deploy-to-posit-connect-commercial) (commercial)
+- [Roll your own](https://shiny.posit.co/py/docs/deploy.html#other-hosting-options)
+:::
+::::
+
+::: {.fragment style="margin-top: 0.7em;"}
+Alternatively, deploy serverless using [Pyodide](https://pyodide.org/). See the [Retirement Simulation](https://github.com/wch/retirement-simulation-dashboard) example for details.
+:::
+
+## Shiny Deployment
+
+![](https://jjallaire.github.io/pydata-quarto-dashboards/images/dashboards/retirement.png)
+
+## Learn more
+
+<https://quarto.org/docs/dashboards>
+
+```{=html}
+<iframe width="1000" height="400" src="https://quarto.org/docs/dashboards" frameborder="1" style="background:white;"></iframe>
+```
+
+## 🛠️ Your Turn!
+
+Create a Dashboard with the following widgets:
+
+::::{layout="[1,1]"}
+:::{}
+```{.python}
+import plotly.express as px
+
+df = px.data.stocks()
+fig = px.line(df, x='date', y="GOOG")
+fig.show()
+```
+:::
+::: {}
+```{.python}
+from ipyleaflet import Map, Marker
+
+center = (53.3868, -6.2569)
+map = Map(center=center, zoom=12)
+display(map)
+```
+:::
+::::
+
+Remember to use in your YAML:
+
+```yaml
+---
+format: dashboard
+---
+```
+
+```{r}
+countdown(minutes = 10, warn_when = 60)
+```
+
+## References
+
+Huge thanks the following people who have generated and shared most of the content of this lecture:
+
+- Mine Çetinkaya-Rundel: [Build-a-Dashboard Workshop](https://posit-conf-2024.github.io/quarto-dashboards/)
+
+- J.J. Allaire: [Dashboards with Jupyter and Quarto](https://jjallaire.github.io/pydata-quarto-dashboards)
+
+<br>
+
+```{r}
+include_graphics("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGdyMnhseGczY3NheHU1cHhtdGRzdWRxaXJ1Z3BsdWF6MWdwZm84ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7JG6cq7EWesFcQ/giphy.gif")
+```
+
+## {background="#43464B"}
+
+```{css, echo = FALSE}
+img.circle {border-radius:50%;}
+```
+
+::: {layout-ncol="2"}
+<img class="circle" src="https://github.com/damien-dupre.png" />
+
+**Thanks for your attention and don't hesitate to ask if you have any questions!**  
+[`r fa(name = "mastodon")` @damien_dupre](https://datasci.social/@damien_dupre)  
+[`r fa(name = "github")` @damien-dupre](https://github.com/damien-dupre)  
+[`r fa(name = "link")` https://damien-dupre.github.io](https://damien-dupre.github.io)  
+[`r fa(name = "paper-plane")` damien.dupre@dcu.ie](mailto:damien.dupre@dcu.ie)
+:::

@@ -1,0 +1,977 @@
+---
+title: "Lecture 10: Analytics Storytelling in a Quarto Website"
+subtitle: BAA1028 - Workflow & Data Management 
+author: Damien Dupré
+format:
+  revealjs:
+    theme: [theme/metropolis.scss]
+    toc-depth: 1
+    chalkboard: false
+    menu: true
+    slide-number: true
+title-slide-attributes:
+    data-background-iframe: logo-fall/index.html
+preload-iframes: true
+---
+
+```{r setup, include = FALSE}
+# libraries --------------------------------------------------------------------
+library(anicon)
+library(countdown)
+library(fontawesome)
+library(knitr)
+
+# functions --------------------------------------------------------------------
+include_img <- function(img_name) {
+  paste0("https://raw.githubusercontent.com/damien-dupre/img/main/", img_name) |> 
+  knitr::include_graphics()
+}
+
+# https://github.com/luissattelmayer/intro-css/blob/642c840b8d0d4bf857b1d0ff3ed38d63c2105e8d/slides/01_corpus_webscraping_slides.qmd#L6
+# https://github.com/lukaslehner/UCL-NCRM-Tools-for-Efficient-Workflows-2023/blob/d1a84da4e81b5fd28db5dc746783f63c5723c031/A-Slides/lecture6.qmd
+# https://github.com/cornelius-erfort/web-data-and-text-r/blob/831fff2a667c7b66b05e416eced829ae784d9eed/slides/09-ethics-and-legal.qmd#L4
+# https://github.com/solmos/user2024-talk/blob/9e362e7ca525877aad23862fe581f5988bb33919/index.qmd#L7
+```
+
+## Storyboard - Think Before You Dive In
+
+Before jumping into creating your data visualisation and **datascrollytelling** in Quarto, take some time to think about the overall structure of your project. A **storyboard** is a key tool for organising your narrative and anticipating the necessary steps for its development.
+
+- **Define a clear plan**: Identify the key messages you want to convey and the order in which they should appear. A well-thought-out narrative will guide your readers effectively.    
+
+- **Prepare the necessary elements**: Gather the data, text, images, and illustrations that will enrich your presentation.
+
+- **Consider interactivity**: Identify points where you want to highlight key aspects, zoom in on important elements, or display specific details.
+
+- **Visualise your transitions**: How will you move from one idea to the next? These steps should be seamless to maintain your audience’s attention.
+
+A storyboard will help you keep an overview while anticipating both technical and narrative challenges. This preparation is essential for maximising the impact of your **datascrollytelling**!
+
+## What will your readers see first?
+
+This is called **visual hierarchy**.
+
+\
+
+What did you see first on this slide? What did you see second?
+
+Why?
+
+## What will your readers see first?
+
+When all of the elements on your plot look the same, it's really hard for people to decide what to focus on. Without that focus, it's difficult for your plot to lead to a conclusion. Instead, you want to vary your plot elements, drawing attention to the most important things first. There are lots of ways to do this: bolding text, making it bigger, using colours, and taking advantage of natural reading direction can all help to establish visual hierarchy.
+
+## What will your readers see first?
+
+When all of the elements on your plot **look the same**, it's **really hard for people** to decide what to focus on.
+
+\
+
+Without that focus, it's difficult for your plot to lead to a conclusion.
+
+\
+
+Instead, you want to **vary your plot elements**, drawing attention to the **most important things** first.
+
+## What will your readers see first?
+
+There are lots of ways to do this:
+
+::::{.columns .small}
+:::{.column width="30%"}
+**bolding text**  
+[**making it bigger**]{style="font-size:125%"}<br>
+:::
+:::{.column width="30%"}
+[**using striking colours...**]{style="color: #dd0033"}<br>
+[... or softer colours]{style="color: #bbbbbb"}
+:::
+
+:::{.column width="30%"}
+**taking advantage of natural reading direction** 
+:::
+::::
+
+These techniques can all **help establish visual hierarchy.**
+
+# Using Quarto for storytelling {#section-moss}
+
+## Example 1
+
+Your data is **electricity demand** and **temperature** at **3 inner Melbourne sites**:
+
+https://raw.githubusercontent.com/jimjam-slam/talk-storytelling-r-quarto/refs/heads/main/data/power-temperature-threesites.csv
+
+\
+
+:::{style="font-size: 48%;"}
+```{ojs}
+powerTemp = FileAttachment("https://raw.githubusercontent.com/jimjam-slam/talk-storytelling-r-quarto/refs/heads/main/data/power-temperature-threesites.csv").csv({ typed: true })
+
+Inputs.table(powerTemp)
+```
+:::
+
+## A basic chart
+
+```{r}
+#| library: slides-setup
+library(tidyverse)
+library(here)
+power_temp <- read_csv("https://raw.githubusercontent.com/jimjam-slam/talk-storytelling-r-quarto/refs/heads/main/data/power-temperature-threesites.csv")
+```
+
+:::{style="font-size: 85%;"}
+```{r}
+#| label: basic-chart
+#| id: basic-chart
+#| echo: true
+#| output-location: column
+
+ggplot(power_temp) +
+  aes(x = tmax, y = demand, colour = working) +
+  geom_point(size = 2) +
+  facet_wrap(vars(name)) +
+  labs(
+    x = "2m air temperature [°C]",
+    y = "Electricity demand [MW]",
+    title = "Electricity and temperature")
+```
+:::
+
+What stories could we tell with this data?
+
+What improvements could we make?
+
+## Use Quarto to explore this data
+
+:::: {.columns}
+::: {.column}
+
+##### R script
+
+````{.r}
+library(tidyverse)
+
+ggplot(data) +
+  aes() +
+  # ...
+````
+:::
+::: {.column}
+
+##### R code chunk in Quarto doc
+
+````
+---
+title: "Power and temperature"
+---
+
+Let's look at this data!
+
+```{{r}}
+library(tidyverse)
+
+ggplot(data) +
+  aes() +
+  # ...
+```
+````
+
+:::
+::::
+
+# Scrollytelling with Closeread {#section-indigo}
+
+## What's scrollytelling?
+
+Scrollytelling involves **graphics that stick** to the screen and and **change as the user scrolls**.
+
+::: {.columns .small}
+::: {.column}
+![ABC scrollytelling story on fake AI imagery](https://jimjam-slam.github.io/talk-storytelling-r-quarto/assets/scrollytelling-abc-480p.mov){alt="Video of a scrollytelling story by the ABC on fake AI imagery" autoplay="true" loop="true"}
+:::
+::: {.column}
+![New York Times scrollytelling story on \"Shah Jahan on a terrace, holding a pendant set with his portrait\" by Chitarman](https://jimjam-slam.github.io/talk-storytelling-r-quarto/assets/scrollytelling-nyt-480p.mov){alt="Video of a scrollytelling story by the New York Times on \"Shah Jahan on a terrace, holding a pendant set with his portrait\" by Chitarman" autoplay="true" loop="true"}
+:::
+:::
+
+## Closeread: scrollytelling with Quarto {.center}
+
+[**Closeread**](https://closeread.dev) is a Quarto extension developed by Andrew Bray  
+and James Goldie
+
+[(We named it after a [**New York Times series**](https://www.nytimes.com/interactive/2021/arts/close-read.html) — the piece in the last slide was from this series!)]{.small .deemph}
+
+Closeread lets you turn a regular Quarto doc into a scrollytelling doc
+
+## Initialisation
+
+**CloseRead** is an extension designed to work with **Quarto.** Before you begin, make sure your workspace is ready:
+
+1. Open RStudio: Launch RStudio, the ideal environment for working with Quarto.
+
+1. Create a dedicated project: It is recommended to create a new project to organise your files. This will make it easier to manage resources and dependencies.
+
+1. Create a Quarto document: Generate your first `.qmd` (Quarto Markdown) file, which will serve as the foundation for your **datascrollytelling** project.  
+   To do this, go to **File > New File > Quarto Document** in RStudio.  
+   ![](img/formation/new_quarto.png)  
+   Then, fill in the different parameters (uncheck the visual editor).  
+   ![](img/formation/new_quarto_2.png)  
+
+1. Install the CloseRead extension: At the root of your project (where your `.qmd` file is located), install the CloseRead extension. This will add the necessary functionalities to your project. This step is done in the terminal, to the right of the console.  
+   ![](img/formation/install_closeread.png)
+
+
+## How Closeread works
+
+\
+
+:::: {.columns .small}
+::: {.column width="47.5%"}
+##### Step 1
+
+A Quarto extension is like an R package — it extends Quarto's abilities.
+
+Install Closeread in the RStudio Terminal by running:
+
+```bash
+quarto add qmd-lab/closeread
+```
+
+\
+
+##### Step 2
+
+At the top of your Quarto doc, change  
+`format: html` → `format: closeread-html`
+:::
+::: {.column width="5%"}
+:::
+::: {.column width="47.5%"}
+##### Step 3
+Tell Quarto where the scrollytelling starts and stops:
+
+\
+
+````
+:::{.cr-section}
+
+(scrollytelling stuff goes here!)
+
+:::
+````
+
+:::
+::::
+
+## How Closeread works {.center}
+
+Closeread has two components: **stickies** and **triggers**.
+
+\
+
+::: {.columns .small}
+::: {.column}
+
+##### Stickies
+
+Things you want to stick on the screen. Give them an ID starting with `#cr-`.
+
+````
+:::{#cr-myplot}
+
+```{{r}}
+ggplot(mydata) +
+ aes(x = x, y = y) +
+ geom_point()
+```
+
+:::
+````
+
+:::
+::: {.column}
+
+##### Triggers
+
+These make the stickies appear. They work like citations: use the ID of the sticky with an `@`:
+
+````
+When this text scrolls past, my great figure will appear! @cr-myplot
+````
+
+:::
+:::
+
+## How can scrollytelling help my communication? {.hleft}
+
+::: {.columns .small}
+::: {.column width="30%"}
+Here's a Closeread example where we **build a plot up** one layer at a time:
+
+[**closeread.dev/\
+gallery/demos/\
+build-up-plots/**](https://closeread.dev/gallery/demos/build-up-plots/)
+
+\
+
+How can we use this technique with our electricity and temperature data?
+:::
+::: {.column width="5%"}
+:::
+::: {.column width="65%"}
+
+```{=html}
+<iframe
+  src="https://closeread.dev/gallery/demos/build-up-plots/"
+  style="height: 650px; width: 900px; border: 1px solid lightgrey; border-radius: 0.5em;"></iframe>
+```
+
+:::
+:::
+
+You can view the example file here: [1-skeleton](./example_formation/1-squelette.qmd){target="_blank"}
+
+## Scroll on Images
+
+### Step 1 - Loading Texts and Images
+
+To understand the very simple functionality of **CloseRead**, add images and text to one of your sections.
+
+1. Create an `img` directory in your project.
+
+1. Upload your photos.
+
+1. In your `.qmd` file, alternate between adding images and texts.
+
+:::{.callout-tip}
+An image is added simply with the code `![](./img/my_photo.png)`
+:::
+
+You can test a `render` to check that the images and text display correctly.
+
+### Step 2 - Adding a CloseRead Section
+
+You can now animate your page with CloseRead. The principle is to scroll the texts over the images, with the images changing depending on the scroll level.
+
+You need to tell your Quarto document that you want to add a CloseRead section. Wrap your text and images with the opening tag for a CloseRead section `::::{.cr-section}` and the closing tag `::::`.
+
+Here’s my code:
+
+```
+# Les grandes énigmes des données invisibles
+
+::::{.cr-section}
+
+![](./img/img1.webp)
+
+**L'énigme flottante des données invisibles**    
+Les chiffres chuchotent leurs secrets aux angles invisibles d'une géométrie oubliée. Saurons-nous un jour entendre leurs vérités non-numériques ? 
+
+![](./img/img2.webp)
+
+**Le labyrinthe des connexions furtives**    
+Chaque pixel est une porte, mais laquelle mène au sommet du triangle imaginaire ? Une énigme pour les esprits quantiques. 
+
+![](./img/img3.webp)
+
+**L'éclipse des données perdues**     
+Quand les graphiques se camouflent dans les ombres des spectres, seule une poignée de courbes revient. Les autres ? Elles errent entre deux dimensions. 
+
+::::
+
+```
+
+You can test a `render` to check that the images and text display within a CloseRead section.  
+You will notice that everything scrolls to the left. This is because we haven’t specified which elements should scroll and which ones should be in the background.
+
+### Step 3 - Choosing Scrolling and Background Elements
+
+In our example, the texts scroll, and the images appear in the background one after the other.
+
+The element that doesn't move (a `sticky` in CloseRead) is wrapped in a tag prefixed by `#cr-`. For example, the opening tag is `:::{#cr-myImage1}` and the closing tag is `:::`.
+
+The element that moves (a trigger) is followed by a call to this sticky in the form `@cr-myImage1`.
+
+Here’s the final code with 3 images:
+
+```
+::::{.cr-section}           <!--- Début d'une section CloseRead --->
+
+:::{#cr-image1}             <!--- Un sticky (l'image de fond fixe) --->
+![](./img/img1.webp)
+:::                         <!--- Fin du sticky  --->
+**L'énigme flottante des données invisibles**    
+Les chiffres chuchotent leurs secrets aux angles invisibles d'une géométrie oubliée. Saurons-nous un jour entendre leurs vérités non-numériques ? @cr-image1   ## appel du texte qui vient défiler sur le sticky @cr-image1
+
+:::{#cr-image2}                <!--- Un autre sticky (l'image de fond change) --->
+![](./img/img2.webp)
+:::
+
+**Le labyrinthe des connexions furtives**    
+Chaque pixel est une porte, mais laquelle mène au sommet du triangle imaginaire ? Une énigme pour les esprits quantiques. @cr-image2
+
+:::{#cr-image3}
+![](./img/img3.webp)
+:::
+
+**L'éclipse des données perdues**     
+Quand les graphiques se camouflent dans les ombres des spectres, seule une poignée de courbes revient. Les autres ? Elles errent entre deux dimensions. @cr-image3
+
+::::             <!--- Fin de ma section closeread --->
+
+```
+
+You can test a `render` to verify that the text scrolls correctly and that the image displays properly.
+
+You can check the example file here: [2-scroll_image](./example_formation/2-scroll_image.qmd){target="_blank"}
+
+## Focus Elements for an Image [easy]{.class key="easy"}
+
+Focus effects allow you to direct the reader's attention to specific aspects of your stickies. Using the previous example, focus effects would allow the reader’s attention to be drawn to a part of the images in the stickies.
+
+To use a focus element, you will modify the call in your trigger. Instead of `My text.... @cr-mySticky`, you will use `My text.... [@cr-mySticky]{type_focus="value_of_focus}"`.
+
+In CloseRead, there are two focus effects for an image: 
+
+### Scaling: **scale-by** 
+
+You can adjust the size of a sticky to grab attention or create a visual effect.
+
+`[@cr-mycontent]{scale-by="1.5"}`
+
+In this example, the corresponding element will be enlarged by 50%.
+
+### Movement: **pan-to**
+
+To center a specific part of an element (usually an image), you can use the pan-to attribute. This accepts both relative (%) or absolute (pixel) units.
+
+`[@cr-mycontent]{pan-to="25%,-50%"}`: the element will move 25% of its width to the right and 50% of its height upwards.  
+`[@cr-mycontent]{pan-to="-30px, 30px"}`: the element will move 30px to the left and 30px down.
+
+### Combining Effects
+
+You can combine the effects by chaining them together in the declaration.
+
+`[@cr-mycontent]{scale-by="1.5" pan-to="25%,-50%"}`: the element will be enlarged by 50% and moved 25% of its width to the right and 50% of its height upwards.
+
+### Example
+
+You can adapt your previous code to add movement and zoom effects.
+
+```
+::::{.cr-section}           <!--- Début d'une section CloseRead --->
+
+:::{#cr-image1}             <!--- Un sticky (l'image de fond fixe) --->
+![](./img/img1.webp)
+:::                         <!--- Fin du sticky  --->
+**L'énigme flottante des données invisibles**    
+Les chiffres chuchotent leurs secrets aux angles invisibles d'une géométrie oubliée. Saurons-nous un jour entendre leurs vérités non-numériques ? @cr-image1   ## appel du texte qui vient défiler sur le sticky @cr-image1
+
+:::{#cr-image2}                <!--- Un autre sticky (l'image de fond change) --->
+![](./img/img2.webp)
+:::
+
+**Le labyrinthe des connexions furtives**    
+Chaque pixel est une porte, mais laquelle mène au sommet du triangle imaginaire ? Une énigme pour les esprits quantiques. @cr-image2
+
+:::{#cr-image3}
+![](./img/img3.webp)
+:::
+
+**L'éclipse des données perdues**     
+Quand les graphiques se camouflent dans les ombres des spectres, seule une poignée de courbes revient. Les autres ? Elles errent entre deux dimensions. @cr-image3
+
+::::             <!--- Fin de ma section closeread --->
+
+```
+
+
+You can consult the example file here: [3-scroll_image_with_focus](./example_formation/3-scroll_image_with_focus.qmd){target="_blank"}
+
+## Scroll on Text [intermediate]{.class key="inter"}
+
+:::{.callout-tip}
+Focus effects on text work particularly well for short, inline text such as poems and lines of code. 
+:::
+
+So far, we have seen the case where the sticky is an image. It is also possible to have other stickies, such as text or code.
+
+The process remains the same with triggers scrolling over text that stays in the background. There are focus elements specific to text.
+
+### Zoom on a Line or Specific Element: **zoom-to**
+
+Only if the sticky is code or a line, it is possible to zoom directly onto a line or a specific span.
+
+`[@cr-mycontent]{zoom-to="3"}`: zoom on line 3  
+`[@cr-mycontent]{zoom-to="cr-span1"}`: zoom on the line with the id cr-span1  
+
+### Highlighting: **highlight**
+
+To highlight text, you can use the highlight focus:
+
+`[@cr-mycontent]{highlight="3-6"}`: highlight lines 3 to 6  
+`[@cr-mycontent]{highlight="cr-span1"}`: highlight the lines with the id cr-span1
+
+### Special Case of Code
+
+You can easily zoom or highlight lines of code just like normal text! This is very powerful for training content in R or Python.
+
+You can check the example file here: [4-scroll-text-with-focus](./example_formation/4-scroll-text-with-focus.qmd){target="_blank"}
+
+:::{.callout-tip}
+You will notice in the text declaration the class `.scale-to-fill` which makes the sticky scale to fill the view window without distortion or cropping.
+:::
+
+## Scroll on an R Plot [intermediate]{.class key="inter"}
+
+In datascrollytelling, the use of dynamic plots is a powerful way to capture the reader's attention and convey complex information progressively. The goal is to synchronize scrolling text with interactive visualizations, ensuring that the right explanations appear when the relevant data is highlighted. CloseRead facilitates this synchronization by combining ggplot graphs in "stickies" with text triggers.
+
+::: {.callout-tip}
+If you don’t want to use ggplot, you can create plots in another tool (e.g., datawrapper) and export them as images. Then, you can scroll or zoom them just like images.
+:::
+
+1. Create the complete plot in ggplot - write the text
+
+To start, you need to create your plot with all curves. In order to ensure the scrolling reveals the curves properly, you should first:
+
+- Define the axes by setting the min and max values: the axes will not change regardless of the data displayed.  
+- Fix the curve colors so they stay consistent regardless of scrolling. For example, by using `scale_color_manual(values = species_colors)`.  
+- Integrate the legend into the plot to avoid the size of the legend affecting the width of the plot.
+
+Additionally, write the texts you wish to display.
+
+Here's an example of ggplot code:
+
+```{r}
+#| eval: false
+#| echo: true
+# Chargement de ggplot2
+library(ggplot2)
+
+# Création des données simulées
+set.seed(42)
+data <- data.frame(
+  année = rep(2010:2019, 3),
+  population = c(
+    100 + cumsum(rnorm(10, mean = 5, sd = 3)),  # Plumifloron Azuré
+    40 + cumsum(rnorm(10, mean = -2, sd = 4)), # Taurillon Rubicond
+    80 + cumsum(rnorm(10, mean = 3, sd = 2))    # Luminéon Écarlate
+  ),
+  espèce = rep(c("Plumifloron Azuré", 
+                 "Taurillon Rubicond", 
+                 "Luminéon Écarlate"), each = 10)
+)
+
+# On fixe les couleurs
+couleurs_especes <- c(
+  "Plumifloron Azuré" = "#1E90FF",     
+  "Taurillon Rubicond" = "#FF4500",    
+  "Luminéon Écarlate" = "#32CD32"     
+)
+
+# Graphique avec un geom par courbe et axes fixes
+ggplot(data, aes(x = année, y = population, color = espèce)) +
+  geom_line(data = subset(data, espèce == "Plumifloron Azuré")) +  
+  geom_line(data = subset(data, espèce == "Taurillon Rubicond")) +   
+  geom_line(data = subset(data, espèce == "Luminéon Écarlate")) +   
+  scale_x_continuous(limits = c(2010, 2019), breaks = 2010:2019) + 
+  scale_y_continuous(limits = c(0, 175)) +    
+      scale_color_manual(values = couleurs_especes) +  
+  labs(
+    title = "Évolution des populations animales (2010-2019)",
+    x = "Année",
+    y = "Population",
+    color = "Espèces"
+  ) +
+  theme_minimal()+
+  theme(legend.position = c(.2, 0.9)) 
+```
+
+2. Create the CloseRead Section
+
+You create a CloseRead section where you put:
+
+- stickies corresponding to your plots (i.e., stickies that contain each R chunk)
+- texts for the triggers
+
+In our example, we have 4 texts: one introductory text, then one text for each species. We also have 4 stickies: one sticky containing a chunk with an empty plot (no `geom_line`), and for each of the 3 other stickies, we add a `geom_line` each time.
+Now, it's just a matter of matching the stickies and triggers.
+
+The example [5-scroll-graph-ggplot.qmd](./example_formation/5-scroll-graph-ggplot.qmd){target="_blank"} will show you the implementation.
+
+::: {.callout-tip}
+We chose to make the scroll progressively reveal each of the curves. You could also play with the size or color of the curves. The principle remains the same!
+:::
+
+::: {.callout-tip}
+You can adjust the size of the plot displayed directly in the quarto chunk options: `fig-width` and `fig-height` to define in the chunk options.
+:::
+
+## Modify the Theme [intermediate]{.class key="inter"}
+
+An effective data visualization combines data clarity with polished aesthetics. To achieve this, Quarto and CloseRead offer complementary tools: the former provides global theme management and text element layout, while the latter offers options for customizing and enriching the dynamic presentation.
+
+### Quarto Themes
+
+By default, Quarto offers 25 rendering themes [See HTML Theming in the Quarto docs](https://quarto.org/docs/output-formats/html-themes.html).
+
+In the YAML header of your Quarto document, simply try setting the theme. For example, take your setup and modify it:
+```yaml
+---
+title: "Data Storytelling with CloseRead"
+author: "Your Name"
+format: 
+  closeread-html:
+    theme: cyborg
+---
+```
+
+It is possible to override the theme by changing the font size, background color, etc. For example:
+
+```yaml
+---
+title: "Data Storytelling with CloseRead"
+author: "Your Name"
+format: 
+  closeread-html:
+    theme: cyborg
+    backgroundcolor: darkslateblue
+    fontsize: 1.4em
+---
+```
+
+You will notice that only the parts outside of the closeRead section are impacted. This is already a good start.
+
+## Layout of Text Elements
+
+Quarto allows the classic markdown formatting:
+	•	Font: *italics*, **bold**, ***bold italics***
+	•	Headings: # Header 1, ## Header 2, ### Header 3...
+	•	Lists:
+	
+### CloseRead Layouts
+
+By default, the scroll happens to the left with the image/text/graphic staying on the right. In closeRead, this layout is referred to as “sidebar-left.” To change it, you can either set it for the entire page or for a specific section.
+
+If you want to change it for the entire page, you specify it in the YAML header:
+
+```yaml
+---
+title: "Data Storytelling with CloseRead"
+author: "Your Name"
+format: 
+  closeread-html:
+    theme: cyborg
+    backgroundcolor: darkslateblue
+    fontsize: 1.4em
+    cr-section:
+      layout: "overlay-center"
+---
+```
+
+To define it only for a section, you need to specify it when creating the section:
+
+```
+:::{.cr-section layout="overlay-center"}
+
+
+//// le contenu de la section ici...
+
+:::
+```
+
+The layout options are:
+	•	sidebar-left (default)
+	•	sidebar-right
+	•	overlay-left
+	•	overlay-center
+	•	overlay-right
+
+### Themes and Layout in CloseRead
+
+The specific rendering aspects of CloseRead are set in the header under the cr-style key. For example:
+
+
+```yaml
+---
+title: "Data Storytelling with CloseRead"
+author: "Your Name"
+format: 
+  closeread-html:
+    theme: cyborg
+    backgroundcolor: darkslateblue
+    fontsize: 1.4em
+    cr-section:
+      layout: "overlay-center"
+    cr-style:
+      narrative-background-color-sidebar: darkslateblue
+      narrative-text-color-sidebar: white
+      section-background-color: darkslateblue
+      narrative-background-color-overlay: violet
+      narrative-text-color-overlay: black
+---
+```
+
+In this example, I made the entire background purple, both for the left side where the text scrolls and for the central part.
+For the text that overlays the image, I used a purple color and black text.
+Other options are available on the CloseRead documentation site.
+
+CloseRead Layout with CSS
+
+To go further with the layout, you can define stylesheet elements in your quarto document.
+For example, create a chunk of type ```{=html} :
+
+```
+<!-- some quick style customisation: see https://closeread.dev/guide/styling -->
+<style>
+  .cr-section.overlay-left {
+    background-color: white;
+  }
+
+  .cr-section.overlay-left .narrative-col .narrative {
+    font-size: 1.15em;
+    background-color: #3a79aa;
+    color: #f1f1f1;
+    padding: 0.6em 0.8em;
+    border-radius: 1;
+    backdrop-filter: blur(10px);
+  }
+  
+  .cr-section.overlay-left .narrative-col .narrative a {
+    background-color: #3a79aa;
+    color: #f1f1f1;
+  }
+  
+</style>
+```
+
+You can see an example here: 6-scroll_image_with_theme.qmd{target=”_blank”}
+
+## Scrolling with Javascript Graphs or Maps [Advanced]{.class key=“hard”}
+
+Quarto allows you to integrate Observable Javascript chunks (OJS), enabling you to use Javascript directly within Quarto. Just a reminder, Javascript is a programming language primarily used to create dynamic interactions and interactive features on websites.
+CloseRead interacts with these OJS blocks, making them dynamic during a scroll.
+
+### Basics of OJS Blocks
+
+Quarto natively integrates OJS chunks in the same way as R or Python chunks. To render an OJS chunk, the full page rendering must be run (simply running the chunk itself is not enough).
+
+Here is a very simple example using an Observable plot: See Observable plot
+
+```{ojs}
+//| eval: false
+
+gistemp = FileAttachment("gistemp.csv").csv({typed: true})
+
+Plot.plot({
+  y: {
+    grid: true,
+    tickFormat: "+f",
+    label: "↑ Surface temperature anomaly (°C)"
+  },
+  color: {
+    scheme: "BuRd",
+    legend: true
+  },
+  marks: [
+    Plot.ruleY([0]),
+    Plot.dot(gistemp, {x: "Date", y: "Anomaly", stroke: "Anomaly"})
+  ]
+})
+
+```
+
+Learn more on the Quarto documentation site
+
+OJS Interaction with CloseRead
+
+When looking at the graph generated on temperature anomalies since 1860, you might want to talk about three different periods and display data based on these periods. To do this, CloseRead provides a variable that increments as you scroll. This is crTriggerIndex.
+
+The first text that scrolls corresponds to crTriggerIndex == 0, then it moves to 1, then 2, and so on…
+
+:::callout-warning
+The crTriggerIndex applies to the entire document, not per cr-section. Be careful, if you add a cr-section before the one you configured, you will need to change the crTriggerIndex for that section.
+:::
+
+Knowing this, it is possible to update the graph to account for this crTriggerIndex in order to filter the data for the specified dates.
+
+As we saw earlier, you must place this within a CloseRead section like this:
+
+```
+::::{.cr-section}
+
+Le premier texte à afficher sur le graphique vide @cr-plot
+
+Le second texte à afficher @cr-plot
+
+Le troisième @cr-plot
+
+Le dernier @cr-plot
+
+```
+
+```{ojs}
+//| eval: false
+
+gistemp = FileAttachment("gistemp.csv").csv({typed: true})
+
+function createPlot(data, startYear, endYear) {
+  return Plot.plot({
+    x: {
+      domain: [new Date("1880-01-01"), new Date("2016-12-01")], 
+      label: "Date →"
+    },
+    y: {
+      domain: [-0.8, 1.4], 
+      grid: true,
+      tickFormat: "+f",
+      label: "↑ Surface temperature anomaly (°C)"
+    },
+    color: {
+      scheme: "BuRd",
+      legend: true
+    },
+    marks: [
+      Plot.ruleY([0]),
+      Plot.dot(
+        data.filter(d => {
+          const year = new Date(d.Date).getFullYear();
+          return year >= startYear && year < endYear;
+        }), 
+        {x: "Date", y: "Anomaly", stroke: "Anomaly"}
+      )
+    ],
+    width: Math.max(width, 900)
+  });
+}
+
+chart = {
+  if (crTriggerIndex == 0) {
+    return createPlot(gistemp, 0, 0);
+  }
+    else if (crTriggerIndex == 1) {
+    return createPlot(gistemp, 0, 1930);
+  } else if (crTriggerIndex == 2) {
+    return createPlot(gistemp, 0, 1980);
+  } else if (crTriggerIndex == 3) {
+    return createPlot(gistemp, 0, Infinity);
+  } else {
+    return createPlot(gistemp, 0, Infinity); 
+  }
+}
+
+```
+
+
+:::callout-tip
+Pour plus de fluidité, la variable crTriggerProgress est un nombre compris entre 0 et 1 représentant la progression des scrolls dans l'ensemble du document.
+:::
+
+
+Scroll in a progress-block
+
+It is possible to manage the scroll for only one CloseRead section using the progress-block. By placing the scrolling text inside a progress-block, we can manipulate the crProgressBlock variable, which will range from 0 to 1, but just for that block.
+
+Here’s an example of how to implement it:
+
+```
+::::{.cr-section}
+
+:::{.progress-block}
+text1 @cr-plot3
+
+text2 @cr-plot3
+
+text3 @cr-plot3
+
+text4 @cr-plot3
+
+text5 @cr-plot3
+
+text6 @cr-plot3
+:::
+```
+
+```{ojs}
+//| eval: false
+
+
+function createPlotDynamic(data, progress) {
+  const startYear = 1880; 
+  const endYear = 2024; 
+
+  const dynamicYear = startYear + (endYear - startYear) * progress;
+
+  return Plot.plot({
+    x: {
+      domain: [new Date("1880-01-01"), new Date("2016-12-01")], 
+      label: "Date →"
+    },
+    y: {
+      domain: [-0.8, 1.4], 
+      grid: true,
+      tickFormat: "+f",
+      label: "↑ Surface temperature anomaly (°C)"
+    },
+    color: {
+      scheme: "BuRd",
+      legend: true
+    },
+    marks: [
+      Plot.ruleY([0]),
+      Plot.dot(
+        data.filter(d => {
+          const year = new Date(d.Date).getFullYear();
+          return year <= dynamicYear; 
+        }), 
+        {x: "Date", y: "Anomaly", stroke: "Anomaly"}
+      )
+    ],
+    width: Math.max(width, 900)
+  });
+}
+
+chartDynamic = createPlotDynamic(gistemp, crProgressBlock);
+
+```
+
+You can view the example file here: 7-scroll-observable{target=”_blank”}
+
+### Maps
+
+Now that we know how to create .ojs blocks and animate them with CloseRead, a world of possibilities opens up… especially the world of maps.
+
+In the dataviz example on Saint-Jacut de la Mer, a map example is available.
+
+You can also create them using the amazing bertin.js.
+
+## References
+
+Huge thanks the following people who have generated and shared most of the content of this lecture:
+
+- Sam Csik: [Customizing Quarto Websites, Make your website stand out using SASS and CSS](https://ucsb-meds.github.io/customizing-quarto-websites)
+
+<br>
+
+```{r}
+#| fig-align: "center"
+include_graphics("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGdyMnhseGczY3NheHU1cHhtdGRzdWRxaXJ1Z3BsdWF6MWdwZm84ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7JG6cq7EWesFcQ/giphy.gif")
+```
+
+## {background="#43464B"}
+
+```{css, echo = FALSE}
+img.circle {border-radius:50%;}
+```
+
+::: {layout-ncol="2"}
+<img class="circle" src="https://github.com/damien-dupre.png" />
+
+**Thanks for your attention and don't hesitate to ask if you have any questions!**  
+[`r fa(name = "mastodon")` @damien_dupre](https://datasci.social/@damien_dupre)  
+[`r fa(name = "github")` @damien-dupre](https://github.com/damien-dupre)  
+[`r fa(name = "link")` https://damien-dupre.github.io](https://damien-dupre.github.io)  
+[`r fa(name = "paper-plane")` damien.dupre@dcu.ie](mailto:damien.dupre@dcu.ie)
+:::
