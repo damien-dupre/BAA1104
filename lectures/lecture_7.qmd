@@ -1,6 +1,6 @@
 ---
 title: "Lecture 7: HTML Theming in a Quarto Website"
-subtitle: BAA1028 - Workflow & Data Management 
+subtitle: BAA1104 - E-Portfolio and Business Analytics Challenges
 author: Damien Dupré
 format:
   revealjs:
@@ -110,7 +110,6 @@ See for details: [HTML Themes Basic Options](https://quarto.org/docs/output-form
 For example. here we set the font-size a bit larger and specify that we want a bit more space between lines of text:
 
 ``` yaml
-title: "My Document"
 format:
   html: 
     theme: cosmo
@@ -166,24 +165,24 @@ format:
     - custom.scss
 ```
 
-## Theme Options
+<!-- ## Theme Options -->
 
-Your `custom.scss` file might look something like this:
+<!-- Your `custom.scss` file might look something like this: -->
 
-``` css
-/*-- scss:defaults --*/
-$h2-font-size:          1.6rem !default;
-$headings-font-weight:  500 !default;
+<!-- ``` css -->
+<!-- /*-- scss:defaults --*/ -->
+<!-- $h2-font-size:          1.6rem !default; -->
+<!-- $headings-font-weight:  500 !default; -->
 
-/*-- scss:rules --*/
-h1, h2, h3, h4, h5, h6 {
-  text-shadow: -1px -1px 0 rgba(0, 0, 0, .3);
-}
-```
+<!-- /*-- scss:rules --*/ -->
+<!-- h1, h2, h3, h4, h5, h6 { -->
+<!--   text-shadow: -1px -1px 0 rgba(0, 0, 0, .3); -->
+<!-- } -->
+<!-- ``` -->
 
-Note that the variables section is denoted by the `/*-- scss:defaults --*/` comment and the rules section (where normal CSS rules go) is denoted by the `/*-- scss:rules --*/` comment.
+<!-- Note that the variables section is denoted by the `/*-- scss:defaults --*/` comment and the rules section (where normal CSS rules go) is denoted by the `/*-- scss:rules --*/` comment. -->
 
-## Exercise: Bootstrap Theme {background="#43464B"}
+## {{< fa screwdriver-wrench>}} Your Turn {background="#43464B"}
 
 Have a look at the different themes from the [Bootswatch](https://bootswatch.com/) project.
 
@@ -209,7 +208,7 @@ format:
 ::::
 
 ```{r}
-countdown(minutes = 5, warn_when = 60)
+countdown(minutes = 3, warn_when = 60)
 ```
 
 # Use Sass
@@ -250,6 +249,8 @@ You might imagine how often you'll need to type those HEX codes out as you devel
 Or just look at my website:
 
 ```{.scss filename="Example stylesheet (.scss)"}
+/*-- scss:defaults --*/
+
 // Headings
 $headings-color: #E84E0F !default;
 
@@ -275,6 +276,8 @@ $navbar-fg: #eeeeee !default;
 Sass allows us to **define variables** (in the form `$var-name: value;`) for our colors, which we can reference instead of writing out their HEX codes each time. This makes your stylesheet **more readable and easier to update** (e.g. only need to update HEX codes in one spot, not multiple!).
 
 ```{.sass filename="Example stylesheet (.scss)"}
+/*-- scss:defaults --*/
+
 // define Sass vars 
 $darkblue: #053660;
 $teal: #147C91;
@@ -311,16 +314,22 @@ Lucky for us, **Quarto compiles the contents of a `.scss` file into CSS without 
 
 1. Create a `.scss` file in your repo's root directory using the Terminal:
 
-:::: {layout="[1,1]"}
+:::: {layout="[1,1,1]"}
 ::: {#first-column}
-```{.bash filename="Mac/Linux Terminal" code-line-numbers=false}
+```{.bash filename="Bash or zsh"}
 touch styles.scss
 ```
 :::
 
 ::: {#second-column}
-```{.bash filename="Windows Terminal" code-line-numbers=false}
-New-Item styles.scss
+```{.bash filename="CMD"}
+type nul > styles.scss
+```
+:::
+
+::: {#third-column}
+```{.bash filename="PowerShell"}
+ni styles.scss
 ```
 :::
 ::::
@@ -344,7 +353,9 @@ Adding the region decorator as written above is ***critical!*** Quarto won't rec
 
 format:
   html:
-    theme: styles.scss
+    theme: 
+      - cosmo
+      - styles.scss
     toc: true
     page-layout: full
 ```
@@ -603,27 +614,33 @@ include_graphics("images/orange-navbar.png")
 
 Our resulting website, which is primarily themed using `cosmo`, but with a custom orange navbar.
 
-## Exercise: Sass Variables {background="#43464B"}
+## {{< fa screwdriver-wrench>}} Your Turn {background="#43464B"}
 
 1. Create a `.scss` file in your repo's root directory using the Terminal:
 
-:::: {layout="[1,1]"}
+:::: {layout="[1,1,1]"}
 ::: {#first-column}
-```{.bash filename="Mac/Linux Terminal" code-line-numbers=false}
+```{.bash filename="Bash or zsh"}
 touch styles.scss
 ```
 :::
 
 ::: {#second-column}
-```{.bash filename="Windows Terminal" code-line-numbers=false}
-New-Item styles.scss
+```{.bash filename="CMD"}
+type nul > styles.scss
+```
+:::
+
+::: {#third-column}
+```{.bash filename="PowerShell"}
+ni styles.scss
 ```
 :::
 ::::
 
 2. Add the `/*-- scss:defaults --*/` decorator to the top of `styles.scss`;
 
-3. Apply the path to your `styles.scss` file using the `theme` option;
+3. Apply the path to your `styles.scss` file using the `theme` option with your theme;
 
 4. In your `styles.scss` file, define 3 colours and assign them to the variables:
 
@@ -739,7 +756,9 @@ The easiest way to apply a main (i.e. default) font for all text elements on you
 ```{.yaml filename="_quarto.yml"}
 format:
   html:
-    theme: styles.scss
+    theme: 
+     - cosmo
+     - styles.scss
     mainfont: Nunito
     toc: true
     page-layout: full
@@ -780,7 +799,7 @@ $font-family-monospace: 'Roboto Mono', monospace;
 
 **{{< fa angle-right >}}** You must import a higher font weight (e.g. 800), in addition to your standard "regular" weight, if you wish to **bold** text -- even bolding text using markdown syntax (e.g. `**this text is bold**`) will not work unless a higher font weight style is imported).
 
-## Exercise: Google Font {background="#43464B"}
+## {{< fa screwdriver-wrench>}} Your Turn {background="#43464B"}
 
 1. Select the Montserrat Google font family from <https://fonts.google.com>;
 
@@ -1031,69 +1050,7 @@ title: "All my favorite resources!"
 [Here is more orange text written using Quarto's syntax]{.orange-text}
 ```
 
-# A couple more styling tips
-
-## More than 1 font family
-
-Recall that we:
-
-1. imported two font families from Google Fonts -- [Nunito](https://fonts.google.com/specimen/Nunito?query=nunito) and [Sen](https://fonts.google.com/specimen/Sen?query=sen) (though you can import and use as many as you'd like), and
-
-2. set Nunito as our `mainfont` in `_quarto.yml` (which applies Nunito as the default font for all text elements). 
-
-. . . 
-
-To also apply Sen, we can:
-
-1. create a Sass variable for Sen, then 
-
-2. write a CSS rule(s) to apply Sen to our desired text elements.
-
-##  font-family value
-
-Look for the code chunk titled, **Sen: CSS class for a variable style** on the **Embed code** page. We'll want to grab the value specified after the **`font-family` property** (here, that value is, `"Sen", sans-serif;`). 
-
-```{r}
-include_graphics("images/sen-font-family.png")
-```
-
-## Create Sen Sass / CSS
-
-Here, we create a CSS grouping selector, which applies Sen to any HTML header (`<h1>` - `<h6>`):
-
-```{.sass filename="styles.scss"}
-/*-- scss:defaults --*/
-
-// Import fonts
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Sen:wght@400..800&display=swap');
-
-// Fonts
-$sen: "Sen", sans-serif;
-
-/*-- scss:rules --*/
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: $sen;
-}
-
-h1, h2 {
-  letter-spacing: 5px;
-  font-weight: 800;
-}
-
-```
-
-## Sen rendered
-
-Sen is now applied to all of our website headers!
-
-```{r}
-include_graphics("images/rendered-sen.gif")
-```
-
 ## Resize logo
-
-Final touch: resize our logo
 
 Let's add a CSS rule to increase the size of our logo. Be sure to add this rule beneath your `/*-- scss:rules --*/` region decorator, and note that you may need to adjust the `max-height` value to best suit your own personal logo:
 
