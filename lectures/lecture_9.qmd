@@ -1,6 +1,6 @@
 ---
 title: "Lecture 9: Python in your Project Pages"
-subtitle: BAA1028 - Workflow & Data Management 
+subtitle: BAA1104 - E-Portfolio and Business Analytics Challenges
 author: Damien Dupré
 format:
   revealjs:
@@ -30,6 +30,175 @@ include_img <- function(img_name) {
 
 ```
 
+# Setting Up Python for Quarto
+
+## Why Do We Need Python?
+
+Today we will use Quarto to run **active Python code** directly in our project pages.
+
+For this to work, Quarto needs to find a working Python installation on your computer.
+
+Let's make sure everything is set up before we start!
+
+## Step 1: Check if Python is Installed
+
+Open the **Terminal** in VS Code and type:
+
+:::: {layout="[1,1]"}
+::: {}
+
+**macOS**
+
+```{.bash filename="Terminal"}
+python3 --version
+```
+
+If Python is installed, you will see something like `Python 3.12.1`. If not, you will see `command not found`.
+
+:::
+::: {}
+
+**Windows**
+
+```{.bash filename="Terminal"}
+python --version
+```
+
+or
+
+```{.bash filename="Terminal"}
+py --version
+```
+
+If Python is installed, you will see the version number. If not, you will see an error or the Microsoft Store will open.
+
+:::
+::::
+
+## Step 2: Install Python if Missing
+
+:::: {layout="[1,1]"}
+::: {}
+
+**macOS**
+
+Option 1: Download from [python.org](https://www.python.org/downloads/):
+
+- Go to python.org and download the latest version
+- Run the installer package
+
+Option 2: Using Homebrew:
+
+```{.bash filename="Terminal"}
+brew install python
+```
+
+:::
+::: {}
+
+**Windows**
+
+Option 1: Download from [python.org](https://www.python.org/downloads/):
+
+- Go to python.org and download the latest version
+- **Important**: Check the box **"Add Python to PATH"**
+
+Option 2: Using the Microsoft Store:
+
+- Search for "Python" in the Microsoft Store and install it
+
+:::
+::::
+
+## Step 3: Check That Quarto Finds Python
+
+Run the following command in the Terminal:
+
+```{.bash filename="Terminal"}
+quarto check
+```
+
+This will display a diagnostic report. Look for the **Python** section:
+
+```default
+[✓] Checking Python 3 installation...
+      Version: 3.12.1
+      Path: /usr/local/bin/python3
+      Jupyter: 5.7.2
+      Kernelspec: python3
+```
+
+If you see checkmarks, Python is correctly configured. If you see crosses, revisit the previous steps.
+
+## If Quarto Still Cannot Find Python
+
+If Python is installed but Quarto cannot find it, you need to tell Quarto where to look.
+
+**Find Python's path:**
+
+**macOS**
+
+```{.bash filename="Terminal"}
+which python3
+```
+
+Returns something like `/usr/local/bin/python3` or `/opt/homebrew/bin/python3`.
+
+**Windows**
+
+```{.bash filename="Terminal"}
+where python
+```
+
+Returns something like `C:\Users\YourName\AppData\Local\Programs\Python\Python312\python.exe`.
+
+## If Quarto Still Cannot Find Python (continued)
+
+Set the path in your terminal before rendering:
+
+**macOS**
+
+```{.bash filename="Terminal"}
+export QUARTO_PYTHON=/usr/local/bin/python3
+```
+
+**Windows (PowerShell)**
+
+```{.bash filename="Terminal"}
+$env:QUARTO_PYTHON="C:\Users\YourName\AppData\Local\Programs\Python\Python312\python.exe"
+```
+
+## Install Required Python Packages
+
+Even with Python found, you might get errors about missing packages like `jupyter` or `plotly`:
+
+```{.bash filename="Terminal"}
+pip install jupyter plotly pandas
+```
+
+## Debugging Summary
+
+| Problem | Solution |
+|---|---|
+| `Python 3 not found` | Install Python from python.org |
+| Python installed but Quarto can't find it | Set `QUARTO_PYTHON` environment variable |
+| `No module named jupyter` | Run `pip install jupyter` |
+| Not sure what's wrong | Run `quarto check` to diagnose |
+
+## {{< fa screwdriver-wrench>}} Your Turn {background="#43464B"}
+
+Let's make sure everyone is ready before we continue!
+
+1. Open the **Terminal** in VS Code
+2. Run `python --version` and check that Python is installed
+3. Run `quarto check` and verify that the **Python** section shows checkmarks
+4. If Python is missing, install it from [python.org](https://www.python.org/downloads/) and run `quarto check` again
+5. Run `pip install jupyter plotly pandas`
+
+```{r}
+countdown(minutes = 5, warn_when = 60)
+```
+
 ## Before we proceed...
 
 Start again from scratch!
@@ -39,7 +208,7 @@ You have made incredible progress with your eportfolio but you should not mess i
 In the terminal of VS Code type:
 
 ```{.bash filename="Terminal"}
-quarto create project website baa1028-lecture12
+quarto create project website baa1028-lecture9
 quarto preview
 ```
 
@@ -235,7 +404,7 @@ code
 
 If you are creating HTML output there is a wide variety of options available for code block output. See the article on [HTML Code](https://quarto.org/docs/output-formats/html-code.html) for additional details.
 
-## 🛠️ Your Turn!
+## {{< fa screwdriver-wrench>}} Your Turn {background="#43464B"}
 
 Write a project page which only includes non active code to describe how to read a csv file, select some columns, and filter some values with the `pandas` library in python.
 
@@ -334,7 +503,7 @@ fig.show()
 ```
 ````
 
-## 🛠️ Your Turn!
+## {{< fa screwdriver-wrench>}} Your Turn {background="#43464B"}
 
 In your tutorial to use the `pandas` library in python, turn all the non active code cells/chunks into active code.
 
@@ -342,7 +511,7 @@ In your tutorial to use the `pandas` library in python, turn all the non active 
 countdown(minutes = 5, warn_when = 60)
 ```
 
-## 🛠️ Your Turn!
+## {{< fa screwdriver-wrench>}} Your Turn {background="#43464B"}
 
 Write a second project page which describes how to do a linear regression in python. 
 
@@ -468,8 +637,8 @@ print('Hello, world again!')
 
 For example, the option `code-fold: true` collapses the code into an HTML "details" tag so the user can display it on-demand.
 
-:::: {.columns}
-::: {.column width="46%"}
+::::{layout="[1,1]"}
+:::{}
 What you write:
 ````markdown
 ---
@@ -491,7 +660,7 @@ fig.show()
 ````
 
 :::
-::: {.column width="46%"}
+:::{}
 What you see:
 ```{python}
 #| echo: true

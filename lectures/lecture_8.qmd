@@ -1,6 +1,6 @@
 ---
 title: "Lecture 8: Displaying Projects in a Quarto Website"
-subtitle: BAA1028 - Workflow & Data Management 
+subtitle: BAA1104 - E-Portfolio and Business Analytics Challenges
 author: Damien Dupré
 format:
   revealjs:
@@ -45,7 +45,7 @@ You have made incredible progress with your eportfolio but you should not mess i
 In the terminal of VS Code type:
 
 ```{.bash filename="Terminal"}
-quarto create project website baa1028-lecture9
+quarto create project website baa1028-lecture8
 quarto preview
 ```
 
@@ -144,7 +144,7 @@ URL
 
 - **Your readers**: Understand context of content from its URL
 
-## Exercise 1
+## {{< fa screwdriver-wrench>}} Your Turn {background="#43464B"}
 
 Add a new subfolder `projects` to your site and, inside this subfolder, a new page `index.qmd`:
 
@@ -155,6 +155,10 @@ title: Projects
 
 {{< lipsum 1 >}}
 {{< placeholder 400 400 >}}
+```
+
+```{r}
+countdown(minutes = 5, warn_when = 60)
 ```
 
 # Navigation
@@ -191,7 +195,7 @@ More [about me](/about.qmd).
 :::::
 
 ::: footer
-https://quarto.org/docs/websites/#linking
+<https://quarto.org/docs/websites/#linking>
 :::
 
 ## Navigation Bar
@@ -219,12 +223,16 @@ website:
       - projects/index.qmd
 ```
 
-## Exercise 2
+## {{< fa screwdriver-wrench>}} Your Turn {background="#43464B"}
 
 Provide links to your new page:
 
 -   From somewhere in the content of `index.qmd`
 -   After "Home" in the navigation bar
+
+```{r}
+countdown(minutes = 5, warn_when = 60)
+```
 
 ## Navigation Items
 
@@ -260,9 +268,12 @@ Options for `icon`: [Bootstrap Icons](https://icons.getbootstrap.com)
 
 Use navigation items in `left`, `right` and `tools`
 
-::: columns
 ![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/navigation-navbar-navitems.png)
+
+::: footer
+<https://quarto.org/docs/websites/website-navigation.html#top-navigation>
 :::
+
 
 ## Navigation Bar Links
 
@@ -283,21 +294,11 @@ website:
         href: https://github.com/cwickham
 ```
 
-::: footer
-https://quarto.org/docs/websites/website-navigation.html#top-navigation
-:::
-
 ## Navigation Bar Options
 
 Other customization: `title`, `logo`, `search`
 
-::: columns
 ![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/navigation-navbar-options.png)
-:::
-
-::: footer
-https://quarto.org/docs/websites/website-navigation.html#top-navigation
-:::
 
 ## Navigation Bar Options
 
@@ -320,17 +321,11 @@ website:
         href: https://github.com/cwickham
 ```
 
-::: footer
-https://quarto.org/docs/websites/website-navigation.html#top-navigation
-:::
-
 # When things get more complicated...
 
 ## Navigation Elements {.scrollable}
 
 ![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/navigation-quarto-web-annotated.jpg)
-
-...
 
 ![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/navigation-quarto-web-footer-annotated.jpg)
 
@@ -355,7 +350,7 @@ Side navigation
 :::{}
 Top navigation
 
-``` {.yaml filename="_quarto.yml" code-line-numbers=""}
+``` {.yaml filename="_quarto.yml"}
 website:
   navbar:
     left:
@@ -373,7 +368,7 @@ Add items to `left`, `right` and `tools`
 :::{}
 Side navigation
 
-``` {.yaml filename="_quarto.yml" code-line-numbers="|2|3"}
+``` {.yaml filename="_quarto.yml"}
 website:
   sidebar:
     contents:
@@ -411,7 +406,7 @@ Side navigation
 :::{}
 Top navigation
 
-``` {.yaml filename="_quarto.yml" code-line-numbers="|5-8"}
+``` {.yaml filename="_quarto.yml"}
 website:
   navbar:
     left:
@@ -427,7 +422,7 @@ Add a `text` item along with `menu`
 :::{}
 Side navigation
 
-``` {.yaml filename="_quarto.yml" code-line-numbers="|5-8"}
+``` {.yaml filename="_quarto.yml"}
 website:
   sidebar:
     contents:
@@ -547,7 +542,7 @@ website:
 
 <https://quarto.org/docs/websites/website-navigation.html#breadcrumbs>
 
-Navigate up levels in a nested sidebar. Displayed by default.
+Navigate up levels in a nested sidebar. 
 
 ``` {.yaml filename="_quarto.yml"}
 website:
@@ -591,52 +586,20 @@ We have referenced this `projects/index.qmd` in the navbar inside the `_quarto.y
 
 Today, we will populate the content of `projects/index.qmd` with a list of different projects!
 
-## Let's Add more Pages!
-
--   Create a new subfolder called `list` inside `/projects`
--   In this `list` sub-subfolder, create 3 quarto files: `project_1.qmd`, `project_2.qmd`, and `project_3.qmd`
-
-::::{layout="[1,1]"}
-:::{}
-Displaying a listing on `projects/index.qmd` is as simple as:
-
-``` yaml
----
-title: My Projects
-listing: default
----
-```
-:::
-:::{}
-Explicit default options:
-
-``` yaml
----
-title: My Projects
-listing:
-  contents: /
-  sort: "date"
-  type: default
-  categories: false
----
-```
-:::
-:::::
-
 ## A listing is...
 
 ::::{layout="[1,1]"}
 :::{}
--   an automatically generated list of content
--   styled via a template, (built-in `type`, or custom `template`)
--   can be included on any page
+-   An automatically generated list of content
+-   Styled via a template, (built-in `type`, or custom `template`)
+-   Can be included on any page
 :::
 :::{}
 ![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/listings-default.png)
 :::
 :::::
 
-## Generated from documents in `contents`
+## Generated from documents YAML
 
 ::::{layout="[1,1]"}
 :::{}
@@ -663,18 +626,6 @@ categories:
 -   Great for large collections
 -   Great for collections that grow
 
-## Your Turn
-
-1.  (Repeat) Make a new page `blog/index.qmd` which is a listing
-2.  Experiment with `type` and `categories`:
-    * `type`: `grid` or `table`
-    * `categories`: `true`, `unnumbered`, `cloud`
-
-    [Other listing options](https://quarto.org/docs/websites/website-listings.html#listing-options)
-3.  Discuss with your neighbor:
-    -   What makes this a blog?
-    -   What would you change if this was a gallery of your projects?
-
 ## Default
 
 ![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/listings-default.png)
@@ -687,21 +638,7 @@ categories:
 
 ![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/listings-table.png)
 
-## Categories
-
-::::{layout="[1,1]"}
-:::{}
-![`true`/`numbered`](images/listings-categories-true.png)
-
-![`unnumbered`](images/listings-categories-unnumbered.png)
-:::
-:::{}
-
-![`cloud`](images/listings-categories-cloud.png)
-:::
-::: 
-
-## Use listings for \_ projects \_
+## Use listings for projects
 
 <https://ivelasq.rbind.io/project>
 
@@ -711,7 +648,7 @@ categories:
 More examples at: <https://charlotte.quarto.pub/listings/>
 :::
 
-## Use listings for \_ talks \_
+## Use listings for talks
 
 <https://meghan.rbind.io/talks/>
 
@@ -721,7 +658,7 @@ More examples at: <https://charlotte.quarto.pub/listings/>
 More examples at: <https://charlotte.quarto.pub/listings/>
 :::
 
-## Use listings for \_ publications \_
+## Use listings for publications
 
 <https://mickael.canouil.fr/publications>
 
@@ -739,30 +676,24 @@ More examples at: <https://charlotte.quarto.pub/listings/>
 <iframe src="https://charlotte.quarto.pub/listings/" width="100%" height="550" title="Listing Examples"></iframe>
 ```
 
-## `contents` can be a YAML file
+## The listed content can be a YAML file
 
-::::{layout="[1,1]"}
-:::{}
 ```{.yaml filename="projects/index.qmd"}
 ---
 title: Projects
 listing:
   contents: projects.yml
-  type: grid
-  max-description-length: 250
 ---
 ```
-:::
-:::{}
+
+With `projects.yml` having the following content:
+
 ```{.yaml filename="project/projects.yml"}
 - title: Predicting House Prices with Machine Learning
   path: https://example.com/house-prices
-  # Photo by Breno Assis on Unsplash https://unsplash.com/photos/aerial-photography-of-rural-r3WAWU5Fi5Q 
   image: images/breno-assis-r3WAWU5Fi5Q-unsplash.jpg
-  description: >
-    This project involves using machine learning algorithms to predict house prices based on
-    various features such as location, size, and amenities. It includes data cleaning,
-    feature engineering, and model selection.
+  description: "This project involves using machine learning algorithms to predict house prices based on
+    various features such as location, size, and amenities."
   categories: [Python, Machine Learning, Data Cleaning]
   date: 2024-01-01
   ...
@@ -770,21 +701,15 @@ listing:
 `path` can be a relative path to a file in your site, or a URL
 
 You can use [Listing Fields](https://quarto.org/docs/websites/website-listings.html#listing-fields), or create custom ones.
-:::
-::: 
 
-
-## `contents` can be a YAML file
+## The listed content can be a YAML file
 
 ![](https://raw.githubusercontent.com/posit-conf-2024/quarto-websites/refs/heads/main/images/listings-projects.png)
 
 ## Simple Customization: Select Fields
 
-::::{layout="[1,1]"}
-:::{}
 Use `fields` to specify which [Listing Fields](https://quarto.org/docs/websites/website-listings.html#listing-fields) are displayed.
-:::
-:::{}
+
 E.g. Exclude `date`:
 
 ```{.yaml}         
@@ -793,20 +718,13 @@ listing:
   type: grid
   fields: ["image", "title", "categories", "description"]
 ```
-:::
-::: 
-
 
 ## Simple Customization: Rename Fields
-
-::::{layout="[1,1]"}
-:::{}
 
 Use `field-display-names` to provide a different label for a field 
 
 Mostly useful for `type: table`. 
-:::
-:::{}
+
 E.g. Rename `title` to `Project`
 
 ```{.yaml}         
@@ -816,18 +734,6 @@ listing:
   field-display-names: 
     title: Project
 ```
-:::
-::: 
-
-## Your Turn
-
-1. Switch to `type: table`
-
-2. Omit the `image` field from the listing
-
-3. Change the name of the "Categories" column to "Skills"
-
-4. Brainstorm:  What could you use a listing for on your own site?
 
 ## Advanced Customization
 
@@ -902,83 +808,41 @@ Place listings in the page by `id`
 :::
 :::
 
-## Custom template
+## {{< fa screwdriver-wrench>}} Let's Add more Pages! {background="#43464B"}
+
+-   Create a new subfolder called `list` inside `/projects`
+-   In this `list` sub-subfolder, create 3 quarto files: `project_1.qmd`, `project_2.qmd`, and `project_3.qmd`
 
 ::::{layout="[1,1]"}
 :::{}
-```{.yaml filename="teaching/index.qmd"}
+Displaying a listing on `projects/index.qmd` is as simple as:
+
+``` yaml
 ---
-title: "Teaching"
-listing:
-  - id: ay_23-24
-    contents: ay_23-24.yml
-    template: ../html/teaching/listing.ejs
+title: My Projects
+listing: default
 ---
 ```
-Provide an `ejs` file to `template`
 :::
 :::{}
-````{.html filename="../html/teaching/listing.ejs"}
-```{=html}
-<div class="teaching">
-    <% for (const course of items) { %>
-    <div class="course-entry">
-        <div class="logo">
-            <% if (course.url) { %>
-            <a href="<%= course.url %>" target="_blank"><img src="<%= course.logo %>" alt="<%= course.title %>" title="<%= course.title %>" /></a>
-            <% } else { %>
-            <img src="<%= course.logo %>" alt="<%= course.title %>" title="<%= course.title %>" />
-            <% } %>
-        </div>
-        <div class="body">
-            <p class="course-title">
-                <% if (course.url) { %>
-                <a href="<%= course.url %>" target="_blank"><%= course.title %></a> 
-                <% } else { %>
-                <%= course.title %> 
-                <% } %>
-            </p>
-            <p class="course-details">
-                <span class="course-number"><%= course.number %></span> | 
-                <span class="course-university"><%= course.university %></span>
-                <% if (course.role) { %>
-                | <span class="course-role"><%= course.role %></span>
-                <% } %>
-            </p>
-            <p class="course-description"><%= course.description %></p>
+Explicit default options:
 
-            <ul class="course-semesters">
-                <% for (const semester of course.semester) { %>
-                <% if (semester.url) { %>
-                <li><a href="<%= semester.url %>"><i class="fa-solid fa-building-columns"></i> <%= semester.name %></a></li>
-                <% } else { %> 
-                <li class="no-link"><i class="fa-solid fa-building-columns"></i> <%= semester.name %></li>
-                <% } %>
-                <% } %>
-            </ul>
-        </div>
-    </div>
-    <% } %>
-</div>
+``` yaml
+---
+title: My Projects
+listing:
+  contents: /
+  sort: "date"
+  type: default
+  categories: false
+---
 ```
-````
-Define how item in `items` should be generated
 :::
-:::
+:::::
 
-## Your Turn
-
-**Add a listing page to your site**: 
-
-1. Create a page to house the listing 
-
-2. Either: 
-    - populate a `.yml` file with a couple of items (use `projects/project.yml` as a template), or
-    - create some placeholder `.qmd` files.
-    
-3. Add the page to your site navigation
-
-4. Clean up any template listing pages/files/folders you don't want
+```{r}
+countdown(minutes = 10, warn_when = 60)
+```
 
 ## References
 
